@@ -1,4 +1,17 @@
 /******* COLOUR  ******
+
+dark header         031500
+light header        0e5003
+
+dark body text      E0E7DF
+light body text     E0E7DF
+
+dark body           0e5003
+light body          E0E7DF
+
+dark body text      E0E7DF
+light body text     0e5003
+
 * background: xxx#031500xxx #0e5003
 * text: #C2CFBF
 * headings: #E0E7DF
@@ -9,16 +22,20 @@
 body {
     width: 100%;
     display: table;
-    margin: 0;  
-    background-color: #FFF;
+    margin: 0;
+    background-color: #E0E7DF;
     color: #0e5003;
     font-family: 'Kanit', Arial, Helvetica, sans-serif;
     font-size: 12px;
 }
 
+body.dark {
+    background-color: #0e5003;
+    color: #E0E7DF;
+}
+
 h1   {
     font-size: 300%;
-    color: #0e5003;
     text-align: center;
     animation: slide-right 3s;
 }
@@ -46,12 +63,21 @@ header img {
     height: auto;
 }
 
+body.dark header {
+    background-color: #031500;
+    color: #E0E7DF;
+}
+
 .topnav {
     overflow: hidden;
     float: right;
     background-color: #0e5003;
     margin-top: 10px;
-  }
+}
+
+body.dark .topnav {
+    background-color: #031500;
+}
   
 .topnav a {
     display: inline;
@@ -109,6 +135,10 @@ footer {
     background-color: #0e5003;
     color: #E0E7DF;
     padding: 6px;
+}
+
+body.dark footer {
+    background-color: #031500;
 }
 
 .findMe ul li {
