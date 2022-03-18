@@ -9,21 +9,14 @@ function handleNav() {
 
 function setColorScheme(scheme) {
     var body = document.getElementById("mainBody");
-    console.log(body);
     switch(scheme){
-        case 'dark':
-        // Dark
-            console.log('dark mode')            
+        case 'dark':          
             body.classList.add("dark");
         break;
-        case 'light':
-        // Light
-            console.log('light mode')           
+        case 'light':           
             body.className = ""
         break;
-        default:
-        // Default
-            console.log('default mode')           
+        default:          
             body.className = ""
         break;
     }
