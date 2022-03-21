@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="../styles/style.css">
         <script src="../scripts/navScript.js"></script>
     </head>
-    <body id="mainBody" class="">
+    <body id="mainBody" class="dark">
         <header>
             <a href="../"><img src="../img/logo.png" alt="EllieAtWHL"></a>
             <div class="topnav" id="myTopNav">        
@@ -25,7 +25,7 @@
             <h1>Coming soon...</h1>
         </section>
         <footer>
-            <div class="findMe">
+            <div class="findMe floatLeft">
                 <h2>You can also find me at...</h2>
                 <ul>
                     <li><a href="https://twitter.com/EllieAtWHL" target="_blank">Twitter</a></li> |
@@ -33,6 +33,13 @@
                     <li><a href="https://github.com/EllieAtWHL" target="_blank">Github</a></li> |
                     <li><a href="https://trailblazer.me/id/elliematthewman" target="_blank">Salesforce</a></li> 
                 </ul>
+            </div>
+            <div class="darkMode floatRight">
+                <label class="switch">
+                    <input type="checkbox" onclick="handleDarkMode()" id="darkMode">
+                    <span class="slider round"></span>
+                </label>
+                <p>Dark Mode</p>
             </div>
 
         </footer>

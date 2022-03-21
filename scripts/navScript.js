@@ -7,17 +7,17 @@ function handleNav() {
     }
 }
 
-function setColorScheme(scheme) {
-    var body = document.getElementById("mainBody");
+function setColorScheme(scheme) {    
     switch(scheme){
-        case 'dark':          
-            body.classList.add("dark");
+        case 'dark':  
+            document.getElementById('darkMode').checked = true;
+            document.getElementById('mainBody').classList.add("dark");
         break;
         case 'light':           
-            body.className = ""
+            document.getElementById('mainBody').className = ""
         break;
         default:          
-            body.className = ""
+            document.getElementById('mainBody').className = ""
         break;
     }
 }
@@ -31,6 +31,15 @@ function getPreferredColorScheme() {
         }
     }
     return 'light';
+}
+
+function handleDarkMode(){
+    var checkbox = document.getElementById('darkMode');
+    if(checkbox.checked === true){
+        setColorScheme('dark');
+    }else {
+        setColorScheme('light');
+    }
 }
 
 window.onload = function() {
