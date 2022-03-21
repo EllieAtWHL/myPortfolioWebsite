@@ -1,23 +1,15 @@
-/******* COLOUR  ******
+/******* COLOUR  SCHEME ******
 
-dark header/footer  150003
-light header/footer      0e5003
+dark header/footer  #150003
+light header/footer #0e5003
 
-dark body text      E0E7DF
-light body text     E0E7DF
+header/footer text  #E0E7DF
 
-dark body           0e5003
-light body          E0E7DF
+dark body           #0e5003
+light body          #E0E7DF
 
-dark body text      E0E7DF
-light body text     0e5003
-
-* background: xxx#031500xxx #0e5003
-* text: #C2CFBF
-* headings: #E0E7DF
-* alternate dark (blue): #000315
-* third dark (maroon): #150003
-***********************/
+dark body text      #E0E7DF
+light body text     #0e5003*/
 
 .floatLeft {
     display: inline;
@@ -81,21 +73,30 @@ header img {
 .topnav {
     overflow: hidden;
     float: right;
-    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.topnav span {
 }
   
 .topnav a {
     display: inline;
     color: #E0E7DF;
     text-align: center;
-    padding: 14px 16px;
+    padding: 5px;
     text-decoration: none;
     font-size: 200%;
+    border-radius: 500px;
 }
 
 .topnav a:hover {
     background-color: #E0E7DF;
     color: #0e5003;
+}
+
+.dark .topnav a:hover {
+    background-color: #0e5003;
+    color: #E0E7DF;
 }
 
 .topnav .icon {
@@ -112,7 +113,6 @@ header img {
 
 @media screen and (max-width: 600px) {
     .topnav.responsive {
-        background-color: #E0E7DF;
         position: relative;
         width: 80%;
     }
@@ -123,13 +123,8 @@ header img {
     }
     .topnav.responsive a {
         float: none;
-        color: #0e5003;
         display: block;
         text-align: center;
-    }
-    .topnav.responsive a:hover {
-        background-color: #0e5003;
-        color: #E0E7DF;
     }
 }
 
