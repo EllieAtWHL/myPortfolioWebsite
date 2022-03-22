@@ -1,3 +1,5 @@
+let currentMode;
+
 function handleNav() {
     var nav = document.getElementById("myTopNav");
     if (nav.className === "topnav") {
@@ -23,26 +25,34 @@ function setColorScheme(scheme) {
 }
 
 function getPreferredColorScheme() {
+    if(currentMode){
+        return currentMode;
+    }
     if (window.matchMedia) {
         if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-            return 'dark';
+            currentMode = 'dark';
         } else {
-            return 'light';
+            currentMode = 'light';
         }
     }
-    return 'light';
+    return currentMode;
 }
 
 function handleDarkMode(){
     var checkbox = document.getElementById('darkMode');
     if(checkbox.checked === true){
-        setColorScheme('dark');
+        currentMode = 'dark';
     }else {
-        setColorScheme('light');
+        currentMode = 'light';
     }
+    setColorScheme(currentMode);
 }
 
 window.onload = function() {
+    const params = new URLSearchParams(window.location.search);
+    if(params.has('mode')){
+        currentMode = params.get('mode');
+    }
     if(window.matchMedia){
         var colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
         colorSchemeQuery.addEventListener('change', setColorScheme(getPreferredColorScheme()));
