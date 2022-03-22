@@ -36,7 +36,7 @@ body {
     color: #E0E7DF;
 }
 
-h1   {
+h1.slide {
     font-size: 300%;
     text-align: center;
     animation: slide-right 3s;
@@ -231,11 +231,11 @@ input:checked + .slider:before {
 }
 
 button{
-    background-color: #150003;
+    background-color: #0e5003;
     border-radius: 8px;
     border-style: none;
     box-sizing: border-box;
-    color: #FFFFFF;
+    color: #E0E7DF;
     cursor: pointer;
     display: inline-block;
     font-family: 'Kanit', Arial, Helvetica, sans-serif;
@@ -257,7 +257,17 @@ button{
     touch-action: manipulation;
 }
 
+.dark button {
+    background-color: #150003;
+    color: #E0E7DF;
+}
+
 button:hover,
+button:focus {
+  background-color: #4d7046;
+}
+
+.dark button:hover,
 button:focus {
   background-color: #312123;
 }
@@ -265,7 +275,7 @@ button:focus {
 .contactMe {
     margin: 0;
     position: absolute;
-    top: 80%;
+    top: 75%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -273,34 +283,42 @@ button:focus {
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.7);
 }
   
 /* Modal Content/Box */
 .modal-content {
-    background-color: #150003;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #E0E7DF;
+    background-color: #E0E7DF;
+    margin: 5% auto;
+    padding: 10px;
+    border: 1px solid #150003;
     border-radius: 10px;
-    width: 25%; /* Could be more or less, depending on screen size */
+    width: 320px;
+}
+
+.dark .modal-content {
+    background-color: #0e5003;
+    border: 1px solid #E0E7DF;
 }
   
 /* The Close Button */
 .close {
-    color: #aaa;
+    color: #0e5003;
     float: right;
     font-size: 28px;
     font-weight: bold;
+}
+
+.dark .close {
+    color: #E0E7DF;
 }
   
 .close:hover,
@@ -308,4 +326,51 @@ button:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+label {
+    font-size: 16px;
+}
+
+input, textarea{    
+  width: 100%;
+  padding: 8px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #150003;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.dark input {
+    background-color: #150003;
+    color: #E0E7DF;
+}
+
+input[type=submit] {    
+  width: 100%;
+  background-color: #0e5003;
+  color: #E0E7DF;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: 2px solid #0e5003;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+    border: 2px solid #150003;
+  }
+
+.dark input[type=submit] {
+    background-color: #150003;
+    border: 2px solid #150003;
+}
+
+.dark input[type=submit]:hover {
+    border: 2px solid #E0E7DF;
+}
+
+.dark textarea {
+    background-color: #150003;  
 }
