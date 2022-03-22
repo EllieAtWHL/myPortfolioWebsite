@@ -5,6 +5,11 @@
         <link rel="shortcut icon" type="image/jpg" href="../img/favicon.jpg"/>
         <title>EllieAtWHL</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script>
+        function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
+        </script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../styles/style.css">
@@ -15,6 +20,70 @@
         <section>
             <h1>Home Page</h1>
             <h1>Coming soon...</h1>
+
+            <div class="contactMe">
+                <button id="contactMe">Contact Me</button>
+            </div>
+
+            <div id="contactMeModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                        <h2>Contact Me</h2>
+
+                        <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+                        
+                            <input type=hidden name='captcha_settings' value='{"keyname":"EllieAtWHL","fallback":"true","orgId":"00D58000000YxlM","ts":""}'>
+                            <input type=hidden name="oid" value="00D58000000YxlM">
+                            <input type=hidden name="retURL" value="https://www.ellieatwhl.co.uk/">
+                            
+                            <!--  ----------------------------------------------------------------------  -->
+                            <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+                            <!--  these lines if you wish to test in debug mode.                          -->
+                            <!--  <input type="hidden" name="debug" value=1>                              -->
+                            <!--  <input type="hidden" name="debugEmail"                                  -->
+                            <!--  value="eleanormatthewman+salesforce@gmail.com">                         -->
+                            <!--  ----------------------------------------------------------------------  -->
+                            
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td><label for="first_name">First Name</label></td>
+                                        <td><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" /></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><label for="last_name">Last Name</label></td>
+                                        <td><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" /></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><label for="email">Email</label></td>
+                                        <td><input  id="email" maxlength="80" name="email" size="20" type="text" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label for="description">Comments</label></td>
+                                        <td><textarea name="description"></textarea></td>
+                                    </tr> 
+                                    
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="g-recaptcha" data-sitekey="6LfUBQEfAAAAAOwXkILtp2Amwf_U6Ouoza-xsGZT"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><input type="submit" name="submit"></td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        
+                        </form>
+
+        <script src="../scripts/modalScript.js"></script>
+                    </div>
+                </div>
         </section>
     </body>
 </html>
