@@ -8,40 +8,13 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../styles/style.css">
-        <script src="../scripts/navScript.js"></script>
+        <script src="../scripts/templateScript.js"></script>
+        <script src="../scripts/darkModeScript.js"></script>
     </head>
     <body id="mainBody" class="dark">
-        <header>
-            <a onclick="window.location='../?mode='+currentMode" href="#"><img src="../img/logo.png" alt="EllieAtWHL"></a>
-            <div class="topnav" id="myTopNav">        
-                <span><a href="javascript:void(0);" class="icon" onclick="handleNav()"><i class="fa fa-bars"></i></a></span>
-                <span><a onclick="window.location='../?mode='+currentMode" href="#">Home</a></span>
-                <span><a onclick="window.location='/about-me/?mode='+currentMode" href="#">About Me</a></span>
-                <span><a onclick="window.location='/experience/?mode='+currentMode" href="#">Experience</a></span>
-                <span><a onclick="window.location='/projects/?mode='+currentMode" href="#">Projects</a></span>
-            </div>
-        </header>
         <section>
+            <h1>Experience</h1>
             <h1>Coming soon...</h1>
         </section>
-        <footer>
-            <div class="findMe floatLeft">
-                <h2>You can also find me at...</h2>
-                <ul>
-                    <li><a href="https://twitter.com/EllieAtWHL" target="_blank">Twitter</a></li> |
-                    <li><a href="https://www.linkedin.com/in/elliematthewman/" target="_blank">LinkedIn</a></li> |
-                    <li><a href="https://github.com/EllieAtWHL" target="_blank">Github</a></li> |
-                    <li><a href="https://trailblazer.me/id/elliematthewman" target="_blank">Salesforce</a></li> 
-                </ul>
-            </div>
-            <div class="darkMode floatRight">
-                <label class="switch">
-                    <input type="checkbox" onclick="handleDarkMode()" id="darkMode">
-                    <span class="slider round"></span>
-                </label>
-                <p>Dark Mode</p>
-            </div>
-
-        </footer>
     </body>
 </html>
