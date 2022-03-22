@@ -147,8 +147,13 @@ footer {
 .findMe ul li {
     display: inline;
     font-size: 100%;
+    border-right: solid 1px #E0E7DF;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.findMe li:last-of-type {
+    border: 0;
 }
 
 .findMe ul li a {
