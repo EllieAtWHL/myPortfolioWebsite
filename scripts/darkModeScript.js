@@ -1,14 +1,5 @@
 let currentMode;
 
-function handleNav() {
-    var nav = document.getElementById("myTopNav");
-    if (nav.className === "topnav") {
-      nav.className += " responsive";
-    } else {
-      nav.className = "topnav";
-    }
-}
-
 function setColorScheme(scheme) {    
     switch(scheme){
         case 'dark':  
