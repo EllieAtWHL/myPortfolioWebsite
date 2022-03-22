@@ -127,7 +127,7 @@ function createFooter(){
     darkModeLabel.appendChild(darkModeInput);
     darkModeLabel.appendChild(darkModeSpan);
     darkMode.appendChild(darkModeLabel);
-    darkMode.appendChild(darkModeText);
+    darkMode.appendChild(darkModeP);
 
 
     footer.appendChild(findMe);
