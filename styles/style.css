@@ -36,15 +36,40 @@ body {
     color: #E0E7DF;
 }
 
-h1.slide {
-    font-size: 300%;
+h1.slideLeft {
+    font-size: 50px;
+    text-align: center;
+    animation: slide-left 3s;
+    text-shadow: 2px 2px #150003;
+}
+
+@keyframes slide-left {
+    from    { transform: translateX(-100%);}
+    to      { transform: translateX(0);}
+}
+
+h1.slideRight {
+    font-size: 50px;
     text-align: center;
     animation: slide-right 3s;
+    text-shadow: 2px 2px #150003;
 }
 
 @keyframes slide-right {
-    from { transform: translateX(-100%);}
-    to {transform: translateX(0);}
+    from    { transform: translateX(100%);}
+    to      { transform: translateX(0);}
+}
+
+h1.slideDown {
+    font-size: 50px;
+    text-align: center;
+    animation: slide-down 3s;
+    text-shadow: 2px 2px #150003;
+}
+
+@keyframes slide-down {
+    from    { transform: translateY(150%);}
+    to       {transform: translateY(0);}
 }
 
 header {
