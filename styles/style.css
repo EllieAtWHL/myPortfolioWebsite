@@ -23,7 +23,8 @@ light body text     #0e5003*/
 
 body {
     width: 100%;
-    display: table;
+    /*display: table;
+    position: relative;*/
     margin: 0;
     background-color: #E0E7DF;
     color: #0e5003;
@@ -39,7 +40,7 @@ body {
 h1.slideLeft {
     font-size: 50px;
     text-align: center;
-    animation: slide-left 3s;
+    animation: slide-left 2s;
     text-shadow: 2px 2px #150003;
 }
 
@@ -48,28 +49,57 @@ h1.slideLeft {
     to      { transform: translateX(0);}
 }
 
+.leftNotes {
+    opacity: 0;
+    font-size: 14px;
+    text-align: center;
+    animation: fade-in 1s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+}
+
+.rightNotes {
+    opacity: 0;
+    font-size: 14px;
+    text-align: center;
+    animation: fade-in 1s;
+    animation-delay: 4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+    from    { opacity: 0%;}
+    to      { opacity: 100%;}
+}
+
 h1.slideRight {
+    opacity: 0%;
     font-size: 50px;
     text-align: center;
-    animation: slide-right 3s;
+    animation: slide-right 2s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
     text-shadow: 2px 2px #150003;
 }
 
 @keyframes slide-right {
-    from    { transform: translateX(100%);}
-    to      { transform: translateX(0);}
+    from    { opacity: 100%; transform: translateX(100%);}
+    to      { opacity: 100%; transform: translateX(0);}
 }
 
 h1.slideDown {
+    opacity: 0%;
     font-size: 50px;
     text-align: center;
     animation: slide-down 3s;
+    animation-delay: 4s;
+    animation-fill-mode: forwards;
     text-shadow: 2px 2px #150003;
 }
 
 @keyframes slide-down {
-    from    { transform: translateY(150%);}
-    to       {transform: translateY(0);}
+    from    { opacity: 100%; transform: translateY(150%);}
+    to      { opacity: 100%; transform: translateY(0);}
 }
 
 header {
@@ -150,8 +180,17 @@ header img {
     }
 }
 
+.topSection {
+    height: 80vh;
+}
+
+.bottomSection {
+    height: 20%;
+}
+
 footer {
     position: fixed;
+    z-index: 1;
     bottom: 0;
     width: 100%;
     background-color: #0e5003;
@@ -298,9 +337,10 @@ button:focus {
 }
 
 .contactMe {
+    /*opacity: 0%;*/
     margin: 0;
     position: absolute;
-    top: 75%;
+    top: 80%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -310,7 +350,7 @@ button:focus {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     left: 0;
     top: 0;
     width: 100%;
