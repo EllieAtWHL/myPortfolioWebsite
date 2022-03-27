@@ -50,6 +50,7 @@ function createHeader(){
 
     const homeLinkSpan = document.createElement('span');
     const homeLink = createLink({onclick: function() {window.location='../?mode='+currentMode}, href: '#', text: 'Home'});
+    // TODO: const homeLink = createLink({onclick: function() {window.location='../?mode='+currentMode}, href: '#', text: 'Home', active: true});
     homeLinkSpan.appendChild(homeLink);
 
     const aboutMeLinkSpan = document.createElement('span');
@@ -86,7 +87,7 @@ function createFooter(){
     const findMe = document.createElement('div');
     findMe.className = 'findMe floatLeft';
 
-    heading = document.createElement('h2');
+    heading = document.createElement('p');
     headingText = document.createTextNode('You can also find me at...');
     heading.appendChild(headingText);
 
@@ -161,6 +162,7 @@ function createLink(linkDetails){
     if (linkDetails.onclick) link.onclick = linkDetails.onclick;
     if (linkDetails.href) link.href = linkDetails.href;
     if (linkDetails.class) link.className = linkDetails.class;
+    if (linkDetails.active) link.classList.add('active');
     if (linkDetails.target) link.target = linkDetails.target;
     if (linkDetails.text){
         const text = document.createTextNode(linkDetails.text);

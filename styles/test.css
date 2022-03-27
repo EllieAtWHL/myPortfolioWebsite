@@ -18,6 +18,7 @@ html, body {
     color: #0e5003;
     font-family: 'Kanit', Arial, Helvetica, sans-serif;
     font-size: 14px;
+    overflow: hidden
 }
 
 .wrapper {
@@ -75,22 +76,27 @@ html, body {
 .topnav {
     overflow: hidden;
     float: right;
-    margin-right: 10px;
+    margin: 1%;
 }
 
 .topnav a {
-    display: inline;
+    display: inline-block;
     color: #E0E7DF;
     text-align: center;
-    padding: 5px;
+    padding: .5em;
     text-decoration: none;
     font-size: 200%;
-    border-radius: 500px;
+    border-radius: .3em;
 }
 
 .topnav a:hover {
     background-color: #E0E7DF;
     color: #0e5003;
+}
+
+.topnav a.active {
+    font-weight: bold;
+    pointer-events: none;
 }
 
 .topnav .icon {
@@ -172,6 +178,14 @@ h1.slideDown {
     to      { opacity: 100%; transform: translateY(0);}
 }
 
+.findMe {
+    margin: 1em;
+}
+
+.findMe p {
+    margin: 0;
+}
+
 .findMe ul {
     display: inline-flex;
     flex-wrap: wrap;
@@ -201,7 +215,7 @@ h1.slideDown {
 }
 
 .darkMode {
-    padding: 20px;
+    padding: 1em 2em 0;
 }
 
 .switch {
@@ -363,6 +377,7 @@ button:focus {
         float: none;
         display: block;
         text-align: center;
+        border-radius: 500px;
     }
 }
 
