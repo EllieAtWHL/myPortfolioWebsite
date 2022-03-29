@@ -1,6 +1,3 @@
-/* This is porbably 10 times larger than it needs to be
-but I will learn how to clean it up at some point! */
-
 :root {
     /*** light  | header/footer | background    ***/
     /*** dark   | body          | background    ***/
@@ -17,6 +14,93 @@ but I will learn how to clean it up at some point! */
     --chosen-font:'Kanit', Arial, Helvetica, sans-serif;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: var(--pale-green);
+    color: var(--dark-green);
+    font-family: var(--chosen-font);
+    font-size: 14px;
+    overflow: hidden
+}
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+    display: table;
+}
+
+.header, .content, .footer {
+    display: table-row;
+}
+
+.header, .footer {
+    background-color: var(--dark-green);
+    color: var(--pale-green);
+}
+
+.footer .inner {
+    padding: 0px 0px 0px 6px;
+}
+
+.inner {
+    display: table-cell;
+}
+
+.content .inner {
+    height: 100%;
+    position: relative;
+    background-color: var(--pale-green);
+}
+
+.scrollable {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+.header img {
+    float: left;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 10%;
+    height: auto;
+}
+
+.topnav {
+    overflow: hidden;
+    float: right;
+    margin: 1%;
+}
+
+.topnav a {
+    display: inline-block;
+    color: var(--pale-green);
+    text-align: center;
+    padding: .5em;
+    text-decoration: none;
+    font-size: 200%;
+    border-radius: .3em;
+}
+
+.topnav a:hover {
+    background-color: var(--pale-green);
+    color: var(--dark-green);
+}
+
+.topnav a.active {
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.topnav .icon {
+    display: none;
+}
+
 .floatLeft {
     display: inline;
     float: left;
@@ -25,20 +109,6 @@ but I will learn how to clean it up at some point! */
 .floatRight {
     display: inline;
     float: right;
-}
-
-body {
-    width: 100%;
-    margin: 0;
-    background-color: var(--pale-green);
-    color: var(--dark-green);
-    font-family: var(--chosen-font);
-    font-size: 12px;
-}
-
-.dark {
-    background-color: var(--dark-green);
-    color: var(--pale-green);
 }
 
 h1.slideLeft {
@@ -83,7 +153,7 @@ h1.slideRight {
     animation: slide-right 2s;
     animation-delay: 2s;
     animation-fill-mode: forwards;
-    text-shadow: 2px 2px var(--third-colour);
+    text-shadow: 2px 2px var(--third-colour)
 }
 
 @keyframes slide-right {
@@ -106,104 +176,12 @@ h1.slideDown {
     to      { opacity: 100%; transform: translateY(0);}
 }
 
-header {
-    display: inline-block;
-    width: 100%;
-    left: 0px;
-    background-color: var(--dark-green);
-    color: var(--pale-green);
-    padding: 6px;
+.findMe {
+    margin: 1em;
 }
 
-header img {
-    float: left;
-    padding: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 10%;
-    height: auto;
-}
-
-.dark header {
-    background-color: var(--third-colour);
-    color: var(--pale-green);
-}
-
-.topnav {
-    overflow: hidden;
-    float: right;
-    margin-right: 10px;
-}
-  
-.topnav a {
-    display: inline;
-    color: var(--pale-green);
-    text-align: center;
-    padding: 5px;
-    text-decoration: none;
-    font-size: 200%;
-    border-radius: 500px;
-}
-
-.topnav a:hover {
-    background-color: var(--pale-green);
-    color: var(--dark-green);
-}
-
-.dark .topnav a:hover {
-    background-color: var(--dark-green);
-    color: var(--pale-green);
-}
-
-.topnav .icon {
-    display: none;
-}
-
-@media screen and (max-width: 600px) {
-    .topnav a {display: none;}
-    .topnav a.icon {
-      float: right;
-      display: block;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .topnav.responsive {
-        position: relative;
-        width: 80%;
-    }
-    .topnav.responsive .icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .topnav.responsive a {
-        float: none;
-        display: block;
-        text-align: center;
-    }
-}
-
-.topSection {
-    height: 80vh;
-}
-
-.bottomSection {
-    height: 20%;
-}
-
-footer {
-    position: fixed;
-    z-index: 1;
-    bottom: 0;
-    width: 100%;
-    background-color: var(--dark-green);
-    color: var(--pale-green);
-    padding: 6px;
-}
-
-.dark footer {
-    background-color: var(--third-colour);
+.findMe p {
+    margin: 0;
 }
 
 .findMe ul {
@@ -225,7 +203,7 @@ footer {
 }
 
 .findMe ul li a {
-    font-family: var(--chosen-font);
+    font-family: 'Kanit', Arial, Helvetica, sans-serif;
     color: var(--pale-green);
     text-decoration: none;
 }
@@ -235,7 +213,7 @@ footer {
 }
 
 .darkMode {
-    padding: 20px;
+    padding: 1em 2em 0;
 }
 
 .switch {
@@ -258,7 +236,7 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: var(--pale-green);
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -270,7 +248,7 @@ footer {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: var(--pale-green);
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -303,7 +281,7 @@ button{
     border-radius: 8px;
     border-style: none;
     box-sizing: border-box;
-    color: var(--pale-green);
+    color: var(--dark-green);
     cursor: pointer;
     display: inline-block;
     font-family: var(--chosen-font);
@@ -325,23 +303,12 @@ button{
     touch-action: manipulation;
 }
 
-.dark button {
-    background-color: var(--third-colour);
-    color: var(--pale-green);
-}
-
 button:hover,
 button:focus {
-  border: solid 1px var(--third-colour);
-}
-
-.dark button:hover,
-button:focus {
-  border: solid 1px var(--pale-green);
+    border: solid 1px var(--third-colour);
 }
 
 .contactMe {
-    /*opacity: 0%;*/
     margin: 0;
     position: absolute;
     top: 80%;
@@ -349,6 +316,53 @@ button:focus {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
+/******** DARK MODE *******/
+.dark, 
+.dark .content .scrollable, 
+.dark .topnav a:hover {
+    background-color: var(--dark-green) !important;
+    color: var(--pale-green);
+}
+
+.dark .header, 
+.dark .footer,
+.dark button {
+    background-color: var(--third-colour);
+    color: var(--pale-green);
+}
+
+.dark button:hover,
+button:focus {
+    border: solid 1px var(--pale-green);
+}
+
+@media screen and (max-width: 600px) {
+    .topnav a {display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .topnav.responsive {
+        position: relative;
+        width: 80%;
+    }
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: center;
+        border-radius: 500px;
+    }
+}
+
 
 /* The Modal (background) */
 .modal {
@@ -392,7 +406,7 @@ button:focus {
   
 .close:hover,
 .close:focus {
-    color: black;
+    color: var(--third-colour);
     text-decoration: none;
     cursor: pointer;
 }
@@ -410,12 +424,6 @@ input, textarea{
   border-radius: 4px;
   box-sizing: border-box;
 }
-
-.dark input {
-    background-color: var(--third-colour);
-    color: var(--pale-green);
-}
-
 input[type=submit] {    
   width: 100%;
   background-color: var(--dark-green);
@@ -426,20 +434,20 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
 }
-
 input[type=submit]:hover {
-    border: 2px solid var(--third-colour);
-  }
-
+    border: 2px solid var(--third-colour)
+}
+.dark input {
+        background-color: var(--third-colour);
+        color: var(--pale-green)
+    }
 .dark input[type=submit] {
     background-color: var(--third-colour);
     border: 2px solid var(--third-colour);
 }
-
 .dark input[type=submit]:hover {
     border: 2px solid var(--pale-green);
 }
-
 .dark textarea {
-    background-color: var(--third-colour);  
+    background-color: var(--third-colour);
 }
