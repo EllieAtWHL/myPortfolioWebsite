@@ -247,7 +247,7 @@ h1.slideDown {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: var(--pale-green);
+    background-color: var(--dark-green);
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -326,7 +326,8 @@ button:focus {
 
 .dark .header, 
 .dark .footer,
-.dark button {
+.dark button,
+.dark .footer .slider:before  {
     background-color: var(--third-colour);
     color: var(--pale-green);
 }
