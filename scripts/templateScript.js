@@ -4,16 +4,27 @@ document.addEventListener("DOMContentLoaded", function(){createTemplate();})
 
 function createTemplate(){
 
-   const body = document.getElementById('mainBody');
-   const header = createHeader();
+    const body = document.getElementById('body');
+    const wrapper = document.createElement('div');
+    wrapper.className = 'wrapper';
+    wrapper.id = 'wrapper';
+    body.appendChild(wrapper);
+
+    const header = createHeader();
     const footer = createFooter();
-   
-   body.prepend(header);
-   body.appendChild(footer);
+
+    const content = document.getElementById('content');
+
+    wrapper.appendChild(header);
+    wrapper.appendChild(content);
+    wrapper.appendChild(footer);
 }
 
 function createHeader(){
-    header =  document.createElement('header');
+    header =  document.createElement('div');
+    header.className = 'header';
+    inner = createInner();
+    header.appendChild(inner);
 
     const logoLink = createLink({onclick: function() {window.location='../?mode='+currentMode}, href: "#"});
 
@@ -39,6 +50,7 @@ function createHeader(){
 
     const homeLinkSpan = document.createElement('span');
     const homeLink = createLink({onclick: function() {window.location='../?mode='+currentMode}, href: '#', text: 'Home'});
+    // TODO: const homeLink = createLink({onclick: function() {window.location='../?mode='+currentMode}, href: '#', text: 'Home', active: true});
     homeLinkSpan.appendChild(homeLink);
 
     const aboutMeLinkSpan = document.createElement('span');
@@ -60,19 +72,22 @@ function createHeader(){
     topnav.appendChild(projectsLinkSpan);
 
     logoLink.appendChild(logo);
-    header.appendChild(logoLink);
-    header.appendChild(topnav);
+    inner.appendChild(logoLink);
+    inner.appendChild(topnav);
 
     return header
 }
 
 function createFooter(){
-    const footer = document.createElement('footer');
+    const footer = document.createElement('div');
+    footer.className = 'footer';
+    const inner = createInner();
+    footer.appendChild(inner);
     
     const findMe = document.createElement('div');
     findMe.className = 'findMe floatLeft';
 
-    heading = document.createElement('h2');
+    heading = document.createElement('p');
     headingText = document.createTextNode('You can also find me at...');
     heading.appendChild(headingText);
 
@@ -130,10 +145,16 @@ function createFooter(){
     darkMode.appendChild(darkModeP);
 
 
-    footer.appendChild(findMe);
-    footer.appendChild(darkMode);
+    inner.appendChild(findMe);
+    inner.appendChild(darkMode);
 
     return footer;
+}
+
+function createInner(){
+    const inner = document.createElement('div');
+    inner.className = 'inner';
+    return inner;
 }
 
 function createLink(linkDetails){
@@ -141,6 +162,7 @@ function createLink(linkDetails){
     if (linkDetails.onclick) link.onclick = linkDetails.onclick;
     if (linkDetails.href) link.href = linkDetails.href;
     if (linkDetails.class) link.className = linkDetails.class;
+    if (linkDetails.active) link.classList.add('active');
     if (linkDetails.target) link.target = linkDetails.target;
     if (linkDetails.text){
         const text = document.createTextNode(linkDetails.text);

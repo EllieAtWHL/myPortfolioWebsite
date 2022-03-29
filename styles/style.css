@@ -10,7 +10,6 @@
     --pale-green: #E0E7DF;
     /*** dark   | header/footer | background    ***/
     --third-colour: #150003;
-
     --chosen-font:'Kanit', Arial, Helvetica, sans-serif;
 }
 
@@ -421,9 +420,11 @@ input, textarea{
   margin: 8px 0;
   display: inline-block;
   border: 1px solid var(--third-colour);
+
   border-radius: 4px;
   box-sizing: border-box;
 }
+
 input[type=submit] {    
   width: 100%;
   background-color: var(--dark-green);
@@ -434,6 +435,7 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
 }
+
 input[type=submit]:hover {
     border: 2px solid var(--third-colour)
 }

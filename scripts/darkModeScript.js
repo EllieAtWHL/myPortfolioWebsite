@@ -1,16 +1,17 @@
 let currentMode;
 
-function setColorScheme(scheme) {    
+function setColorScheme(scheme) {  
+    const element = document.getElementById('body');  
     switch(scheme){
         case 'dark':  
             document.getElementById('darkMode').checked = true;
-            document.getElementById('mainBody').classList.add("dark");
+            element.classList.add("dark");
         break;
         case 'light':           
-            document.getElementById('mainBody').className = ""
+            element.className = ""
         break;
         default:          
-            document.getElementById('mainBody').className = ""
+            element.className = ""
         break;
     }
 }
