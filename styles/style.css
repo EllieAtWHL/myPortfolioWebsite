@@ -9,7 +9,8 @@
     /*** dark   | body          | text          ***/
     --pale-green: #E0E7DF;
     /*** dark   | header/footer | background    ***/
-    --third-colour: #150003;
+    --third-colour: #052007;
+    /* --third-colour: #150003; */
     --chosen-font:'Kanit', Arial, Helvetica, sans-serif;
 }
 
