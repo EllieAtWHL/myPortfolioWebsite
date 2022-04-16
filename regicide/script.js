@@ -29,6 +29,9 @@ const ROYAL_STATS_MAP = {
     "K": {attack: 20, health: 40}
 }
 
+const gameStart =  document.getElementById('game-start')
+const playButton = document.getElementById('play-game')
+const playArea = document.getElementById('play-area')
 const royalDeckElement = document.querySelector('.royal-deck')
 const drawDeckElement = document.querySelector('.draw-deck')
 const royalCardSlot = document.querySelector('.royal-card-slot')
@@ -65,11 +68,15 @@ handSlots.forEach(slot => {
     slot.addEventListener('click', cardSelected)
 })
 
-startGame()
+
+playButton.addEventListener('click', startGame)
+
 
 attackButton.addEventListener('click', handlePlayerAttack)
 
 function startGame() {
+    gameStart.style.display = 'none'
+    playArea.style.display = 'grid'
     attackButton.disabled = true
     onAttack = true
     createDecks()
