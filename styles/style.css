@@ -12,6 +12,11 @@
     --third-colour: #052007;
     /* --third-colour: #150003; */
     --chosen-font:'Kanit', Arial, Helvetica, sans-serif;
+    --heading-font-size: 400%;
+    --sub-heading-font-size: 300%;
+    --tertiary-heading-font-size: 200%;
+    --lowest-heading-font-size: 150%;
+    --text-font-size: 14px;
 }
 
 html, body {
@@ -20,7 +25,7 @@ html, body {
     background-color: var(--pale-green);
     color: var(--dark-green);
     font-family: var(--chosen-font);
-    font-size: 14px;
+    font-size: var(--text-font-size);
     overflow: hidden
 }
 
@@ -45,6 +50,7 @@ html, body {
 
 .inner {
     display: table-cell;
+    margin: 2%;
 }
 
 .content .inner {
@@ -61,6 +67,10 @@ html, body {
     bottom: 0;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.article {
+    margin: 0 5%;
 }
 
 .header img {
@@ -84,7 +94,7 @@ html, body {
     text-align: center;
     padding: .5em;
     text-decoration: none;
-    font-size: 200%;
+    font-size: var(--tertiary-heading-font-size);
     border-radius: .3em;
 }
 
@@ -112,69 +122,91 @@ html, body {
     float: right;
 }
 
-h1.slideLeft {
-    font-size: 50px;
+h1, h2 {    
     text-align: center;
-    animation: slide-left 2s;
     text-shadow: 2px 2px var(--third-colour);
+}
+
+h1 {
+    font-size: var(--heading-font-size);
+}
+
+h2 {
+    font-size: var(--sub-heading-font-size);
+}
+
+h3 {
+    font-weight: lighter;
+    font-size: var(--tertiary-heading-font-size);
+}
+
+h4 {
+    font-weight: lighter;
+    font-size: var(--lowest-heading-font-size);
+}
+
+h1.slideLeft {
+    animation: slide-left 2s;
+}
+
+h1.slideRight {
+    opacity: 0%;
+    animation: slide-right 2s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+}
+
+h1.slideDown {
+    opacity: 0%;
+    animation: slide-down 3s;
+    animation-delay: 4s;
+    animation-fill-mode: forwards;
 }
 
 @keyframes slide-left {
     from    { transform: translateX(-100%);}
     to      { transform: translateX(0);}
 }
+@keyframes slide-right {
+    from    { opacity: 100%; transform: translateX(100%);}
+    to      { opacity: 100%; transform: translateX(0);}
+}
+@keyframes slide-down {
+    from    { opacity: 100%; transform: translateY(150%);}
+    to      { opacity: 100%; transform: translateY(0);}
+}
 
-.leftNotes {
+a {
+    color: var(--dark-green);
+}
+
+.dark a {
+    color: var(--pale-green);
+}
+
+.source {
+    font-style: italic;
+}
+
+.leftNotes, .rightNotes {
     opacity: 0;
-    font-size: 14px;
+    font-size: var(--text-font-size);
     text-align: center;
     animation: fade-in 1s;
-    animation-delay: 2s;
     animation-fill-mode: forwards;
 }
 
+.leftNotes {
+    animation-delay: 2s;
+}
+
 .rightNotes {
-    opacity: 0;
-    font-size: 14px;
-    text-align: center;
-    animation: fade-in 1s;
     animation-delay: 4s;
-    animation-fill-mode: forwards;
 }
 
 @keyframes fade-in {
     from    { opacity: 0%;}
     to      { opacity: 100%;}
-}
-
-h1.slideRight {
-    opacity: 0%;
-    font-size: 50px;
-    text-align: center;
-    animation: slide-right 2s;
-    animation-delay: 2s;
-    animation-fill-mode: forwards;
-    text-shadow: 2px 2px var(--third-colour)
-}
-
-@keyframes slide-right {
-    from    { opacity: 100%; transform: translateX(100%);}
-    to      { opacity: 100%; transform: translateX(0);}
-}
-
-h1.slideDown {
-    opacity: 0%;
-    font-size: 50px;
-    text-align: center;
-    animation: slide-down 3s;
-    animation-delay: 4s;
-    animation-fill-mode: forwards;
-    text-shadow: 2px 2px var(--third-colour);
-}
-
-@keyframes slide-down {
-    from    { opacity: 100%; transform: translateY(150%);}
-    to      { opacity: 100%; transform: translateY(0);}
 }
 
 .findMe {
@@ -282,11 +314,11 @@ button{
     border-radius: 8px;
     border-style: none;
     box-sizing: border-box;
-    color: var(--dark-green);
+    color: var(--pale-green);
     cursor: pointer;
     display: inline-block;
     font-family: var(--chosen-font);
-    font-size: 14px;
+    font-size: var(--text-font-size);
     font-weight: 500;
     height: 40px;
     line-height: 20px;
@@ -310,12 +342,11 @@ button:focus {
 }
 
 .contactMe {
-    margin: 0;
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+#contactMeButton{
+    left: 45%;
 }
 
 /******** DARK MODE *******/
@@ -423,7 +454,6 @@ input, textarea{
   margin: 8px 0;
   display: inline-block;
   border: 1px solid var(--third-colour);
-
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -455,4 +485,5 @@ input[type=submit]:hover {
 }
 .dark textarea {
     background-color: var(--third-colour);
+    color: var(--pale-green);
 }
