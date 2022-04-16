@@ -20,9 +20,23 @@
                 <div class="scrollable">
                     <div class="game-start" id="game-start">
                         <h1>Regicide</h1>
-                        <p>Regicide is a challenging, card game based on a standard 52 card deck</p>
-                        <p>Kickstarted by <a href="https://www.badgersfrommars.com/" target="_blank">Badgers From Mars in May 2020</a></p>
-                        <p>You can <a href="https://www.badgersfrommars.com/buy-regicide/" target="_blank">buy your own copy</a> or <a href="https://www.badgersfrommars.com/regicide/" target="_blank">learn to play</a></p>
+                        <p>Regicide is a challenging, card game based on a standard 52 card deck.</p>
+                        <p>Kickstarted by <a href="https://www.badgersfrommars.com/" target="_blank">Badgers From Mars</a> in May 2020.</p>
+                        <p>You can <a href="https://www.badgersfrommars.com/buy-regicide/" target="_blank">buy your own copy</a> or <a href="https://www.badgersfrommars.com/regicide/" target="_blank">learn to play</a>. I hope you learn to love it as much as I do!</p>
+                        <div class="note">
+                            <h4>Note</h4>
+                            <p>Still a work in progress, known bugs/missing features include:</p>
+                            <ul>
+                                <li>Suffering damage not required (easy mode - yay!)</li>
+                                <li>Shield/royal attack not updatng correctly</li>
+                                <li>Yielding not implemented - not sure it makes sense single player?</li>
+                                <li>Jester not implemented - special solo rules to use for it</li>
+                                <li>Add ability to undo card selection</li>
+                                <li>Not mobile-friendly</li>
+                                <li>Improve messaging</li>
+                            </ul>
+                        </div>
+                        
                         <button id="play-game">Play Game</button>
                     </div>
                     
@@ -39,15 +53,15 @@
                             <div class="draw-deck deck"></div>
                         </div>
                         <div class="active-container container">
-                            <div class="active-card-slot-first card-slot"></div>
-                            <div class="active-card-slot-second card-slot"></div>
-                            <div class="active-card-slot-third card-slot"></div>
-                            <div class="active-card-slot-fourth card-slot"></div>
-                            <div class="active-card-slot-fifth card-slot"></div>
-                            <div class="active-card-slot-sixth card-slot"></div>
-                            <div class="active-card-slot-seventh card-slot"></div>
-                            <div class="active-card-slot-eigth card-slot"></div>
-                            <button class="attack-button">⚔️ Attack!</button>
+                            <div class="card-slot" id="active-card-slot-first"></div>
+                            <div class="card-slot" id="active-card-slot-second"></div>
+                            <div class="card-slot" id="active-card-slot-third"></div>
+                            <div class="card-slot" id="active-card-slot-fourth"></div>
+                            <div class="card-slot" id="active-card-slot-fifth"></div>
+                            <div class="card-slot" id="active-card-slot-sixth"></div>
+                            <div class="card-slot" id="active-card-slot-seventh"></div>
+                            <div class="card-slot" id="active-card-slot-eigth"></div>
+                            <button id="attack-button">⚔️ Attack!</button>
                             <div class="spacer"></div>
                             <div class="spacer"></div>
                             <div class="spacer"></div>
@@ -55,14 +69,14 @@
                             <!-- <button class="yield-button">Yield</button> -->
                         </div>
                         <div class="player-container container">
-                            <div class="hand-card-slot-first card-slot"></div>
-                            <div class="hand-card-slot-second card-slot"></div>
-                            <div class="hand-card-slot-third card-slot"></div>
-                            <div class="hand-card-slot-fourth card-slot"></div>
-                            <div class="hand-card-slot-fifth card-slot"></div>
-                            <div class="hand-card-slot-sixth card-slot"></div>
-                            <div class="hand-card-slot-seventh card-slot"></div>
-                            <div class="hand-card-slot-eigth card-slot"></div>
+                            <div class="card-slot" id="hand-card-slot-first"></div>
+                            <div class="card-slot" id="hand-card-slot-second"></div>
+                            <div class="card-slot" id="hand-card-slot-third"></div>
+                            <div class="card-slot" id="hand-card-slot-fourth"></div>
+                            <div class="card-slot" id="hand-card-slot-fifth"></div>
+                            <div class="card-slot" id="hand-card-slot-sixth"></div>
+                            <div class="card-slot" id="hand-card-slot-seventh"></div>
+                            <div class="card-slot" id="hand-card-slot-eigth"></div>
                         </div>
                         <div class="defence-container container">
                             <div class="defence-card-slot-first card-slot"></div>

@@ -39,38 +39,35 @@ const discardCardSlot = document.querySelector('.discard-card-slot')
 const attackElement = document.querySelector('.attack')
 const healthElement = document.querySelector('.health')
 const powerTextElement = document.querySelector('.power-text')
-const attackButton = document.querySelector('.attack-button')
+const attackButton = document.getElementById('attack-button')
 const handSlots = [
-    document.querySelector('.hand-card-slot-first'),
-    document.querySelector('.hand-card-slot-second'),
-    document.querySelector('.hand-card-slot-third'),
-    document.querySelector('.hand-card-slot-fourth'),
-    document.querySelector('.hand-card-slot-fifth'),
-    document.querySelector('.hand-card-slot-sixth'),
-    document.querySelector('.hand-card-slot-seventh'),
-    document.querySelector('.hand-card-slot-eigth')
+    document.getElementById('hand-card-slot-first'),
+    document.getElementById('hand-card-slot-second'),
+    document.getElementById('hand-card-slot-third'),
+    document.getElementById('hand-card-slot-fourth'),
+    document.getElementById('hand-card-slot-fifth'),
+    document.getElementById('hand-card-slot-sixth'),
+    document.getElementById('hand-card-slot-seventh'),
+    document.getElementById('hand-card-slot-eigth')
 ]
 const activeSlots = [
-    document.querySelector('.active-card-slot-first'),
-    document.querySelector('.active-card-slot-second'),
-    document.querySelector('.active-card-slot-third'),
-    document.querySelector('.active-card-slot-fourth'),
-    document.querySelector('.active-card-slot-fifth'),
-    document.querySelector('.active-card-slot-sixth'),
-    document.querySelector('.active-card-slot-seventh'),
-    document.querySelector('.active-card-slot-eigth')
+    document.getElementById('active-card-slot-first'),
+    document.getElementById('active-card-slot-second'),
+    document.getElementById('active-card-slot-third'),
+    document.getElementById('active-card-slot-fourth'),
+    document.getElementById('active-card-slot-fifth'),
+    document.getElementById('active-card-slot-sixth'),
+    document.getElementById('active-card-slot-seventh'),
+    document.getElementById('active-card-slot-eigth')
 ]
 
 let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, currentRoyalHealth, onAttack
 
+playButton.addEventListener('click', startGame)
 
 handSlots.forEach(slot => {
     slot.addEventListener('click', cardSelected)
 })
-
-
-playButton.addEventListener('click', startGame)
-
 
 attackButton.addEventListener('click', handlePlayerAttack)
 
@@ -125,8 +122,9 @@ function createRoyalDeck(jacks, queens, kings){
 function setRoyalCard(){
     royalCardSlot.innerHTML = ''
     royalCard = royalDeck.pop()
+    if(!royalCard) wonGame()
     royalCardSlot.appendChild(royalCard.getHTML())
-    powerTextElement.innerText = `Protected against: ${SUIT_POWER_MAP[royalCard.suit]}`
+    powerTextElement.innerText = `Immunity against: ${SUIT_POWER_MAP[royalCard.suit]}`
     currentRoyalAttack = ROYAL_STATS_MAP[royalCard.value].attack
     currentRoyalHealth = ROYAL_STATS_MAP[royalCard.value].health
     updateStatsText()
@@ -296,7 +294,8 @@ function playerAttack(suits){
         chosenCards = undefined
         updateHealthText()
         attackButton.disabled = true
-        handleRoyalAttack()
+        if(playerHand.numberOfCards === 0) youLost()
+        else handleRoyalAttack()
     }
     else handleRoyalDefeated(currentRoyalHealth === 0)
 }
@@ -358,6 +357,14 @@ function clearActiveDeck(){
         slot.innerHTML = ''
     })
     attackButton.disabled = true
+}
+
+function wonGame(){
+    alert(`You won the game?!?`)
+}
+
+function youLost(){
+    alert(`Sorry, you lost`)
 }
 
 function updateDiscardPile(){
