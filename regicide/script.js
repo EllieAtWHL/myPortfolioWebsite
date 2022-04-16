@@ -119,7 +119,7 @@ function setRoyalCard(){
     royalCardSlot.innerHTML = ''
     royalCard = royalDeck.pop()
     royalCardSlot.appendChild(royalCard.getHTML())
-    powerTextElement.innerText = `Protected against: \n ${SUIT_POWER_MAP[royalCard.suit]}`
+    powerTextElement.innerText = `Protected against: ${SUIT_POWER_MAP[royalCard.suit]}`
     currentRoyalAttack = ROYAL_STATS_MAP[royalCard.value].attack
     currentRoyalHealth = ROYAL_STATS_MAP[royalCard.value].health
     updateStatsText()
@@ -301,6 +301,7 @@ function handleRoyalAttack(){
     updateAttackText()
     alert(`${royalCard.value}${royalCard.suit} is attacking for ${currentRoyalAttack}`)
     console.log(`Actual shield ${shield}`)
+    onAttack = true
 }
 
 function currentShield(){
