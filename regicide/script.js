@@ -32,6 +32,8 @@ const ROYAL_STATS_MAP = {
 const gameStart =  document.getElementById('game-start')
 const playButton = document.getElementById('play-game')
 const playArea = document.getElementById('play-area')
+const gameMessage = document.getElementById('game-message')
+const messageElement = document.getElementById('message')
 const royalDeckElement = document.querySelector('.royal-deck')
 const drawDeckElement = document.querySelector('.draw-deck')
 const royalCardSlot = document.querySelector('.royal-card-slot')
@@ -293,7 +295,7 @@ function playerAttack(suits){
         else activeDeck = new Deck(activeDeck.cards.concat(chosenCards.cards))
         updateHealthText()
         attackButton.disabled = true
-        if(playerHand.numberOfCards === 0) youLost()
+        if(playerHand.numberOfCards === 0) lostGame()
         else handleRoyalAttack(suits)
     }
     else handleRoyalDefeated(currentRoyalHealth === 0)
@@ -362,8 +364,10 @@ function wonGame(){
     alert(`You won the game?!?`)
 }
 
-function youLost(){
-    alert(`Sorry, you lost`)
+function lostGame(){
+    // alert(`Sorry, you lost`)
+    gameMessage.style.display = 'block'
+    messageElement.innerText = 'Sorry, you lost'
 }
 
 function updateDiscardPile(){
