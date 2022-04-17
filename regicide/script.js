@@ -61,7 +61,7 @@ const activeSlots = [
     document.getElementById('active-card-slot-eigth')
 ]
 
-let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, currentRoyalHealth, onAttack
+let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, currentRoyalHealth, currentShield, onAttack
 
 playButton.addEventListener('click', startGame)
 
@@ -291,36 +291,34 @@ function playerAttack(suits){
     if(currentRoyalHealth > 0) {
         if (!activeDeck) activeDeck = new Deck(chosenCards.cards)
         else activeDeck = new Deck(activeDeck.cards.concat(chosenCards.cards))
-        chosenCards = undefined
         updateHealthText()
         attackButton.disabled = true
         if(playerHand.numberOfCards === 0) youLost()
-        else handleRoyalAttack()
+        else handleRoyalAttack(suits)
     }
     else handleRoyalDefeated(currentRoyalHealth === 0)
 }
 
-function handleRoyalAttack(){
+function handleRoyalAttack(suits){
     onAttack = false
-    let shield = royalCard.suit === '♠' ? 0 : currentShield()
-    currentRoyalAttack -= shield
-    updateAttackText()
+    if(!currentShield) currentShield = 0
+    if(suits.includes('♠')){
+        let shield = royalCard.suit === '♠' ? 0 : getCardShield(chosenCards.cards)
+        currentRoyalAttack -= shield
+        if (currentRoyalAttack < 0) currentRoyalAttack = 0
+        currentShield += shield
+        updateAttackText()
+    }
     alert(`${royalCard.value}${royalCard.suit} is attacking for ${currentRoyalAttack}`)
-    console.log(`Actual shield ${shield}`)
+    console.log(`Current shield ${currentShield}`)
+    chosenCards = undefined
     onAttack = true
-}
-
-function currentShield(){
-    let shield = 0
-    if(activeDeck?.cards) shield += getCardShield(activeDeck.cards)
-    if(chosenCards?.cards) shield += getCardShield(chosenCards.cards)
-    return shield
 }
 
 function getCardShield(cards){
     let shield = 0
     cards.forEach(card => {
-        if(card.suit === '♠') shield += CARD_VALUE_MAP[card.value]
+        shield += CARD_VALUE_MAP[card.value]
     })
     return shield
 }
@@ -335,6 +333,7 @@ function handleRoyalDefeated(exactKill){
         if(!discardDeck) discardDeck = new Deck([royalCard])
         else discardDeck = new Deck([royalCard].concat(discardDeck.cards))
     }
+    currentShield = 0
     moveActiveToDiscard()
     setRoyalCard()
     updateDeckCount()
