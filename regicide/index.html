@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="regicide.css">
         <script src="../scripts/templateScript.js"></script>
         <script src="../scripts/darkModeScript.js"></script>
+        <script src="../scripts/modalScript.js"></script>
         <script src="regicide.js" type="module"></script>
     </head>
     <body id="body" class="dark">
@@ -92,10 +93,10 @@
 
                     <div class="modal" id="game-message">
                         <div class="modal-content">
-                            <span class="close">&times;</span>
                             <h3 class="message" id="message"></h3>
-                            <button>Back home</button>
-                            <button>Restart</button>
+                            <div class="modal-footer">
+                                <!-- create buttons dependent on state -->
+                            </div>
 
                         </div>
                     </div>

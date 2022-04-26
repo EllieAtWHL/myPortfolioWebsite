@@ -5,7 +5,8 @@
 :root{
     --royal-color: rgb(154, 45, 154);
     --draw-color: rgb(48, 197, 22);
-    --column-width: calc()
+    --gap-width: 0.25 vw;
+    --gap-height: 0.25vh;
 }
 
 .game-start {
@@ -25,25 +26,24 @@ h1, h4 {
 .play-area {
     display: none;
     grid-template-rows: repeat(4, auto);
-    gap: .5rem;
+    gap: var(--gap-width);
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: var(--gap-width);
     user-select: none;
     animation: fadeIn 1s;
 }
 
 .container {
-    padding-top: .5rem;
+    padding-top: var(--gap-height);
     display: grid;
     grid-template-columns: repeat(8, min(10vw, 100px));
-    /* grid-template-rows: auto; */
-    gap: .5rem;
+    gap: var(--gap-width);
     justify-content: center;
     align-items: center;
     width: 90vw;
     max-width: 800px;
-    height: min(25vh, 200px);
+    height: min(20vh, 200px);
 }
 
 .deck, .card {
@@ -59,7 +59,7 @@ h1, h4 {
 .deck {
     border: 1px solid black;
     border-radius: .5rem;
-    font-size: 2rem;
+    font-size: calc(var(--gap-height)*15);
     text-align: center;
     color: white;
 }
@@ -85,6 +85,7 @@ h1, h4 {
 
 .power-text {
     grid-column: span 8;
+    height: var(--gap-height);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,7 +95,7 @@ h1, h4 {
     position: relative;
     border: 1px solid black;
     border-radius: .5rem;
-    font-size: 3rem;
+    font-size: calc(var(--gap-height)*25);
     background-color: white;
 }
 

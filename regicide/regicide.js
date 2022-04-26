@@ -64,6 +64,7 @@ const activeSlots = [
 ]
 
 let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, currentRoyalHealth, currentShield, onAttack
+let messages = []
 
 playButton.addEventListener('click', startGame)
 
@@ -78,6 +79,11 @@ function startGame() {
     playArea.style.display = 'grid'
     attackButton.disabled = true
     onAttack = true
+    chosenCards = undefined
+    activeDeck = undefined
+    discardDeck = undefined
+    clearActiveDeck()
+    updateDiscardPile()
     createDecks()
     setRoyalCard()
     createPlayerHand()
@@ -152,7 +158,7 @@ function cardSelected(){
     let selectedCard = {suit: cardValue.substring(cardValue.length-1), value: cardValue.substring(0,cardValue.length-1)}
     if(onAttack){
         if(invalidSelection(selectedCard)){
-            alert('Illegal move') //TODO Improve illegal moves
+            alertBox('Illegal move')
         }
         else {
             attackButton.disabled = false
@@ -161,7 +167,7 @@ function cardSelected(){
             renderSelectedCardMovement(slotToClear)
         }
     } else {
-        //TODO: Select cards to be discards
+        //TODO: Select cards to be discarded
     }
 }
 
@@ -226,7 +232,7 @@ function handlePlayerAttack(){
         if(card.suit !== royalCard.suit){
             suitsActive.push(card.suit)
         }
-        else alert(`${card.suit} power is blocked`)
+        else messages.push(`${card.suit} power is blocked`);
     })
     if(suitsActive.includes('♥')){
         handleHearts()
@@ -251,11 +257,11 @@ function handleHearts(){
     if (maxHeal > 0) {
         healFromDiscard(maxHeal)
     }
-    else alert(`Unable to heal`)
+    else messages.push(`Unable to heal`)
 }
 
 function healFromDiscard(maxHeal){
-    alert(`Healing ${maxHeal} ${maxHeal === 1 ? 'card' : 'cards'} from the discard pile`) //TODO
+    messages.push(`Healing ${maxHeal} ${maxHeal === 1 ? 'card' : 'cards'} from the discard pile`)//TODO
     discardDeck.shuffle()
     let healedCards = discardDeck.cards.splice(0,maxHeal)
     drawDeck = new Deck(drawDeck.cards.concat(healedCards))
@@ -274,7 +280,7 @@ function handleDiamonds(){
 }
 
 function drawFromTavern(maxDraw){
-    alert(`Drawing ${maxDraw} ${maxDraw === 1 ? 'card' : 'cards'} from tavern`)
+    messages.push(`Drawing ${maxDraw} ${maxDraw === 1 ? 'card' : 'cards'} from tavern`)
     let drawnCards = []
     for(let i=0;i<maxDraw;i++){
         drawnCards.push(drawDeck.pop())
@@ -289,13 +295,13 @@ function playerAttack(suits){
     let damageDealt = totalPlayerAttack()
     if(suits.includes('♣')) damageDealt += damageDealt
     currentRoyalHealth -= damageDealt
-    alert(`Attacking ${royalCard.value}${royalCard.suit} for ${damageDealt} damage`)
+    messages.push(`Attacking ${royalCard.value}${royalCard.suit} for ${damageDealt} damage`)
     if(currentRoyalHealth > 0) {
         if (!activeDeck) activeDeck = new Deck(chosenCards.cards)
         else activeDeck = new Deck(activeDeck.cards.concat(chosenCards.cards))
         updateHealthText()
         attackButton.disabled = true
-        if(playerHand.numberOfCards === 0) lostGame()
+        if(playerHand.numberOfCards === 0) alertBox('Sorry, you lost', true)
         else handleRoyalAttack(suits)
     }
     else handleRoyalDefeated(currentRoyalHealth === 0)
@@ -311,8 +317,11 @@ function handleRoyalAttack(suits){
         currentShield += shield
         updateAttackText()
     }
-    alert(`${royalCard.value}${royalCard.suit} is attacking for ${currentRoyalAttack}`)
-    console.log(`Current shield ${currentShield}`)
+    messages.push(`${royalCard.value}${royalCard.suit} is attacking for ${currentRoyalAttack}`)
+    
+    alertBox(messages) //TODO: Clean up messages
+    messages =[]
+
     chosenCards = undefined
     onAttack = true
 }
@@ -327,14 +336,18 @@ function getCardShield(cards){
 
 function handleRoyalDefeated(exactKill){
     if(exactKill) {
-        alert(`${royalCard.value}${royalCard.suit} defeated with critical hit`)
+        messages.push(`${royalCard.value}${royalCard.suit} defeated with critical hit`)
         drawDeck = new Deck([royalCard].concat(drawDeck.cards))
     }
     else {
-        alert(`${royalCard.value}${royalCard.suit} defeated`)
+        messages.push(`${royalCard.value}${royalCard.suit} defeated`)
         if(!discardDeck) discardDeck = new Deck([royalCard])
         else discardDeck = new Deck([royalCard].concat(discardDeck.cards))
     }
+
+    alertBox(messages) //TODO: Clean up messages
+    messages =[]
+
     currentShield = 0
     moveActiveToDiscard()
     setRoyalCard()
@@ -360,16 +373,6 @@ function clearActiveDeck(){
     attackButton.disabled = true
 }
 
-function wonGame(){
-    alert(`You won the game?!?`)
-}
-
-function lostGame(){
-    // alert(`Sorry, you lost`)
-    gameMessage.style.display = 'block'
-    messageElement.innerText = 'Sorry, you lost'
-}
-
 function updateDiscardPile(){
     discardCardSlot.innerText = ''
     if(discardDeck?.cards[0]) discardCardSlot.appendChild(discardDeck.cards[0].getHTML())
@@ -391,4 +394,47 @@ function updateHealthText(){
 function updateDeckCount() {
     royalDeckElement.innerText = royalDeck.numberOfCards
     drawDeckElement.innerText = drawDeck.numberOfCards
+}
+
+function wonGame(){
+    alertBox(`You won the game?!?`, true)
+}
+
+function alertBox(message, endGame){
+    if(endGame){
+        //TODO: add end game buttons
+        addAlertBoxButton('Restart', endGame)
+    } else {
+        addAlertBoxButton('Continue')
+    }
+    messageElement.innerText = message
+    gameMessage.style.display = 'block'
+    
+}
+
+function addAlertBoxButton(label, endGame){
+    let footerElement = document.querySelector('.modal-footer');
+    let button = document.createElement('button')
+    button.innerText = label
+    footerElement.appendChild(button)
+    if(endGame){
+        button.addEventListener('click', restartGame)
+    } else {
+        button.addEventListener('click', closeModal)
+    }
+}
+
+function closeModal(){
+    gameMessage.style.display = 'none'
+    let footerElement = document.querySelector('.modal-footer');
+    footerElement.innerHTML = ''
+    button.removeEventListener('click', closeModal)
+}
+
+function restartGame(){
+    startGame();
+    gameMessage.style.display = 'none'
+    let footerElement = document.querySelector('.modal-footer');
+    footerElement.innerHTML = ''
+    button.removeEventListener('click', restartGame)
 }
