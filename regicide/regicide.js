@@ -63,7 +63,7 @@ const activeSlots = [
     document.getElementById('active-card-slot-eigth')
 ]
 
-let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, currentRoyalHealth, currentShield, onAttack
+let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, discardedRoyalAttack, currentRoyalHealth, currentShield, onAttack
 let messages = []
 
 playButton.addEventListener('click', startGame)
@@ -166,8 +166,18 @@ function cardSelected(){
             let slotToClear = event.path[1]
             renderSelectedCardMovement(slotToClear)
         }
-    } else {
-        //TODO: Select cards to be discarded
+    } else {        
+        discardedRoyalAttack -= CARD_VALUE_MAP[selectedCard.value]
+        moveSelectedCardToDiscard(selectedCard)
+        let slotToClear = event.path[1]
+        renderDiscardedCardMovement(slotToClear)
+        if(discardedRoyalAttack <= 0) {
+            clearDefenceMessage()
+            onAttack = true
+        } else {
+            updateDefenceMessage()
+        }
+        if(playerHand.numberOfCards === 0) alertBox(['Sorry, you lost'], true)
     }
 }
 
@@ -218,12 +228,25 @@ function moveSelectedCardToChosenCards(selectedCard){
     else chosenCards.push(removedCard[0])
 }
 
+function moveSelectedCardToDiscard(selectedCard){
+    let removedCard = playerHand.remove(selectedCard);
+    if(!discardDeck) discardDeck = new Deck(removedCard)
+    else {
+        discardDeck = new Deck(removedCard.concat(discardDeck.cards))
+    }
+}
+
 function renderSelectedCardMovement(slot){
     let cardToCreate = slot.innerHTML
     slot.innerHTML = ''
     let slotToPopulate = chosenCards.numberOfCards - 1
     if(activeDeck) slotToPopulate += activeDeck.numberOfCards
     activeSlots[slotToPopulate].innerHTML = cardToCreate
+}
+
+function renderDiscardedCardMovement(slot){
+    slot.innerHTML = ''
+    updateDiscardPile()
 }
 
 function handlePlayerAttack(){
@@ -301,7 +324,7 @@ function playerAttack(suits){
         else activeDeck = new Deck(activeDeck.cards.concat(chosenCards.cards))
         updateHealthText()
         attackButton.disabled = true
-        if(playerHand.numberOfCards === 0) alertBox('Sorry, you lost', true)
+        if(playerHand.numberOfCards === 0) alertBox(['Sorry, you lost'], true)
         else handleRoyalAttack(suits)
     }
     else handleRoyalDefeated(currentRoyalHealth === 0)
@@ -319,11 +342,24 @@ function handleRoyalAttack(suits){
     }
     messages.push(`${royalCard.value}${royalCard.suit} is attacking for ${currentRoyalAttack}`)
     
-    alertBox(messages) //TODO: Clean up messages
-    messages =[]
-
+    alertBox(messages)
+    discardedRoyalAttack = currentRoyalAttack
     chosenCards = undefined
-    onAttack = true
+    if(currentRoyalAttack <= 0 ) onAttack = true;
+    else {
+       updateDefenceMessage()
+    }    
+}
+
+function updateDefenceMessage(){
+    let defenceElement = document.getElementById('defence-message')
+    defenceElement.innerText = `Current defense needed is ${discardedRoyalAttack}`
+    defenceElement.style.display = 'block'
+}
+function clearDefenceMessage(){
+    let defenceElement = document.getElementById('defence-message')
+    defenceElement.innerText = ``
+    defenceElement.style.display = 'none'
 }
 
 function getCardShield(cards){
@@ -345,8 +381,7 @@ function handleRoyalDefeated(exactKill){
         else discardDeck = new Deck([royalCard].concat(discardDeck.cards))
     }
 
-    alertBox(messages) //TODO: Clean up messages
-    messages =[]
+    alertBox(messages)
 
     currentShield = 0
     moveActiveToDiscard()
@@ -397,23 +432,34 @@ function updateDeckCount() {
 }
 
 function wonGame(){
-    alertBox(`You won the game?!?`, true)
+    alertBox([`You won the game?!?`], true)
 }
 
-function alertBox(message, endGame){
+function alertBox(messages, endGame){
     if(endGame){
-        //TODO: add end game buttons
         addAlertBoxButton('Restart', endGame)
     } else {
         addAlertBoxButton('Continue')
     }
-    messageElement.innerText = message
+
+    let r = document.querySelector(':root')
+    let listElement = document.createElement('ul')
+    listElement.classList.add('message')
+
+    messageElement.appendChild(listElement)
+    messages.forEach((message) => {
+        let listMessage = document.createElement('li')
+        listMessage.classList.add('list-message')
+        listMessage.innerText = message
+        listElement.appendChild(listMessage)
+    })
+    
     gameMessage.style.display = 'block'
     
 }
 
 function addAlertBoxButton(label, endGame){
-    let footerElement = document.querySelector('.modal-footer');
+    let footerElement = document.querySelector('.modal-footer')
     let button = document.createElement('button')
     button.innerText = label
     footerElement.appendChild(button)
@@ -425,16 +471,22 @@ function addAlertBoxButton(label, endGame){
 }
 
 function closeModal(){
-    gameMessage.style.display = 'none'
-    let footerElement = document.querySelector('.modal-footer');
-    footerElement.innerHTML = ''
-    button.removeEventListener('click', closeModal)
+    clearModal()
+    //TODO: button isn't defined, you silly sausage
+    //button.removeEventListener('click', closeModal)
 }
 
 function restartGame(){
-    startGame();
+    startGame()
+    clearModal()
+    //TODO: button isn't defined, you silly sausage
+    //button.removeEventListener('click', restartGame)
+}
+
+function clearModal(){
     gameMessage.style.display = 'none'
-    let footerElement = document.querySelector('.modal-footer');
+    messageElement.innerHTML = ''
+    messages = []
+    let footerElement = document.querySelector('.modal-footer')
     footerElement.innerHTML = ''
-    button.removeEventListener('click', restartGame)
 }

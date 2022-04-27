@@ -7,11 +7,6 @@ var btn = document.getElementById("contactMeButton");
 // Get the <span> element that closes the modal
 var span = document.querySelector(".close");
 
-
-console.log(modal)
-console.log(btn)
-console.log(span)
-
 // When the user clicks on the button, open the modal
 if(btn){
   btn.onclick = function() {

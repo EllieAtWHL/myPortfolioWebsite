@@ -6,7 +6,7 @@
         <title>Regicide</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../styles/style.css">
         <link rel="stylesheet" href="regicide.css">
@@ -29,12 +29,9 @@
                             <h4>Note</h4>
                             <p>Still a work in progress, known bugs/missing features include:</p>
                             <ul>
-                                <li>Suffering damage not implemented (easy mode - yay!)</li>
-                                <li>Yielding not implemented - not sure it makes sense single player?</li>
                                 <li>Jester not implemented - special solo rules to use for it</li>
                                 <li>Not mobile-friendly</li>
                                 <li>Add ability to undo card selection</li>
-                                <li>Improve messaging</li>
                             </ul>
                         </div>
                         
@@ -79,29 +76,22 @@
                             <div class="card-slot" id="hand-card-slot-seventh"></div>
                             <div class="card-slot" id="hand-card-slot-eigth"></div>
                         </div>
-                        <div class="defence-container container">
-                            <div class="defence-card-slot-first card-slot"></div>
-                            <div class="defence-card-slot-second card-slot"></div>
-                            <div class="defence-card-slot-third card-slot"></div>
-                            <div class="defence-card-slot-fourth card-slot"></div>
-                            <div class="defence-card-slot-fifth card-slot"></div>
-                            <div class="defence-card-slot-sixth card-slot"></div>
-                            <div class="defence-card-slot-seventh card-slot"></div>
-                            <div class="defence-card-slot-eigth card-slot"></div>
-                        </div>
+                            <div class="defence-message" id="defence-message"></div>
+
                     </div> 
 
                     <div class="modal" id="game-message">
                         <div class="modal-content">
-                            <h3 class="message" id="message"></h3>
+                            <div class="message" id="message"></div>
                             <div class="modal-footer">
                                 <!-- create buttons dependent on state -->
                             </div>
 
                         </div>
                     </div>
-
+                    
                 </div>
+                
             </div>
         </div>
     </body>

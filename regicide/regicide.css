@@ -66,6 +66,7 @@ h1, h4 {
 
 .royal-deck {
     background-color: var(--royal-color);
+    background-image: linear-gradient( rgb(47, 7, 47), rgb(175, 12, 172));
 }
 
 /* .royal-deck::after{
@@ -77,10 +78,7 @@ h1, h4 {
 
 .draw-deck {
     background-color: var(--draw-color);
-}
-
-.player-deck {
-    background-color: green;
+    background-image: linear-gradient(rgb(11, 60, 11), green);
 }
 
 .power-text {
@@ -147,11 +145,14 @@ button:disabled {
     cursor: auto;
 }
 
-@keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+.defence-message {
+    display: none;
+    border: 2px solid black;
+    border-radius: 1rem;
+    padding: 1%;
 }
 
 .message {
-    text-align: center;
+    font-size: var(--gap-width);
+    list-style-type: "*"; 
 }
