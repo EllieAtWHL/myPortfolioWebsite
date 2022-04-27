@@ -1,0 +1,158 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+:root{
+    --royal-color: rgb(154, 45, 154);
+    --draw-color: rgb(48, 197, 22);
+    --gap-width: 0.25 vw;
+    --gap-height: 0.25vh;
+}
+
+.game-start {
+    padding: 0 10px;
+    text-align: center;
+}
+
+.note {
+    margin: 0;
+    text-align: left;
+}
+
+h1, h4 {
+    margin: 0;
+}
+
+.play-area {
+    display: none;
+    grid-template-rows: repeat(4, auto);
+    gap: var(--gap-width);
+    justify-content: center;
+    align-items: center;
+    padding: var(--gap-width);
+    user-select: none;
+    animation: fadeIn 1s;
+}
+
+.container {
+    padding-top: var(--gap-height);
+    display: grid;
+    grid-template-columns: repeat(8, min(10vw, 100px));
+    gap: var(--gap-width);
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    max-width: 800px;
+    height: min(20vh, 200px);
+}
+
+.deck, .card {
+    aspect-ratio: 9 / 14;
+    min-width: 36px;
+    min-height: 56px;
+    max-height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deck {
+    border: 1px solid black;
+    border-radius: .5rem;
+    font-size: calc(var(--gap-height)*15);
+    text-align: center;
+    color: white;
+}
+
+.royal-deck {
+    background-color: var(--royal-color);
+    background-image: linear-gradient( rgb(47, 7, 47), rgb(175, 12, 172));
+}
+
+/* .royal-deck::after{
+    text-align: center;
+    content: "\1F451";
+    transform: translate(-10px, 20px)
+}  */
+/* TODO add crown for royal deck? */
+
+.draw-deck {
+    background-color: var(--draw-color);
+    background-image: linear-gradient(rgb(11, 60, 11), green);
+}
+
+.power-text {
+    grid-column: span 8;
+    height: var(--gap-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    position: relative;
+    border: 1px solid black;
+    border-radius: .5rem;
+    font-size: calc(var(--gap-height)*25);
+    background-color: white;
+}
+
+.card.red {
+    color: red;
+}
+
+.card.black {
+    color: black;
+}
+
+.card::before,
+.card::after {
+    position: absolute;
+    content: attr(data-value);
+    font-size: 1rem;
+}
+
+.card::before {
+    top: .25rem;
+    left: .25rem;
+}
+
+.card::after {
+    bottom: .25rem;
+    right: .25rem;
+    transform: rotate(180deg);
+}
+
+.player-container .card:hover {
+    background-color: #ccc;
+}
+
+.player-container .card {
+    cursor: pointer;
+}
+
+button {
+    grid-column: span 2;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+button:hover {
+    opacity: 80%;
+}
+button:disabled {
+    opacity: 20%;
+    cursor: auto;
+}
+
+.defence-message {
+    display: none;
+    border: 2px solid black;
+    border-radius: 1rem;
+    padding: 1%;
+}
+
+.message {
+    font-size: var(--gap-width);
+    list-style-type: "*"; 
+}
