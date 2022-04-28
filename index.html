@@ -13,10 +13,9 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../styles/style.css">
-        <script src="../scripts/templateScript.js"></script>
-        <script src="../scripts/darkModeScript.js"></script>
+        <script src="../scripts/templateScript.js" defer></script>
     </head>
-    <body id="body" class="dark">
+    <body id="body">
         <div class="content" id="content">
             <div class="inner">
                 <div class="scrollable">
@@ -41,7 +40,7 @@
                     <div id="contactMeModal" class="modal">
                         <div class="modal-content">
                             <span class="close">&times;</span>
-                                <h1>Contact Me</h1>
+                                <h3>Contact Me</h3>
 
                                 <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
                                 
@@ -89,7 +88,7 @@
                                         </tbody>
                                     </table>
 
-                                    <input type="submit" name="submit">
+                                    <input class="button" type="submit" name="submit">
                                 
                                 </form>
                                 <script src="../scripts/modalScript.js"></script>
