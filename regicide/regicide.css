@@ -37,7 +37,7 @@ h1, h4 {
 .container {
     padding-top: var(--gap-height);
     display: grid;
-    grid-template-columns: repeat(8, min(10vw, 100px));
+    grid-template-columns: repeat(8, min(11.25vw, 100px));
     gap: var(--gap-width);
     justify-content: center;
     align-items: center;
@@ -46,10 +46,13 @@ h1, h4 {
     height: min(20vh, 200px);
 }
 
+.attack, .health {
+    font-size: calc(var(--gap-height) * 7);
+}
+
 .deck, .card {
     aspect-ratio: 9 / 14;
-    min-width: 36px;
-    min-height: 56px;
+    min-height: 60px;
     max-height: 15vh;
     display: flex;
     justify-content: center;
@@ -113,13 +116,13 @@ h1, h4 {
 }
 
 .card::before {
-    top: .25rem;
-    left: .25rem;
+    top: 0;
+    left: 0;
 }
 
 .card::after {
-    bottom: .25rem;
-    right: .25rem;
+    bottom: 0;
+    right: 0;
     transform: rotate(180deg);
 }
 
@@ -133,8 +136,9 @@ h1, h4 {
 
 button {
     grid-column: span 2;
+    height: 5vh;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: calc(var(--gap-height) * 7);
     cursor: pointer;
 }
 button:hover {

@@ -13,90 +13,87 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../styles/style.css">
-        <script src="../scripts/templateScript.js"></script>
-        <script src="../scripts/darkModeScript.js"></script>
+        <script src="../scripts/templateScript.js" defer></script>
     </head>
-    <body id="body" class="dark">
+    <body id="body">
         <div class="content" id="content">
-            <div class="inner">
-                <div class="scrollable">
-                    <h1 class="slideLeft">Trailblazer.</h1>
-                    <!-- <div class="leftNotes">
-                        <p>Blazing trails in the Salesforce ecosystem since 2013 and starting as an accidental admin and now Lead Developer.</p>
-                        <p>5 * Salesforce Certified and 5 * Trailhead Ranger</p>
-                    </div> -->
-                    <h1 class="slideRight">Mentor.</h1>
-                    <!-- <div class="rightNotes">
-                        Mentoring future...
-                    </div> -->
-                    <h1 class="slideDown">Champion.</h1>
-                    <!-- <div>
-                        Championing Salesforce/women...
-                    </div> -->
+            <div class="scrollable">
+                <h1 class="slideLeft">Trailblazer.</h1>
+                <!-- <div class="leftNotes">
+                    <p>Blazing trails in the Salesforce ecosystem since 2013 and starting as an accidental admin and now Lead Developer.</p>
+                    <p>5 * Salesforce Certified and 5 * Trailhead Ranger</p>
+                </div> -->
+                <h1 class="slideRight">Mentor.</h1>
+                <!-- <div class="rightNotes">
+                    Mentoring future...
+                </div> -->
+                <h1 class="slideDown">Champion.</h1>
+                <!-- <div>
+                    Championing Salesforce/women...
+                </div> -->
 
-                    <div class="contactMe">
-                        <button id="contactMeButton">Contact Me</button>
-                    </div>
-
-                    <div id="contactMeModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                                <h1>Contact Me</h1>
-
-                                <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
-                                
-                                    <input type=hidden name='captcha_settings' value='{"keyname":"EllieAtWHL","fallback":"true","orgId":"00D58000000YxlM","ts":""}'>
-                                    <input type=hidden name="oid" value="00D58000000YxlM">
-                                    <input type=hidden name="retURL" value="https://www.ellieatwhl.co.uk/">
-                                    
-                                    <!--  ----------------------------------------------------------------------  -->
-                                    <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
-                                    <!--  these lines if you wish to test in debug mode.                          -->
-                                    <!--  <input type="hidden" name="debug" value=1>                              -->
-                                    <!--  <input type="hidden" name="debugEmail"                                  -->
-                                    <!--  value="eleanormatthewman+salesforce@gmail.com">                         -->
-                                    <!--  ----------------------------------------------------------------------  -->
-                                    
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td><label for="first_name">First Name</label></td>
-                                                <td><input  id="first_name" maxlength="40" name="first_name" size="20" type="text"/></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td><label for="last_name">Last Name</label></td>
-                                                <td><input  id="last_name" maxlength="80" name="last_name" size="20" type="text"/></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td><label for="email">Email</label></td>
-                                                <td><input  id="email" maxlength="80" name="email" size="20" type="text"/></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><label for="comments">Comments</label></td>
-                                                <td><textarea rows="6" name="comments"></textarea></td>
-                                            </tr> 
-                                            
-                                            <tr>
-                                                <td colspan="2">
-                                                    <div class="g-recaptcha" data-sitekey="6LfUBQEfAAAAAOwXkILtp2Amwf_U6Ouoza-xsGZT"></div>
-                                                </td>
-                                            </tr>
-                                            
-                                            
-                                        </tbody>
-                                    </table>
-
-                                    <input type="submit" name="submit">
-                                
-                                </form>
-                                <script src="../scripts/modalScript.js"></script>
-                            </div>
-                    </div>
-
+                <div class="contactMe">
+                    <button id="contactMeButton">Contact Me</button>
                 </div>
+
+                <div id="contactMeModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                            <h3>Contact Me</h3>
+
+                            <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+                            
+                                <input type=hidden name='captcha_settings' value='{"keyname":"EllieAtWHL","fallback":"true","orgId":"00D58000000YxlM","ts":""}'>
+                                <input type=hidden name="oid" value="00D58000000YxlM">
+                                <input type=hidden name="retURL" value="https://www.ellieatwhl.co.uk/">
+                                
+                                <!--  ----------------------------------------------------------------------  -->
+                                <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+                                <!--  these lines if you wish to test in debug mode.                          -->
+                                <!--  <input type="hidden" name="debug" value=1>                              -->
+                                <!--  <input type="hidden" name="debugEmail"                                  -->
+                                <!--  value="eleanormatthewman+salesforce@gmail.com">                         -->
+                                <!--  ----------------------------------------------------------------------  -->
+                                
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><label for="first_name">First Name</label></td>
+                                            <td><input  id="first_name" maxlength="40" name="first_name" size="20" type="text"/></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td><label for="last_name">Last Name</label></td>
+                                            <td><input  id="last_name" maxlength="80" name="last_name" size="20" type="text"/></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td><label for="email">Email</label></td>
+                                            <td><input  id="email" maxlength="80" name="email" size="20" type="text"/></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><label for="comments">Comments</label></td>
+                                            <td><textarea rows="6" name="comments"></textarea></td>
+                                        </tr> 
+                                        
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="g-recaptcha" data-sitekey="6LfUBQEfAAAAAOwXkILtp2Amwf_U6Ouoza-xsGZT"></div>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                    </tbody>
+                                </table>
+
+                                <input class="button" type="submit" name="submit">
+                            
+                            </form>
+                            <script src="../scripts/modalScript.js"></script>
+                        </div>
+                </div>
+
             </div>
         </div>
     </body>
