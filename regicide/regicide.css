@@ -1,3 +1,5 @@
+@import "../styles/style.css";
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -162,6 +164,9 @@ button:disabled {
 .defence-message {
     display: none;
     border: 2px solid black;
+    background-color: green;
+    color: white;
+    text-align: center;
     border-radius: 1rem;
     padding: 1%;
 }
