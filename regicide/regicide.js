@@ -1,6 +1,7 @@
 import Deck from "./deck.js"
 
 const NUM_OF_PLAYERS = 1
+const TOTAL_JESTERS = 2
 const HAND_LIMIT = 8
 const CARD_VALUE_MAP = {
     "2": 2,
@@ -42,6 +43,8 @@ const attackElement = document.querySelector('.attack')
 const healthElement = document.querySelector('.health')
 const powerTextElement = document.querySelector('.power-text')
 const attackButton = document.getElementById('attack-button')
+const jesterButton = document.getElementById('use-jester')
+const undoButton = document.getElementById('undo-move')
 const handSlots = [
     document.getElementById('hand-card-slot-first'),
     document.getElementById('hand-card-slot-second'),
@@ -65,6 +68,7 @@ const activeSlots = [
 
 let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, discardedRoyalAttack, currentRoyalHealth, currentShield, onAttack
 let messages = []
+let jestersRemaining = TOTAL_JESTERS
 
 playButton.addEventListener('click', startGame)
 
@@ -73,6 +77,8 @@ handSlots.forEach(slot => {
 })
 
 attackButton.addEventListener('click', handlePlayerAttack)
+jesterButton.addEventListener('click', handleUseJester)
+
 
 function startGame() {
     gameStart.style.display = 'none'
@@ -82,6 +88,7 @@ function startGame() {
     chosenCards = undefined
     activeDeck = undefined
     discardDeck = undefined
+    updateJesterText()
     clearActiveDeck()
     updateDiscardPile()
     createDecks()
@@ -148,8 +155,6 @@ function createPlayerHand(){
 function updatePlayerHand(){
     handSlots.forEach( (slot, index) => {
         slot.innerHTML = ''
-        console.log(index)
-        console.log(playerHand)
         if(playerHand.cards[index]){
             slot.appendChild(playerHand.cards[index].getHTML())
         }
@@ -180,7 +185,7 @@ function cardSelected(){
         } else {
             updateDefenceMessage()
         }
-        if(playerHand.numberOfCards === 0) alertBox(['Sorry, you lost'], true)
+        if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
     }
 }
 
@@ -327,7 +332,7 @@ function playerAttack(suits){
         else activeDeck = new Deck(activeDeck.cards.concat(chosenCards.cards))
         updateHealthText()
         attackButton.disabled = true
-        if(playerHand.numberOfCards === 0) alertBox(['Sorry, you lost'], true)
+        if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
         else handleRoyalAttack(suits)
     }
     else handleRoyalDefeated(currentRoyalHealth === 0)
@@ -383,6 +388,8 @@ function handleRoyalDefeated(exactKill){
         if(!discardDeck) discardDeck = new Deck([royalCard])
         else discardDeck = new Deck([royalCard].concat(discardDeck.cards))
     }
+    
+    if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
 
     alertBox(messages)
 
@@ -423,15 +430,45 @@ function updateStatsText(){
     updateHealthText()
 }
 function updateAttackText(){
-    attackElement.innerText = `Current attack: \n ${currentRoyalAttack}`
+    attackElement.innerText = `Royal Attack: \n ${currentRoyalAttack}`
 }
 function updateHealthText(){
-    healthElement.innerText = `Current health: \n ${currentRoyalHealth}`
+    healthElement.innerText = `Royal Health: \n ${currentRoyalHealth}`
 }
 
 function updateDeckCount() {
     royalDeckElement.innerText = royalDeck.numberOfCards
     drawDeckElement.innerText = drawDeck.numberOfCards
+}
+
+function handleUseJester(){
+    if(jestersRemaining < 1) {
+        alertBox([`No jesters remaining`], false)
+        return
+    }
+    jestersRemaining--
+    discardPlayerHand()
+    updateJesterText()
+    if(jestersRemaining === 0){
+        jesterButton.removeEventListener('click', handleUseJester)
+        jesterButton.remove();
+    }
+}
+
+function discardPlayerHand(){
+    if (!discardDeck) discardDeck = new Deck(playerHand.cards)
+    else {
+        discardDeck = new Deck(playerHand.cards.concat(discardDeck.cards))
+    }
+    createPlayerHand()
+    updateDiscardPile()
+    updateDeckCount()
+}
+
+function updateJesterText(){
+
+    let jesterMessage = document.getElementById('jester-message')
+    jesterMessage.innerText = `Jesters left: ${jestersRemaining}`
 }
 
 function wonGame(){
