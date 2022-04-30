@@ -35,68 +35,70 @@ function createTemplate(){
 }
 
 function createHeader(){
-    header =  document.createElement('div')
-    header.className = 'header'
-    inner = createInner()
-    header.appendChild(inner)
+    header =  document.createElement('nav')
+    header.className = 'navbar'
 
-    const logoLink = createLink({onclick: function() {window.location='../?mode='+currentMode}, href: "#"})
-
+    const brandTitle = document.createElement('div')
+    brandTitle.classList.add('brand-title')
+    const logoLink = createLink({href: "#"})
     const logo = document.createElement('img')
     logo.src = "../img/logo.png"
     logo.alt = "EllieAtWHL"
 
+    const toggleButton = createLink({href:'#', class: 'toggle-button'})
+    for(let i=0;i<3;i++){
+        let bar = document.createElement('span')
+        bar.classList.add('bar')
+        toggleButton.appendChild(bar)
+    }
+    
     const topnav = document.createElement('div')
-    topnav.className = 'topnav'
-    topnav.id = 'myTopNav'
+    topnav.className = 'navbar-links'
+    let linksElement = document.createElement('ul')
 
-    const menuLinkSpan = document.createElement('span')
-    const menuLink = createLink({onclick: function(){const nav = document.getElementById("myTopNav")
-    if (nav.className === "topnav") {
-      nav.className += " responsive"
-    } else {
-      nav.className = "topnav"
-    }}, href: 'javascript:void(0)', class: 'icon'})
-    const menuLinkBars = document.createElement('i')
-    menuLinkBars.className = 'fa fa-bars'
-    menuLink.appendChild(menuLinkBars)
-    menuLinkSpan.appendChild(menuLink)
+    const homeLinkLI = document.createElement('li')
+    const homeLink = createLink({href: '#', text: 'Home'})
+    homeLinkLI.appendChild(homeLink)
+    linksElement.appendChild(homeLinkLI)
 
-    const homeLinkSpan = document.createElement('span')
-    const homeLink = createLink({onclick: function() {window.location='../?mode='+currentMode}, href: '#', text: 'Home'})
-    // TODO: const homeLink = createLink({onclick: function() {window.location='../?mode='+currentMode}, href: '#', text: 'Home', active: true})
-    homeLinkSpan.appendChild(homeLink)
+    const aboutMeLinkLI = document.createElement('li')
+    const aboutMeLink = createLink({href: '#', text: 'About Me'})
+    aboutMeLinkLI.appendChild(aboutMeLink)
+    linksElement.appendChild(aboutMeLinkLI)
 
-    const aboutMeLinkSpan = document.createElement('span')
-    const aboutMeLink = createLink({onclick: function() {window.location='/about-me/?mode='+currentMode}, href: '#', text: 'About Me'})
-    aboutMeLinkSpan.appendChild(aboutMeLink)
+    const experienceLinkLI = document.createElement('li')
+    const experienceLink = createLink({href: '#', text: 'Experience'})
+    experienceLinkLI.appendChild(experienceLink)
+    linksElement.appendChild(experienceLinkLI)
 
-    const experienceLinkSpan = document.createElement('span')
-    const experienceLink = createLink({onclick: function() {window.location='/experience/?mode='+currentMode}, href: '#', text: 'Experience'})
-    experienceLinkSpan.appendChild(experienceLink)
+    const projectsLinkLI = document.createElement('li')
+    const projectsLink = createLink({href: '#', text: 'Projects'})
+    projectsLinkLI.appendChild(projectsLink)
+    linksElement.appendChild(projectsLinkLI)
 
-    const projectsLinkSpan = document.createElement('span')
-    const projectsLink = createLink({onclick: function() {window.location='/projects/?mode='+currentMode}, href: '#', text: 'Projects'})
-    projectsLinkSpan.appendChild(projectsLink)
-
-    topnav.appendChild(menuLinkSpan)
-    topnav.appendChild(homeLinkSpan)
-    topnav.appendChild(aboutMeLinkSpan)
-    topnav.appendChild(experienceLinkSpan)
-    topnav.appendChild(projectsLinkSpan)
+    topnav.appendChild(linksElement)
 
     logoLink.appendChild(logo)
-    inner.appendChild(logoLink)
-    inner.appendChild(topnav)
+    brandTitle.appendChild(logoLink)
+    
+    header.appendChild(brandTitle)
+    header.appendChild(toggleButton)
+    header.appendChild(topnav)
 
+    
+    logoLink.addEventListener('click', () => {window.location='../?mode='+currentMode})
+    toggleButton.addEventListener('click', () => {topnav.classList.toggle('active')})
+    homeLink.addEventListener('click', () => {window.location='../?mode='+currentMode})
+    aboutMeLink.addEventListener('click', () => {window.location='/about-me/?mode='+currentMode})
+    experienceLink.addEventListener('click', () => {window.location='/experience/?mode='+currentMode})
+    projectsLink.addEventListener('click', () => {window.location='/projects/?mode='+currentMode})
+    
     return header
 }
 
 function createFooter(){
     const footer = document.createElement('div')
     footer.className = 'footer'
-    const inner = createInner()
-    footer.appendChild(inner)
     
     const findMe = document.createElement('div')
     findMe.className = 'findMe floatLeft'
@@ -162,21 +164,14 @@ function createFooter(){
     darkMode.appendChild(darkModeP)
 
 
-    inner.appendChild(findMe)
-    inner.appendChild(darkMode)
+    footer.appendChild(findMe)
+    footer.appendChild(darkMode)
 
     return footer
 }
 
-function createInner(){
-    const inner = document.createElement('div')
-    inner.className = 'inner'
-    return inner
-}
-
 function createLink(linkDetails){
     const link = document.createElement('a')
-    if (linkDetails.onclick) link.onclick = linkDetails.onclick
     if (linkDetails.href) link.href = linkDetails.href
     if (linkDetails.class) link.className = linkDetails.class
     if (linkDetails.active) link.classList.add('active')
