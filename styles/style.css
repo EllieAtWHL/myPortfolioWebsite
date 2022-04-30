@@ -44,12 +44,12 @@ body {
 }
 
 .navbar, .footer {
+    display: flex;
     background-color: var(--dark-green);
     color: var(--pale-green);
 }
 
 .footer {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     bottom: 0;
