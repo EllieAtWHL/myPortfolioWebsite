@@ -78,12 +78,13 @@ handSlots.forEach(slot => {
 
 attackButton.addEventListener('click', handlePlayerAttack)
 jesterButton.addEventListener('click', handleUseJester)
+undoButton.addEventListener('click', handleUndoMove)
 
 
 function startGame() {
     gameStart.style.display = 'none'
     playArea.style.display = 'grid'
-    attackButton.disabled = true
+    attackButton.style.visibility = 'hidden'
     onAttack = true
     chosenCards = undefined
     activeDeck = undefined
@@ -171,7 +172,7 @@ function cardSelected(){
             alertBox(['Illegal move'])
         }
         else {
-            attackButton.disabled = false
+            attackButton.style.visibility = 'visible'
             moveSelectedCardToChosenCards(selectedCard)
             let slotToClear = event.path[1]
             renderSelectedCardMovement(slotToClear)
@@ -333,7 +334,7 @@ function playerAttack(suits){
         if (!activeDeck) activeDeck = new Deck(chosenCards.cards)
         else activeDeck = new Deck(activeDeck.cards.concat(chosenCards.cards))
         updateHealthText()
-        attackButton.disabled = true
+        attackButton.style.visibility = 'hidden'
         if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
         else handleRoyalAttack(suits)
     }
@@ -417,7 +418,7 @@ function clearActiveDeck(){
     activeSlots.forEach(slot => {
         slot.innerHTML = ''
     })
-    attackButton.disabled = true
+    attackButton.style.visibility = 'hidden'
 }
 
 function updateDiscardPile(){
@@ -471,6 +472,10 @@ function updateJesterText(){
 
     let jesterMessage = document.getElementById('jester-message')
     jesterMessage.innerText = `Jesters left: ${jestersRemaining}`
+}
+
+function handleUndoMove(){
+    console.log('Undo!')
 }
 
 function wonGame(){
