@@ -25,13 +25,21 @@ h1, h4 {
     margin: 0;
 }
 
+.scrollable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .play-area {
     display: none;
+    width: min(94vw, 700px);
     grid-template-rows: repeat(4, auto);
     gap: var(--gap-width);
     justify-content: center;
     align-items: center;
-    padding: var(--gap-width);
+    padding: max(var(--gap-width), var(--gap-height));
+    margin: max(var(--gap-width), var(--gap-height));
     user-select: none;
     animation: fadeIn 1s;
 }
@@ -66,11 +74,15 @@ h1, h4 {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid black;
+    border-radius: .5rem;
+}
+
+.card-slot:empty:hover { 
+    filter: brightness(10000%);
 }
 
 .deck {
-    border: 1px solid black;
-    border-radius: .5rem;
     font-size: calc(var(--gap-height)*15);
     text-align: center;
     color: white;
@@ -176,6 +188,7 @@ button:disabled {
     text-align: center;
     border-radius: 1rem;
     padding: 1%;
+    margin: 1%;
 }
 
 .message {
