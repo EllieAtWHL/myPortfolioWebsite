@@ -23,7 +23,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--pale-green);
-    color: var(--dark-green);
+    color: var(--third-colour);
     font-family: var(--chosen-font);
     font-size: var(--text-font-size);
     overflow-y: hidden;
@@ -91,9 +91,11 @@ body {
 .navbar-links li:hover {
     background-color: var(--pale-green);
 }
-.navbar-links li:hover a {
+
+a {
     color: var(--dark-green);
 }
+
 .dark .navbar-links li:hover {
     background-color: var(--third-colour);
 }
