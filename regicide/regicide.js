@@ -146,11 +146,14 @@ function createPlayerHand(){
 }
 
 function updatePlayerHand(){
-
-    for(let i = 0; i < playerHand.numberOfCards; i++){
-        handSlots[i].innerHTML = ''
-        handSlots[i].appendChild(playerHand.cards[i].getHTML())
-    }
+    handSlots.forEach( (slot, index) => {
+        slot.innerHTML = ''
+        console.log(index)
+        console.log(playerHand)
+        if(playerHand.cards[index]){
+            slot.appendChild(playerHand.cards[index].getHTML())
+        }
+    })
 }
 
 function cardSelected(){
