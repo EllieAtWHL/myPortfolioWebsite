@@ -37,17 +37,24 @@ h1, h4 {
 .container {
     padding-top: var(--gap-height);
     display: grid;
-    grid-template-columns: repeat(8, min(11.25vw, 100px));
+    grid-template-columns: repeat(8, min(11.25vw, 85px));
     gap: var(--gap-width);
     justify-content: center;
     align-items: center;
     width: 90vw;
-    max-width: 800px;
+    max-width: 680px;
     height: min(20vh, 200px);
 }
 
-.attack, .health {
-    font-size: calc(var(--gap-height) * 7);
+.spacer {
+    display:grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.attack, .health, .jester-message {
+    font-size: calc(var(--gap-height) * 8);
+    text-align: center;
 }
 
 .deck, .card {
@@ -96,7 +103,7 @@ h1, h4 {
     position: relative;
     border: 1px solid black;
     border-radius: .5rem;
-    font-size: calc(var(--gap-height)*25);
+    font-size: 7vw;
     background-color: white;
 }
 
@@ -135,11 +142,14 @@ h1, h4 {
 }
 
 button {
-    grid-column: span 2;
     height: 5vh;
+    width: auto;
     border-radius: 5px;
     font-size: calc(var(--gap-height) * 7);
     cursor: pointer;
+}
+#attack-button {
+    grid-column: span 2;
 }
 button:hover {
     opacity: 80%;

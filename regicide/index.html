@@ -27,7 +27,6 @@
                         <h4>Note</h4>
                         <p>Still a work in progress, known bugs/missing features include:</p>
                         <ul>
-                            <li>Jester not implemented - special solo rules to use for it</li>
                             <li>Not mobile-friendly</li>
                             <li>Add ability to undo card selection</li>
                         </ul>
@@ -41,10 +40,15 @@
                         <div class="power-text text"></div>
                         <div class="royal-deck deck"></div>
                         <div class="royal-card-slot card-slot"></div>
-                        <div class="spacer"></div>
+                        <div class="spacer">
+                            <div class="jester-message" id="jester-message"></div>
+                            <button id="use-jester">Use</button>
+                        </div>
                         <div class="attack"></div>
                         <div class="health"></div>
-                        <div class="spacer"></div>
+                        <div class="spacer">
+                            <!-- <button id="undo-move">Undo</button> -->
+                        </div>
                         <div class="discard-card-slot card-slot">Discard Pile</div>
                         <div class="draw-deck deck"></div>
                     </div>
