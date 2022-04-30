@@ -103,7 +103,7 @@ h1, h4 {
     position: relative;
     border: 1px solid black;
     border-radius: .5rem;
-    font-size: 7vw;
+    font-size: min(7vw, 70px);
     background-color: white;
 }
 
