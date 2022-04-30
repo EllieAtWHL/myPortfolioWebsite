@@ -59,7 +59,7 @@ h1, h4 {
     text-align: center;
 }
 
-.deck, .card {
+.deck, .card, .card-slot:empty {
     aspect-ratio: 9 / 14;
     min-height: 60px;
     max-height: 15vh;
@@ -150,8 +150,15 @@ button {
     font-size: calc(var(--gap-height) * 7);
     cursor: pointer;
 }
-#attack-button {
+#attack-button, .jester {
     grid-column: span 2;
+}
+.jester {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
 }
 button:hover {
     opacity: 80%;
