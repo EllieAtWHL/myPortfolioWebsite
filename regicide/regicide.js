@@ -88,6 +88,8 @@ function startGame() {
     chosenCards = undefined
     activeDeck = undefined
     discardDeck = undefined
+    let jestersRemaining = TOTAL_JESTERS
+    clearDefenceMessage()
     updateJesterText()
     clearActiveDeck()
     updateDiscardPile()
