@@ -18,3 +18,4 @@ You can [buy your own copy](https://www.badgersfrommars.com/buy-regicide/) or [l
 - Include a way of teaching new players how to play
 - Option to restart (with same starting cards)
 - Multi-player support
+- Resign option
