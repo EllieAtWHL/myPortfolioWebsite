@@ -68,6 +68,7 @@ const activeSlots = [
 
 let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, discardedRoyalAttack, currentRoyalHealth, currentShield, onAttack
 let messages = []
+let moves = []
 let jestersRemaining = TOTAL_JESTERS
 
 playButton.addEventListener('click', startGame)
@@ -165,11 +166,24 @@ function updatePlayerHand(){
 }
 
 function cardSelected(){
+    let type = onAttack ? 'playCard' : 'discardCard'
+    let state = {
+        discardDeck: Object.assign(discardDeck),
+        playerHand: playerHand,
+        royalDeck: royalDeck,
+        activeDeck: activeDeck,
+        drawDeck: drawDeck,
+        royalCard: royalCard,
+        royalAttack: currentRoyalAttack,
+        royalHealth: currentRoyalHealth,
+        currentShield: currentShield
+    }
+    moves.unshift({type: type, state: state})
     let cardValue = event.target.dataset.value
     let selectedCard = {suit: cardValue.substring(cardValue.length-1), value: cardValue.substring(0,cardValue.length-1)}
     if(onAttack){
         if(invalidSelection(selectedCard)){
-            alertBox('Illegal move')
+            alertBox(['Illegal move'])
         }
         else {
             attackButton.style.visibility = 'visible'
@@ -190,6 +204,7 @@ function cardSelected(){
         }
         if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
     }
+    console.log(moves)
 }
 
 function invalidSelection(selectedCard){
@@ -261,6 +276,7 @@ function renderDiscardedCardMovement(slot){
 }
 
 function handlePlayerAttack(){
+    moves.unshift({type: 'playerAttack'})
     let suitsActive= []
     chosenCards.cards.forEach( card => {
         if(card.suit !== royalCard.suit){
@@ -440,11 +456,13 @@ function updateHealthText(){
 }
 
 function updateDeckCount() {
+    console.log(royalDeck)
     royalDeckElement.innerText = royalDeck.numberOfCards
     drawDeckElement.innerText = drawDeck.numberOfCards
 }
 
 function handleUseJester(){
+    moves.unshift({type: 'useJester'})
     if(jestersRemaining < 1) {
         alertBox([`No jesters remaining`], false)
         return
@@ -469,13 +487,28 @@ function discardPlayerHand(){
 }
 
 function updateJesterText(){
-
     let jesterMessage = document.getElementById('jester-message')
     jesterMessage.innerText = `Jesters left: ${jestersRemaining}`
 }
 
 function handleUndoMove(){
     console.log('Undo!')
+    let moveToUndo = moves.shift()
+    console.log(JSON.parse(JSON.stringify(moveToUndo)))
+    //updates all deck states
+    activeDeck = moveToUndo.state.activeDeck
+    discardDeck = moveToUndo.state.discardDeck
+    drawDeck = moveToUndo.state.drawDeck
+    playerHand = moveToUndo.state.playerHand
+    royalDeck = moveToUndo.state.royalDeck
+    royalCard = moveToUndo.state.royalCard
+    currentRoyalAttack = moveToUndo.state.royalAttack
+    currentRoyalHealth = moveToUndo.state.royalHealth
+    currentShield = moveToUndo.state.currentShield
+
+    updateAllItems()
+    //update all rendering
+
 }
 
 function wonGame(){
@@ -536,4 +569,15 @@ function clearModal(){
     messages = []
     let footerElement = document.querySelector('.modal-footer')
     footerElement.innerHTML = ''
+}
+
+function updateAllItems(){
+    updateAttackText()
+    updateDeckCount()
+    updateDefenceMessage()
+    updateDiscardPile()
+    updateHealthText()
+    updateJesterText()
+    updatePlayerHand()
+    updateStatsText()
 }
