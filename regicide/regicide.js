@@ -168,16 +168,18 @@ function updatePlayerHand(){
 function cardSelected(){
     let type = onAttack ? 'playCard' : 'discardCard'
     let state = {
-        discardDeck: Object.assign(discardDeck),
-        playerHand: playerHand,
-        royalDeck: royalDeck,
-        activeDeck: activeDeck,
-        drawDeck: drawDeck,
-        royalCard: royalCard,
+        discardDeck: discardDeck ? new Deck(discardDeck.cards) : null,
+        playerHand: playerHand ? new Deck(playerHand.cards) : null,
+        royalDeck: royalDeck ? new Deck(royalDeck.cards) : null,
+        activeDeck: activeDeck ? new Deck(activeDeck.cards) : null,
+        drawDeck: drawDeck ? new Deck(drawDeck.cards) : null,
+        royalCard: royalCard ? JSON.parse(JSON.stringify(royalCard)) : null,
         royalAttack: currentRoyalAttack,
         royalHealth: currentRoyalHealth,
         currentShield: currentShield
     }
+    console.log(JSON.parse(JSON.stringify(playerHand)))
+    console.log(JSON.parse(JSON.stringify(state.playerHand)))
     moves.unshift({type: type, state: state})
     let cardValue = event.target.dataset.value
     let selectedCard = {suit: cardValue.substring(cardValue.length-1), value: cardValue.substring(0,cardValue.length-1)}
@@ -456,7 +458,6 @@ function updateHealthText(){
 }
 
 function updateDeckCount() {
-    console.log(royalDeck)
     royalDeckElement.innerText = royalDeck.numberOfCards
     drawDeckElement.innerText = drawDeck.numberOfCards
 }
@@ -494,7 +495,6 @@ function updateJesterText(){
 function handleUndoMove(){
     console.log('Undo!')
     let moveToUndo = moves.shift()
-    console.log(JSON.parse(JSON.stringify(moveToUndo)))
     //updates all deck states
     activeDeck = moveToUndo.state.activeDeck
     discardDeck = moveToUndo.state.discardDeck
