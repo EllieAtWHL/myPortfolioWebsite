@@ -88,7 +88,7 @@ function startGame() {
     chosenCards = undefined
     activeDeck = undefined
     discardDeck = undefined
-    let jestersRemaining = TOTAL_JESTERS
+    jestersRemaining = TOTAL_JESTERS
     clearDefenceMessage()
     updateJesterText()
     clearActiveDeck()
@@ -168,7 +168,7 @@ function cardSelected(){
     let selectedCard = {suit: cardValue.substring(cardValue.length-1), value: cardValue.substring(0,cardValue.length-1)}
     if(onAttack){
         if(invalidSelection(selectedCard)){
-            alertBox('Illegal move')
+            alertBox(['Illegal move'])
         }
         else {
             attackButton.disabled = false
