@@ -68,6 +68,7 @@ const activeSlots = [
 
 let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, discardedRoyalAttack, currentRoyalHealth, currentShield, onAttack
 let messages = []
+let moves = []
 let jestersRemaining = TOTAL_JESTERS
 
 playButton.addEventListener('click', startGame)
@@ -78,12 +79,14 @@ handSlots.forEach(slot => {
 
 attackButton.addEventListener('click', handlePlayerAttack)
 jesterButton.addEventListener('click', handleUseJester)
+undoButton.addEventListener('click', handleUndoMove)
 
 
 function startGame() {
     gameStart.style.display = 'none'
     playArea.style.display = 'grid'
-    attackButton.disabled = true
+    attackButton.style.visibility = 'hidden'
+    undoButton.style.visibility = 'hidden'
     onAttack = true
     chosenCards = undefined
     activeDeck = undefined
@@ -137,9 +140,15 @@ function createRoyalDeck(jacks, queens, kings){
 }
 
 function setRoyalCard(){
-    royalCardSlot.innerHTML = ''
     royalCard = royalDeck.pop()
     if(!royalCard) wonGame()
+    renderRoyalCard()
+}
+
+function renderRoyalCard(){
+    royalCardSlot.innerHTML = ''
+    let tempRoyalCard = new Deck([royalCard])
+    royalCard = tempRoyalCard.cards[0]
     royalCardSlot.appendChild(royalCard.getHTML())
     powerTextElement.innerText = `Immunity against: ${SUIT_POWER_MAP[royalCard.suit]}`
     currentRoyalAttack = ROYAL_STATS_MAP[royalCard.value].attack
@@ -164,14 +173,33 @@ function updatePlayerHand(){
 }
 
 function cardSelected(){
+    if(onAttack){ //temp so only can undo when attacking for now
+        let type = onAttack ? 'playCard' : 'discardCard'
+        let state = {
+            discardDeck: discardDeck ? new Deck(discardDeck.cards) : null,
+            playerHand: playerHand ? new Deck(playerHand.cards) : null,
+            royalDeck: royalDeck ? new Deck(royalDeck.cards) : null,
+            activeDeck: activeDeck ? new Deck(activeDeck.cards) : null,
+            chosenCards: chosenCards ? new Deck(chosenCards.cards) : null,
+            drawDeck: drawDeck ? new Deck(drawDeck.cards) : null,
+            royalCard: royalCard ? JSON.parse(JSON.stringify(royalCard)) : null,
+            royalAttack: currentRoyalAttack,
+            royalHealth: currentRoyalHealth,
+            currentShield: currentShield
+        }
+        moves.unshift({type: type, state: state})
+        moves = JSON.parse(JSON.stringify(moves))
+    }
+    if(!event.target.dataset.value) return
     let cardValue = event.target.dataset.value
     let selectedCard = {suit: cardValue.substring(cardValue.length-1), value: cardValue.substring(0,cardValue.length-1)}
     if(onAttack){
         if(invalidSelection(selectedCard)){
             alertBox(['Illegal move'])
+            moves.shift()
         }
         else {
-            attackButton.disabled = false
+            attackButton.style.visibility = 'visible'
             moveSelectedCardToChosenCards(selectedCard)
             let slotToClear = event.path[1]
             renderSelectedCardMovement(slotToClear)
@@ -189,6 +217,7 @@ function cardSelected(){
         }
         if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
     }
+    if(moves.length > 0 && chosenCards?.numberOfCards > 0) undoButton.style.visibility = 'visible'
 }
 
 function invalidSelection(selectedCard){
@@ -254,12 +283,34 @@ function renderSelectedCardMovement(slot){
     activeSlots[slotToPopulate].innerHTML = cardToCreate
 }
 
+function renderActiveDeck(){
+    let activeAreaCards = {cards: []}
+    console.log(activeDeck)
+    console.log(chosenCards)
+    if(activeDeck && chosenCards){
+        activeAreaCards = new Deck(activeDeck.cards.concat(chosenCards.cards))
+    } else if(activeDeck){
+        activeAreaCards = new Deck(activeDeck.cards)
+    } else if(chosenCards){
+        activeAreaCards = new Deck(chosenCards.cards)
+    }
+    activeSlots.forEach((slot,index) => {
+        slot.innerHTML = ''
+        if(activeAreaCards?.cards[index]){
+            slot.appendChild(activeAreaCards.cards[index].getHTML())
+        } 
+    })
+}
+
 function renderDiscardedCardMovement(slot){
     slot.innerHTML = ''
     updateDiscardPile()
 }
 
 function handlePlayerAttack(){
+    
+    undoButton.style.visibility = 'hidden' // temp hiding until undo implemented for playerAttack too
+    // moves.unshift({type: 'playerAttack'})
     let suitsActive= []
     chosenCards.cards.forEach( card => {
         if(card.suit !== royalCard.suit){
@@ -333,7 +384,7 @@ function playerAttack(suits){
         if (!activeDeck) activeDeck = new Deck(chosenCards.cards)
         else activeDeck = new Deck(activeDeck.cards.concat(chosenCards.cards))
         updateHealthText()
-        attackButton.disabled = true
+        attackButton.style.visibility = 'hidden'
         if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
         else handleRoyalAttack(suits)
     }
@@ -362,9 +413,11 @@ function handleRoyalAttack(suits){
 }
 
 function updateDefenceMessage(){
-    let defenceElement = document.getElementById('defence-message')
-    defenceElement.innerText = `Current defense needed is ${discardedRoyalAttack}`
-    defenceElement.style.display = 'block'
+    if(discardedRoyalAttack > 0){
+        let defenceElement = document.getElementById('defence-message')
+        defenceElement.innerText = `Current defense needed is ${discardedRoyalAttack}`
+        defenceElement.style.display = 'block'
+    }
 }
 function clearDefenceMessage(){
     let defenceElement = document.getElementById('defence-message')
@@ -417,7 +470,7 @@ function clearActiveDeck(){
     activeSlots.forEach(slot => {
         slot.innerHTML = ''
     })
-    attackButton.disabled = true
+    attackButton.style.visibility = 'hidden'
 }
 
 function updateDiscardPile(){
@@ -444,6 +497,7 @@ function updateDeckCount() {
 }
 
 function handleUseJester(){
+    // moves.unshift({type: 'useJester'})
     if(jestersRemaining < 1) {
         alertBox([`No jesters remaining`], false)
         return
@@ -468,9 +522,28 @@ function discardPlayerHand(){
 }
 
 function updateJesterText(){
-
     let jesterMessage = document.getElementById('jester-message')
     jesterMessage.innerText = `Jesters left: ${jestersRemaining}`
+}
+
+function handleUndoMove(){
+    console.log('Undo!')
+    let moveToUndo = moves.shift()
+    console.log(moveToUndo)
+    //updates all deck states
+    activeDeck = moveToUndo.state.activeDeck ? new Deck(moveToUndo.state.activeDeck.cards) : null;
+    chosenCards = moveToUndo.state.chosenCards ? new Deck(moveToUndo.state.chosenCards.cards) : null;
+    discardDeck = moveToUndo.state.discardDeck ? new Deck(moveToUndo.state.discardDeck.cards) : null;
+    drawDeck = moveToUndo.state.drawDeck ? new Deck(moveToUndo.state.drawDeck.cards) : null;
+    playerHand = moveToUndo.state.playerHand ? new Deck(moveToUndo.state.playerHand.cards) : null;
+    royalDeck = moveToUndo.state.royalDeck ? new Deck(moveToUndo.state.royalDeck.cards) : null;
+    royalCard = moveToUndo.state.royalCard
+    currentRoyalAttack = moveToUndo.state.royalAttack
+    currentRoyalHealth = moveToUndo.state.royalHealth
+    currentShield = moveToUndo.state.currentShield
+    updateAllItems()
+    //update all rendering
+
 }
 
 function wonGame(){
@@ -531,4 +604,19 @@ function clearModal(){
     messages = []
     let footerElement = document.querySelector('.modal-footer')
     footerElement.innerHTML = ''
+}
+
+function updateAllItems(){
+    if(!chosenCards) attackButton.style.visibility = 'hidden'
+    if(moves.length < 1) undoButton.style.visibility = 'hidden'
+    updateAttackText()
+    renderRoyalCard()
+    updateDeckCount()
+    updateDefenceMessage()
+    updateDiscardPile()
+    updateHealthText()
+    updateJesterText()
+    renderActiveDeck()
+    updatePlayerHand()
+    updateStatsText()
 }

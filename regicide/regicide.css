@@ -1,3 +1,5 @@
+@import "../styles/style.css";
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -10,7 +12,8 @@
 }
 
 .game-start {
-    padding: 0 10px;
+    padding: 20vh 10px 0 10px;
+    padding-top: 20vh;
     text-align: center;
 }
 
@@ -19,32 +22,55 @@
     text-align: left;
 }
 
-h1, h4 {
+h1, h3, h4 {
     margin: 0;
+}
+
+.scrollable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .play-area {
     display: none;
+    width: min(94vw, 700px);
     grid-template-rows: repeat(4, auto);
     gap: var(--gap-width);
     justify-content: center;
     align-items: center;
-    padding: var(--gap-width);
+    padding: max(var(--gap-width), var(--gap-height));
+    margin: max(var(--gap-width), var(--gap-height));
     user-select: none;
     animation: fadeIn 1s;
 }
 
-.container {
+/* TODO: Make more mobile friendly
+/* .container {
     padding-top: var(--gap-height);
     display: grid;
-    grid-template-columns: repeat(8, min(11.25vw, 85px));
+    grid-template-columns: repeat(4, min(22.5vw, 160px));
+    grid-template-rows: repeat(2, auto);
     gap: var(--gap-width);
     justify-content: center;
     align-items: center;
     width: 90vw;
     max-width: 680px;
     height: min(20vh, 200px);
-}
+} */
+/* @media only screen and (min-width: 600px) { */
+    .container {
+        padding-top: var(--gap-height);
+        display: grid;
+        grid-template-columns: repeat(8, min(11.25vw, 85px));
+        gap: var(--gap-width);
+        justify-content: center;
+        align-items: center;
+        width: 90vw;
+        max-width: 680px;
+        height: min(20vh, 200px);
+    }
+/* } */
 
 .spacer {
     display:grid;
@@ -57,18 +83,22 @@ h1, h4 {
     text-align: center;
 }
 
-.deck, .card {
+.deck, .card, .card-slot:empty {
     aspect-ratio: 9 / 14;
     min-height: 60px;
     max-height: 15vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid black;
+    border-radius: .5rem;
+}
+
+.card-slot:empty:hover { 
+    filter: brightness(10000%);
 }
 
 .deck {
-    border: 1px solid black;
-    border-radius: .5rem;
     font-size: calc(var(--gap-height)*15);
     text-align: center;
     color: white;
@@ -148,8 +178,18 @@ button {
     font-size: calc(var(--gap-height) * 7);
     cursor: pointer;
 }
-#attack-button {
+#attack-button, .jester {
     grid-column: span 2;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+}
+.jester {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
 }
 button:hover {
     opacity: 80%;
@@ -158,7 +198,6 @@ button:disabled {
     opacity: 20%;
     cursor: auto;
 }
-
 .defence-message {
     display: none;
     border: 2px solid black;
