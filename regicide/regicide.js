@@ -142,6 +142,8 @@ function createRoyalDeck(jacks, queens, kings){
 function setRoyalCard(){
     royalCard = royalDeck.pop()
     if(!royalCard) wonGame()
+    currentRoyalAttack = ROYAL_STATS_MAP[royalCard.value].attack
+    currentRoyalHealth = ROYAL_STATS_MAP[royalCard.value].health
     renderRoyalCard()
 }
 
@@ -151,8 +153,6 @@ function renderRoyalCard(){
     royalCard = tempRoyalCard.cards[0]
     royalCardSlot.appendChild(royalCard.getHTML())
     powerTextElement.innerText = `Immunity against: ${SUIT_POWER_MAP[royalCard.suit]}`
-    currentRoyalAttack = ROYAL_STATS_MAP[royalCard.value].attack
-    currentRoyalHealth = ROYAL_STATS_MAP[royalCard.value].health
     updateStatsText()
 }
 
@@ -285,8 +285,6 @@ function renderSelectedCardMovement(slot){
 
 function renderActiveDeck(){
     let activeAreaCards = {cards: []}
-    console.log(activeDeck)
-    console.log(chosenCards)
     if(activeDeck && chosenCards){
         activeAreaCards = new Deck(activeDeck.cards.concat(chosenCards.cards))
     } else if(activeDeck){
@@ -527,10 +525,7 @@ function updateJesterText(){
 }
 
 function handleUndoMove(){
-    console.log('Undo!')
     let moveToUndo = moves.shift()
-    console.log(moveToUndo)
-    //updates all deck states
     activeDeck = moveToUndo.state.activeDeck ? new Deck(moveToUndo.state.activeDeck.cards) : null;
     chosenCards = moveToUndo.state.chosenCards ? new Deck(moveToUndo.state.chosenCards.cards) : null;
     discardDeck = moveToUndo.state.discardDeck ? new Deck(moveToUndo.state.discardDeck.cards) : null;
@@ -542,8 +537,6 @@ function handleUndoMove(){
     currentRoyalHealth = moveToUndo.state.royalHealth
     currentShield = moveToUndo.state.currentShield
     updateAllItems()
-    //update all rendering
-
 }
 
 function wonGame(){
@@ -609,14 +602,11 @@ function clearModal(){
 function updateAllItems(){
     if(!chosenCards) attackButton.style.visibility = 'hidden'
     if(moves.length < 1) undoButton.style.visibility = 'hidden'
-    updateAttackText()
     renderRoyalCard()
     updateDeckCount()
     updateDefenceMessage()
     updateDiscardPile()
-    updateHealthText()
     updateJesterText()
     renderActiveDeck()
     updatePlayerHand()
-    updateStatsText()
 }
