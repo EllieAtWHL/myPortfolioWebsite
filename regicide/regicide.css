@@ -12,7 +12,8 @@
 }
 
 .game-start {
-    padding: 0 10px;
+    padding: 20vh 10px 0 10px;
+    padding-top: 20vh;
     text-align: center;
 }
 
@@ -21,7 +22,7 @@
     text-align: left;
 }
 
-h1, h4 {
+h1, h3, h4 {
     margin: 0;
 }
 
@@ -44,17 +45,32 @@ h1, h4 {
     animation: fadeIn 1s;
 }
 
-.container {
+/* TODO: Make more mobile friendly
+/* .container {
     padding-top: var(--gap-height);
     display: grid;
-    grid-template-columns: repeat(8, min(11.25vw, 85px));
+    grid-template-columns: repeat(4, min(22.5vw, 160px));
+    grid-template-rows: repeat(2, auto);
     gap: var(--gap-width);
     justify-content: center;
     align-items: center;
     width: 90vw;
     max-width: 680px;
     height: min(20vh, 200px);
-}
+} */
+/* @media only screen and (min-width: 600px) { */
+    .container {
+        padding-top: var(--gap-height);
+        display: grid;
+        grid-template-columns: repeat(8, min(11.25vw, 85px));
+        gap: var(--gap-width);
+        justify-content: center;
+        align-items: center;
+        width: 90vw;
+        max-width: 680px;
+        height: min(20vh, 200px);
+    }
+/* } */
 
 .spacer {
     display:grid;

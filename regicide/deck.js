@@ -18,7 +18,11 @@ const VALUES = [
 
 export default class Deck {
     constructor(cards = freshDeck()){
-        this.cards = cards
+        let newCards = []
+        cards.forEach(card => {
+            newCards.push(new Card(card.suit, card.value))
+        })
+        this.cards = newCards
     }
 
     get numberOfCards(){
