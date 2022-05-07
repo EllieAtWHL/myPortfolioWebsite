@@ -175,12 +175,6 @@ button {
     text-align: center;
     justify-content: space-between;
 }
-.jester {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: space-between;
-}
 button:hover {
     opacity: 80%;
 }
@@ -188,7 +182,6 @@ button:disabled {
     opacity: 20%;
     cursor: auto;
 }
-
 .defence-message {
     display: none;
     border: 2px solid black;
