@@ -1,0 +1,104 @@
+:root{
+    --base-green: 113;
+    --high-percent: 90%;
+    --low-percent: 15%;
+
+    --pale-green: hsl(var(--base-green), var(--low-percent), var(--high-percent));
+    --dark-green: hsl(var(--base-green), var(--high-percent), var(--low-percent));
+    --third-colour: hsl(var(--base-green), calc(var(--high-percent) - var(--low-percent)), calc(var(--low-percent) / 2));
+
+    --progress-background: linear-gradient(to right, var(--third-colour), var(--dark-green));
+    --default-background: var(--pale-green);
+    --success-background: darkgreen;
+    --error-background: darkred;
+    --light-text: var(--pale-green);
+}
+.toast {
+    box-sizing: border-box;
+    padding: .75rem;
+    background-color: var(--default-background);
+    color: var(--third-colour);
+    border: 1px solid var(--third-colour);
+    border-radius: .25rem;
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 250ms ease-in-out;
+    overflow: hidden;
+}
+.toast-container[data-position$="right"] .toast{
+    transform: translateX(110%);
+}
+.toast-container[data-position$="left"] .toast{
+    transform: translateX(-110%);
+}
+.toast-container[data-position="top-centre"] .toast{
+    transform: translateY(-100vh);
+}
+.toast-container[data-position="bottom-centre"] .toast{
+    transform: translateY(100vh);
+}
+.toast-container .toast.show {
+    transform: translateX(0);
+}
+
+.toast.progress::before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: calc(100% * var(--progress));
+    background-image: var(--progress-background);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+}
+
+.toast.can-close::after{
+    content: "\00D7";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+}
+
+.toast-container{
+    position: fixed;
+    margin: 10px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    box-shadow: 2px;
+}
+
+.toast-container[data-position^="top"]{
+    top: 0;
+}
+.toast-container[data-position^="bottom"]{
+    bottom: 0;
+}
+.toast-container[data-position^="middle"]{
+   top: 50%;
+   transform: translateY(-50%);
+}
+.toast-container[data-position$="right"]{
+    right: 0;
+}
+.toast-container[data-position$="left"]{
+    left: 0;
+}
+.toast-container[data-position$="centre"]{
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+.success {
+    background-color: var(--success-background);
+    color: var(--light-text);
+}
+
+.error {
+    background-color: var(--error-background);
+    color: var(--light-text);
+}

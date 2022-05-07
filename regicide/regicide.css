@@ -211,5 +211,5 @@ button:disabled {
 
 .message {
     font-size: var(--gap-width);
-    list-style-type: "*"; 
+    list-style-type: none; 
 }
