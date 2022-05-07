@@ -94,6 +94,8 @@ function startGame() {
     activeDeck = undefined
     discardDeck = undefined
     jestersRemaining = TOTAL_JESTERS
+    console.log(jesterButton)
+    if(!jesterButton.parentElement) addJesterButton()
     clearDefenceMessage()
     updateJesterText()
     clearActiveDeck()
@@ -102,6 +104,12 @@ function startGame() {
     setRoyalCard()
     createPlayerHand()
     updateDeckCount()
+}
+
+function addJesterButton(){
+    console.log('creating jester')
+    jesterButton.addEventListener('click', handleUseJester)
+    document.querySelector('.jester').append(jesterButton)
 }
 
 function createDecks(){
