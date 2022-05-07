@@ -319,7 +319,8 @@ button:focus,
     width: 100%;
 }
 #contactMeButton{
-    left: 45%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .button {    
     width: 100%;

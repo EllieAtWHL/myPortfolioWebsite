@@ -1,4 +1,5 @@
 import Deck from "./deck.js"
+import Toast from "../scripts/toast.js"
 
 const NUM_OF_PLAYERS = 1
 const TOTAL_JESTERS = 2
@@ -68,6 +69,7 @@ const activeSlots = [
 
 let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, discardedRoyalAttack, currentRoyalHealth, currentShield, onAttack
 let messages = []
+let toastMessages = []
 let moves = []
 let jestersRemaining = TOTAL_JESTERS
 
@@ -195,7 +197,10 @@ function cardSelected(){
     let selectedCard = {suit: cardValue.substring(cardValue.length-1), value: cardValue.substring(0,cardValue.length-1)}
     if(onAttack){
         if(invalidSelection(selectedCard)){
-            alertBox(['Illegal move'])
+            let toast = new Toast({
+                text: 'Illegal move',
+                error: true
+            })
             moves.shift()
         }
         else {
@@ -314,7 +319,12 @@ function handlePlayerAttack(){
         if(card.suit !== royalCard.suit){
             suitsActive.push(card.suit)
         }
-        else messages.push(`${card.suit} power is blocked`);
+        else {
+            const toast = new Toast({
+                text: `${card.suit} power is blocked`,
+            })
+            toastMessages.push(toast)
+        }
     })
     if(suitsActive.includes('♥')){
         handleHearts()
@@ -338,12 +348,19 @@ function handleHearts(){
     let maxHeal = Math.min(totalPlayerAttack(), discardDeckCardTotal())
     if (maxHeal > 0) {
         healFromDiscard(maxHeal)
+    } else {
+        let toast =  Toast({
+            text: `Unable to heal from discard`
+        })
+        toastMessages.push(toast)
     }
-    else messages.push(`Unable to heal`)
 }
 
 function healFromDiscard(maxHeal){
-    messages.push(`Healing ${maxHeal} ${maxHeal === 1 ? 'card' : 'cards'} from the discard pile`)//TODO
+    let toast = new Toast({
+        text: `Healing ${maxHeal} ${maxHeal === 1 ? 'card' : 'cards'} from the discard pile`
+    })
+    toastMessages.push(toast)
     discardDeck.shuffle()
     let healedCards = discardDeck.cards.splice(0,maxHeal)
     drawDeck = new Deck(drawDeck.cards.concat(healedCards))
@@ -362,7 +379,10 @@ function handleDiamonds(){
 }
 
 function drawFromTavern(maxDraw){
-    messages.push(`Drawing ${maxDraw} ${maxDraw === 1 ? 'card' : 'cards'} from tavern`)
+    let toast = new Toast({
+        text: `Drawing ${maxDraw} ${maxDraw === 1 ? 'card' : 'cards'} from tavern`
+    })
+    toastMessages.push(toast)
     let drawnCards = []
     for(let i=0;i<maxDraw;i++){
         drawnCards.push(drawDeck.pop())
@@ -377,7 +397,10 @@ function playerAttack(suits){
     let damageDealt = totalPlayerAttack()
     if(suits.includes('♣')) damageDealt += damageDealt
     currentRoyalHealth -= damageDealt
-    messages.push(`Attacking ${royalCard.value}${royalCard.suit} for ${damageDealt} damage`)
+    let toast = new Toast({
+        text: `Attacking ${royalCard.value}${royalCard.suit} for ${damageDealt} damage`
+    })
+    toastMessages.push(toast)
     if(currentRoyalHealth > 0) {
         if (!activeDeck) activeDeck = new Deck(chosenCards.cards)
         else activeDeck = new Deck(activeDeck.cards.concat(chosenCards.cards))
@@ -399,9 +422,10 @@ function handleRoyalAttack(suits){
         currentShield += shield
         updateAttackText()
     }
-    messages.push(`${royalCard.value}${royalCard.suit} is attacking for ${currentRoyalAttack}`)
-    
-    alertBox(messages)
+    let toast = new Toast({
+        text: `${royalCard.value}${royalCard.suit} is attacking for ${currentRoyalAttack}`
+    })
+    toastMessages.push(toast)
     discardedRoyalAttack = currentRoyalAttack
     chosenCards = undefined
     if(currentRoyalAttack <= 0 ) onAttack = true;
@@ -433,18 +457,22 @@ function getCardShield(cards){
 
 function handleRoyalDefeated(exactKill){
     if(exactKill) {
-        messages.push(`${royalCard.value}${royalCard.suit} defeated with critical hit`)
+        let toast = new Toast({
+            text: `${royalCard.value}${royalCard.suit} defeated with critical hit`
+        })
+        toastMessages.push(toast)
         drawDeck = new Deck([royalCard].concat(drawDeck.cards))
     }
     else {
-        messages.push(`${royalCard.value}${royalCard.suit} defeated`)
+        let toast = new Toast({
+            text: `${royalCard.value}${royalCard.suit} defeated`
+        })
+        toastMessages.push(toast)
         if(!discardDeck) discardDeck = new Deck([royalCard])
         else discardDeck = new Deck([royalCard].concat(discardDeck.cards))
     }
     
     if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
-
-    alertBox(messages)
 
     currentShield = 0
     moveActiveToDiscard()
@@ -526,6 +554,7 @@ function updateJesterText(){
 
 function handleUndoMove(){
     let moveToUndo = moves.shift()
+    
     activeDeck = moveToUndo.state.activeDeck ? new Deck(moveToUndo.state.activeDeck.cards) : null;
     chosenCards = moveToUndo.state.chosenCards ? new Deck(moveToUndo.state.chosenCards.cards) : null;
     discardDeck = moveToUndo.state.discardDeck ? new Deck(moveToUndo.state.discardDeck.cards) : null;
@@ -536,6 +565,7 @@ function handleUndoMove(){
     currentRoyalAttack = moveToUndo.state.royalAttack
     currentRoyalHealth = moveToUndo.state.royalHealth
     currentShield = moveToUndo.state.currentShield
+  
     updateAllItems()
 }
 
@@ -544,13 +574,15 @@ function wonGame(){
 }
 
 function alertBox(messages, endGame){
+    toastMessages.forEach( toast => {
+        toast.remove()
+    })
     if(endGame){
         addAlertBoxButton('Restart', endGame)
     } else {
         addAlertBoxButton('Continue')
     }
 
-    let r = document.querySelector(':root')
     let listElement = document.createElement('ul')
     listElement.classList.add('message')
 
