@@ -68,7 +68,6 @@ const activeSlots = [
 ]
 
 let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, discardedRoyalAttack, currentRoyalHealth, currentShield, onAttack
-let messages = []
 let toastMessages = []
 let moves = []
 let jestersRemaining = TOTAL_JESTERS
@@ -94,7 +93,8 @@ function startGame() {
     activeDeck = undefined
     discardDeck = undefined
     jestersRemaining = TOTAL_JESTERS
-    console.log(jesterButton)
+    moves = []
+    discardedRoyalAttack = 0
     if(!jesterButton.parentElement) addJesterButton()
     clearDefenceMessage()
     updateJesterText()
@@ -107,7 +107,6 @@ function startGame() {
 }
 
 function addJesterButton(){
-    console.log('creating jester')
     jesterButton.addEventListener('click', handleUseJester)
     document.querySelector('.jester').append(jesterButton)
 }
