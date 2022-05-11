@@ -109,13 +109,6 @@ h1, h3, h4 {
     background-image: linear-gradient( rgb(47, 7, 47), rgb(175, 12, 172));
 }
 
-/* .royal-deck::after{
-    text-align: center;
-    content: "\1F451";
-    transform: translate(-10px, 20px)
-}  */
-/* TODO add crown for royal deck? */
-
 .draw-deck {
     background-color: var(--draw-color);
     background-image: linear-gradient(rgb(11, 60, 11), green);
