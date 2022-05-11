@@ -67,10 +67,9 @@ const activeSlots = [
     document.getElementById('active-card-slot-eigth')
 ]
 
-let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand, currentRoyalAttack, discardedRoyalAttack, currentRoyalHealth, currentShield, onAttack
-let toastMessages = []
-let moves = []
-let jestersRemaining = TOTAL_JESTERS
+let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand
+let currentRoyalAttack, discardedRoyalAttack, currentRoyalHealth, currentShield, onAttack, jestersRemaining
+let toastMessages, moves
 
 playButton.addEventListener('click', startGame)
 
@@ -82,20 +81,20 @@ attackButton.addEventListener('click', handlePlayerAttack)
 jesterButton.addEventListener('click', handleUseJester)
 undoButton.addEventListener('click', handleUndoMove)
 
-
 function startGame() {
     gameStart.style.display = 'none'
     playArea.style.display = 'grid'
     attackButton.style.visibility = 'hidden'
     undoButton.style.visibility = 'hidden'
+    jesterButton.style.visibility = 'visible'
     onAttack = true
     chosenCards = undefined
     activeDeck = undefined
     discardDeck = undefined
     jestersRemaining = TOTAL_JESTERS
     moves = []
+    toastMessages = []
     discardedRoyalAttack = 0
-    if(!jesterButton.parentElement) addJesterButton()
     clearDefenceMessage()
     updateJesterText()
     clearActiveDeck()
@@ -104,11 +103,6 @@ function startGame() {
     setRoyalCard()
     createPlayerHand()
     updateDeckCount()
-}
-
-function addJesterButton(){
-    jesterButton.addEventListener('click', handleUseJester)
-    document.querySelector('.jester').append(jesterButton)
 }
 
 function createDecks(){
@@ -181,24 +175,51 @@ function updatePlayerHand(){
     })
 }
 
-function cardSelected(){
-    if(onAttack){ //temp so only can undo when attacking for now
-        let type = onAttack ? 'playCard' : 'discardCard'
-        let state = {
-            discardDeck: discardDeck ? new Deck(discardDeck.cards) : null,
-            playerHand: playerHand ? new Deck(playerHand.cards) : null,
-            royalDeck: royalDeck ? new Deck(royalDeck.cards) : null,
-            activeDeck: activeDeck ? new Deck(activeDeck.cards) : null,
-            chosenCards: chosenCards ? new Deck(chosenCards.cards) : null,
-            drawDeck: drawDeck ? new Deck(drawDeck.cards) : null,
-            royalCard: royalCard ? JSON.parse(JSON.stringify(royalCard)) : null,
-            royalAttack: currentRoyalAttack,
-            royalHealth: currentRoyalHealth,
-            currentShield: currentShield
-        }
-        moves.unshift({type: type, state: state})
-        moves = JSON.parse(JSON.stringify(moves))
+function setState(){
+    return {
+        discardDeck: discardDeck ? new Deck(discardDeck.cards) : null,
+        playerHand: playerHand ? new Deck(playerHand.cards) : null,
+        royalDeck: royalDeck ? new Deck(royalDeck.cards) : null,
+        activeDeck: activeDeck ? new Deck(activeDeck.cards) : null,
+        chosenCards: chosenCards ? new Deck(chosenCards.cards) : null,
+        drawDeck: drawDeck ? new Deck(drawDeck.cards) : null,
+        royalCard: royalCard ? JSON.parse(JSON.stringify(royalCard)) : null,
+        royalAttack: currentRoyalAttack,
+        royalHealth: currentRoyalHealth,
+        currentShield: currentShield,
+        jestersRemaining: jestersRemaining,
+        discardedRoyalAttack: discardedRoyalAttack,
+        attackButtonVisibilty: attackButton.style.visibility,
+        onAttack: onAttack
     }
+}
+
+
+
+function resetState(state){
+    activeDeck = state.activeDeck ? new Deck(state.activeDeck.cards) : null
+    chosenCards = state.chosenCards ? new Deck(state.chosenCards.cards) : null
+    discardDeck = state.discardDeck ? new Deck(state.discardDeck.cards) : null
+    drawDeck = state.drawDeck ? new Deck(state.drawDeck.cards) : null
+    playerHand = state.playerHand ? new Deck(state.playerHand.cards) : null
+    royalDeck = state.royalDeck ? new Deck(state.royalDeck.cards) : null
+    royalCard = state.royalCard
+    currentRoyalAttack = state.royalAttack
+    currentRoyalHealth = state.royalHealth
+    currentShield = state.currentShield
+    jestersRemaining = state.jestersRemaining
+    discardedRoyalAttack = state.discardedRoyalAttack
+    attackButton.style.visibility = state.attackButtonVisibilty
+    onAttack = state.onAttack
+  
+    updateAllItems()
+}
+
+function cardSelected(){
+    let type = onAttack ? 'playCard' : 'discardCard'
+    let state = setState();
+    moves.unshift({type: type, state: state})
+
     if(!event.target.dataset.value) return
     let cardValue = event.target.dataset.value
     let selectedCard = {suit: cardValue.substring(cardValue.length-1), value: cardValue.substring(0,cardValue.length-1)}
@@ -229,7 +250,7 @@ function cardSelected(){
         }
         if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
     }
-    if(moves.length > 0 && chosenCards?.numberOfCards > 0) undoButton.style.visibility = 'visible'
+    if(moves.length > 0) setUndoButtonVisibility('visible')
 }
 
 function invalidSelection(selectedCard){
@@ -318,9 +339,10 @@ function renderDiscardedCardMovement(slot){
 }
 
 function handlePlayerAttack(){
-    
-    undoButton.style.visibility = 'hidden' // temp hiding until undo implemented for playerAttack too
-    // moves.unshift({type: 'playerAttack'})
+
+    let state = setState()
+    moves.unshift({type: 'playerAttack', state: state})
+
     let suitsActive= []
     chosenCards.cards.forEach( card => {
         if(card.suit !== royalCard.suit){
@@ -340,7 +362,7 @@ function handlePlayerAttack(){
         handleDiamonds()
     }
     playerAttack(suitsActive)
-
+    if(moves.length > 0) setUndoButtonVisibility('visible')
 }
 
 function totalPlayerAttack(){
@@ -356,7 +378,7 @@ function handleHearts(){
     if (maxHeal > 0) {
         healFromDiscard(maxHeal)
     } else {
-        let toast =  Toast({
+        let toast =  new Toast({
             text: `Unable to heal from discard`
         })
         toastMessages.push(toast)
@@ -447,6 +469,11 @@ function updateDefenceMessage(){
         defenceElement.innerText = `Current defense needed is ${discardedRoyalAttack}`
         defenceElement.style.display = 'block'
     }
+    if(discardedRoyalAttack <= 0){
+        let defenceElement = document.getElementById('defence-message')
+        defenceElement.innerText = ``
+        defenceElement.style.display = 'none'
+    }
 }
 function clearDefenceMessage(){
     let defenceElement = document.getElementById('defence-message')
@@ -530,7 +557,8 @@ function updateDeckCount() {
 }
 
 function handleUseJester(){
-    // moves.unshift({type: 'useJester'})
+    let state = setState()
+    moves.unshift({type: 'useJester', state: state})
     if(jestersRemaining < 1) {
         alertBox([`No jesters remaining`], false)
         return
@@ -539,9 +567,9 @@ function handleUseJester(){
     discardPlayerHand()
     updateJesterText()
     if(jestersRemaining === 0){
-        jesterButton.removeEventListener('click', handleUseJester)
-        jesterButton.remove();
+        jesterButton.style.visibility = "hidden"
     }
+    if(moves.length > 0) setUndoButtonVisibility('visible')
 }
 
 function discardPlayerHand(){
@@ -561,19 +589,7 @@ function updateJesterText(){
 
 function handleUndoMove(){
     let moveToUndo = moves.shift()
-    
-    activeDeck = moveToUndo.state.activeDeck ? new Deck(moveToUndo.state.activeDeck.cards) : null;
-    chosenCards = moveToUndo.state.chosenCards ? new Deck(moveToUndo.state.chosenCards.cards) : null;
-    discardDeck = moveToUndo.state.discardDeck ? new Deck(moveToUndo.state.discardDeck.cards) : null;
-    drawDeck = moveToUndo.state.drawDeck ? new Deck(moveToUndo.state.drawDeck.cards) : null;
-    playerHand = moveToUndo.state.playerHand ? new Deck(moveToUndo.state.playerHand.cards) : null;
-    royalDeck = moveToUndo.state.royalDeck ? new Deck(moveToUndo.state.royalDeck.cards) : null;
-    royalCard = moveToUndo.state.royalCard
-    currentRoyalAttack = moveToUndo.state.royalAttack
-    currentRoyalHealth = moveToUndo.state.royalHealth
-    currentShield = moveToUndo.state.currentShield
-  
-    updateAllItems()
+    resetState(moveToUndo.state)
 }
 
 function wonGame(){
@@ -599,15 +615,19 @@ function alertBox(messages, endGame){
         listMessage.classList.add('list-message')
         listMessage.innerText = message
         listElement.appendChild(listMessage)
-    })
-    
+    }) 
     gameMessage.style.display = 'block'
     
+}
+
+function setUndoButtonVisibility(value){
+    undoButton.style.visibility = value
 }
 
 function addAlertBoxButton(label, endGame){
     let footerElement = document.querySelector('.modal-footer')
     let button = document.createElement('button')
+    button.id = 'modal-button'
     button.innerText = label
     footerElement.appendChild(button)
     if(endGame){
@@ -618,29 +638,30 @@ function addAlertBoxButton(label, endGame){
 }
 
 function closeModal(){
+    let button = document.getElementById('modal-button')
+    button.removeEventListener('click', closeModal)
+    button.remove()
     clearModal()
-    //TODO: button isn't defined, you silly sausage
-    //button.removeEventListener('click', closeModal)
 }
 
-function restartGame(){
+function restartGame(){   
+    let button = document.getElementById('modal-button')
+    button.removeEventListener('click', closeModal)
+    button.remove()
     startGame()
     clearModal()
-    //TODO: button isn't defined, you silly sausage
-    //button.removeEventListener('click', restartGame)
 }
 
 function clearModal(){
     gameMessage.style.display = 'none'
     messageElement.innerHTML = ''
-    messages = []
     let footerElement = document.querySelector('.modal-footer')
     footerElement.innerHTML = ''
 }
 
 function updateAllItems(){
     if(!chosenCards) attackButton.style.visibility = 'hidden'
-    if(moves.length < 1) undoButton.style.visibility = 'hidden'
+    if(moves.length < 1) setUndoButtonVisibility('hidden')
     renderRoyalCard()
     updateDeckCount()
     updateDefenceMessage()
