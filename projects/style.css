@@ -1,9 +1,5 @@
 @import "../styles/style.css";
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
 :root {
     --gap-width: 3vw;
     --gap-height: 3vh;

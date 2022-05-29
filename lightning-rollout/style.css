@@ -17,12 +17,12 @@
     --text-font-size: 14px;
 }
 
-li {
+.scrollable li {
     list-style: none;
     font-weight: bold;
 }
 
-img, iframe {
+.scrollable img, iframe {
     width: 80vw;
     aspect-ratio: 16 / 9;
     margin: 0 8%;
