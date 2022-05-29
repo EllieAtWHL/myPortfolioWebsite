@@ -55,7 +55,7 @@ body {
     bottom: 0;
 }
 
-.brand-title img{
+.brand-title img {
     width: 10vw;
     min-width: 75px;
     padding-top: 10px;
@@ -94,6 +94,10 @@ body {
 
 a {
     color: var(--dark-green);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }
 
 .dark .navbar-links li:hover {
@@ -135,12 +139,9 @@ a {
     overflow-x: hidden;
 }
 
-h1, h2 {    
-    text-align: center;
-}
-
 h1 {
     font-size: var(--heading-font-size);
+    text-align: center;
 }
 
 h2 {
@@ -282,7 +283,7 @@ input:checked + .slider:before {
 }
 
 /* *** buttons *** */
-button, .button{
+button, .button {
     background-color: var(--third-colour);
     border-radius: 8px;
     border-style: none;
@@ -318,7 +319,7 @@ button:focus,
 .contactMe {
     width: 100%;
 }
-#contactMeButton{
+#contactMeButton {
     left: 50%;
     transform: translateX(-50%);
 }
@@ -333,6 +334,14 @@ button:focus,
 .dark .navbar-links a:hover {
     background-color: var(--third-colour) !important;
     color: var(--pale-green);
+}
+
+.dark a {
+    filter: brightness(170%);
+}
+
+.dark a:hover {
+    text-decoration: underline;
 }
 
 .dark button, 
@@ -358,7 +367,7 @@ button:focus,
     color: var(--pale-green);
 }
 
-.dark input, .dark textarea{
+.dark input, .dark textarea {
     background-color: var(--pale-green);
     color: var(--dark-green)
 }
@@ -434,7 +443,7 @@ label {
     font-size: 16px;
 }
 
-input, textarea{    
+input, textarea {    
   width: 100%;
   padding: 8px 20px;
   margin: 8px 0;
