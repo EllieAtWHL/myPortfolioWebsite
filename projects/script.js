@@ -5,7 +5,6 @@ buttonElements.forEach(buttonElement => {
 })
 
 function handleClick(event){
-    console.log(event)
 
     if(event.target.localName === 'li'){
         return
