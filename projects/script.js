@@ -14,11 +14,9 @@ function handleClick(event){
 
     let hover = button.querySelector('.card-desc')
     hover.classList.toggle('closed')
-    hover.classList.toggle('open')
 
     let links = button.querySelector('.links')
     links.classList.toggle('closed')
-    links.classList.toggle('open')
 
     let nextSibling = button.nextElementSibling
     let prevSibling = button.previousElementSibling
@@ -26,22 +24,18 @@ function handleClick(event){
     while(nextSibling) {
         let hover = nextSibling.querySelector('.card-desc')
         hover.classList.remove('closed')
-        hover.classList.add('open')
 
         let links = nextSibling.querySelector('.links')
         links.classList.add('closed')
-        links.classList.remove('open')
 
         nextSibling = nextSibling.nextElementSibling;
     }
     while(prevSibling) {
         let hover = prevSibling.querySelector('.card-desc')
         hover.classList.remove('closed')
-        hover.classList.add('open')
 
         let links = prevSibling.querySelector('.links')
         links.classList.add('closed')
-        links.classList.remove('open')
 
         prevSibling = prevSibling.previousElementSibling;
     }
