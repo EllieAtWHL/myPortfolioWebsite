@@ -30,12 +30,22 @@ const ROYAL_STATS_MAP = {
     "Q": {attack: 15, health: 30},
     "K": {attack: 20, health: 40}
 }
+const GAME_STATS_MAP = [
+    {'name':'stats_date', 'label':'Stats since'},
+    {'name':'games_started', 'label':'Games started:'},
+    {'name':'games_won', 'label':'Games won:'},
+    {'name':'games_lost', 'label':'Games lost:'}
+]
+
+const statsIcon = document.getElementById('stats-icon')
 
 const gameStart =  document.getElementById('game-start')
 const playButton = document.getElementById('play-game')
 const playArea = document.getElementById('play-area')
+const statsScreen = document.getElementById('stats-screen')
 const gameMessage = document.getElementById('game-message')
 const messageElement = document.getElementById('message')
+const statsMessageElement = document.getElementById('stat-message')
 const royalDeckElement = document.querySelector('.royal-deck')
 const drawDeckElement = document.querySelector('.draw-deck')
 const royalCardSlot = document.querySelector('.royal-card-slot')
@@ -73,6 +83,7 @@ let currentRoyalAttack, discardedRoyalAttack, currentRoyalHealth, currentShield,
 let moves
 
 playButton.addEventListener('click', startGame)
+statsIcon.addEventListener('click', seeStats)
 
 handSlots.forEach(slot => {
     slot.addEventListener('click', cardSelected)
@@ -82,7 +93,54 @@ attackButton.addEventListener('click', handlePlayerAttack)
 jesterButton.addEventListener('click', handleUseJester)
 undoButton.addEventListener('click', handleUndoMove)
 
+function seeStats(){
+    let footerElement = document.getElementById('stats-screen-footer')
+    
+    let resetButton = document.createElement('button')
+    resetButton.id = 'modal-button'
+    resetButton.innerText = 'Reset Stats'
+    footerElement.appendChild(resetButton)
+    resetButton.addEventListener('click', resetStats)
+
+    let closeButton = document.createElement('button')
+    closeButton.id = 'modal-button'
+    closeButton.innerText = 'Close'
+    footerElement.appendChild(closeButton)
+    closeButton.addEventListener('click', closeModal)
+
+    let statsHeader = document.createElement('h3')
+    statsHeader.innerText = 'Your Statistics'
+    statsMessageElement.appendChild(statsHeader)
+
+    let listElement = document.createElement('div')
+    listElement.classList.add('stat-message')
+
+    statsMessageElement.appendChild(listElement)
+
+    GAME_STATS_MAP.forEach(stat => {
+        let statMessage = document.createElement('p')
+        statMessage.classList.add('list-message')
+        let statValue = getStat(stat.name)
+        if(!statValue) statValue = 0
+        statMessage.innerText = `${stat.label} ${statValue}`
+        listElement.appendChild(statMessage)
+    })
+    statsScreen.style.display = 'block'
+}
+
+function resetStats(){
+    localStorage.clear()
+    startGameSetStats()
+    closeModal()
+    seeStats()
+}
+
+function getStat(statName){
+    return localStorage.getItem(statName)
+}
+
 function startGame() {
+    startGameSetStats()
     gameStart.style.display = 'none'
     playArea.style.display = 'grid'
     hideElement(attackButton)
@@ -103,6 +161,19 @@ function startGame() {
     setRoyalCard()
     createPlayerHand()
     updateDeckCount()
+}
+
+function startGameSetStats(){
+    if(!localStorage.getItem('stats_date')) {
+        let now = new Date;
+        now = now.toLocaleString()
+        localStorage.setItem('stats_date', now)
+    }
+    const statsSinceDate = localStorage.getItem('stats_date')
+
+    if(!localStorage.getItem('games_started')) localStorage.setItem('games_started', 0)
+    let gamesStarted = parseInt(localStorage.getItem('games_started')) + 1
+    localStorage.setItem('games_started', gamesStarted)
 }
 
 function createDecks(){
@@ -246,7 +317,16 @@ function cardSelected(){
         } else {
             updateDefenceMessage()
         }
-        if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
+        if(playerHand.numberOfCards === 0 && jestersRemaining === 0) {
+            alertBox(['Sorry, you lost'], true)
+            let gamesLost = parseInt(localStorage.getItem('games_lost'))
+            if(!gamesLost){
+                gamesLost = 1
+            } else {
+                gamesLost++
+            }
+            localStorage.setItem('games_lost', gamesLost)
+        }
     }
     if(moves.length > 0) showElement(undoButton)
 }
@@ -581,6 +661,14 @@ function handleUndoMove(){
 
 function wonGame(){
     alertBox([`You won the game?!?`], true)
+    
+    let gamesWon = parseInt(localStorage.getItem('games_won'))
+    if(!gamesWon){
+        gamesWon = 1
+    } else {
+        gamesWon++
+    }
+    localStorage.setItem('games_won', gamesWon)
 }
 
 function alertBox(messages, endGame){
@@ -605,7 +693,7 @@ function alertBox(messages, endGame){
 }
 
 function addAlertBoxButton(label, endGame){
-    let footerElement = document.querySelector('.modal-footer')
+    let footerElement = document.getElementById('game-message-footer')
     let button = document.createElement('button')
     button.id = 'modal-button'
     button.innerText = label
@@ -618,9 +706,11 @@ function addAlertBoxButton(label, endGame){
 }
 
 function closeModal(){
-    let button = document.getElementById('modal-button')
-    button.removeEventListener('click', closeModal)
-    button.remove()
+    while(document.getElementById('modal-button')) {
+        let button = document.getElementById('modal-button')
+        button.removeEventListener('click', closeModal)
+        button.remove()
+    }
     clearModal()
 }
 
@@ -634,6 +724,8 @@ function restartGame(){
 
 function clearModal(){
     gameMessage.style.display = 'none'
+    statsScreen.style.display = 'none'
+    statsMessageElement.innerHTML = ''
     messageElement.innerHTML = ''
     let footerElement = document.querySelector('.modal-footer')
     footerElement.innerHTML = ''

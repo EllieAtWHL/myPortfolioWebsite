@@ -6,11 +6,17 @@
 }
 
 :root {
-    --royal-color: rgb(154, 45, 154);
-    --draw-color: rgb(48, 197, 22);
     --gap-width: 0.25vw;
     --gap-height: .15em;
     --corner-position: 0.1em;
+
+    --base-green: 113;
+    --high-percent: 90%;
+    --low-percent: 15%;
+
+    --pale-green: hsl(var(--base-green), var(--low-percent), var(--high-percent));
+    --dark-green: hsl(var(--base-green), var(--high-percent), var(--low-percent));
+    --third-colour: hsl(var(--base-green), calc(var(--high-percent) - var(--low-percent)), calc(var(--low-percent) / 2));
 }
 
 .game-start {
@@ -58,6 +64,24 @@ h1, h3, h4 {
     margin: max(var(--gap-width), var(--gap-height));
     user-select: none;
     animation: fadeIn 1s;
+}
+
+svg.stats-icon {
+  float: right;
+  fill: var(--dark-green);
+  border: var(--dark-green) .5px solid;
+  border-radius: 100px;
+  cursor: pointer;
+  opacity: .5;
+}
+
+svg.stats-icon:hover {
+  opacity: 1;
+}
+
+.dark svg.stats-icon {
+  fill: var(--pale-green);
+  border: var(--pale-green) .5px solid;
 }
 
 .modal button  {
@@ -162,6 +186,9 @@ button:disabled {
     opacity: 20%;
     cursor: auto;
 }
+#modal-button {
+  margin-top: 10px;
+}
 .defence-message {
     grid-column: span 8;
     border: 2px solid black;
@@ -177,6 +204,10 @@ button:disabled {
     text-align: center;
     font-size: 1.5em;
     list-style-type: none; 
+}
+
+.stat-message .list-message {
+  text-align: left;
 }
 
 .message p {
