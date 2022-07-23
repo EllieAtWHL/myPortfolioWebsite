@@ -13,8 +13,6 @@ You can [buy your own copy](https://www.badgersfrommars.com/buy-regicide/) or [l
 ### Improvement List
 
 - Make more mobile-friendly
-- Add ability to undo card selection
-- Add stats (and allow you to reset them?)
 - Include a way of teaching new players how to play
 - Option to restart (with same starting cards)
 - Multi-player support
