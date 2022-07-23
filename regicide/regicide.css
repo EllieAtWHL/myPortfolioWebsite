@@ -8,14 +8,14 @@
 :root {
     --royal-color: rgb(154, 45, 154);
     --draw-color: rgb(48, 197, 22);
-    --gap-width: 0.25 vw;
-    --gap-height: 0.25vh;
+    --gap-width: 0.25vw;
+    --gap-height: .15em;
+    --corner-position: 0.1em;
 }
 
 .game-start {
-    padding: 20vh 10px 0 10px;
-    padding-top: 20vh;
-    text-align: center;
+    padding: 10px;
+    text-align: left;
 }
 
 .note {
@@ -23,12 +23,26 @@
     text-align: left;
 }
 
+.text {
+    font-size: 1.5em;
+    text-align: center;
+}
+
 h1, h3, h4 {
     margin: 0;
 }
 
+.hide {
+    visibility: hidden;
+}
+
+.show {
+    visibility: visible;
+}
+
 .scrollable {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
@@ -44,6 +58,10 @@ h1, h3, h4 {
     margin: max(var(--gap-width), var(--gap-height));
     user-select: none;
     animation: fadeIn 1s;
+}
+
+.modal button  {
+    width: 100%;
 }
 
 /* TODO: Make more mobile friendly
@@ -64,12 +82,11 @@ h1, h3, h4 {
         padding-top: var(--gap-height);
         display: grid;
         grid-template-columns: repeat(8, min(11.25vw, 85px));
-        gap: var(--gap-width);
+        gap: calc(var(--gap-width) * 2);
         justify-content: center;
-        align-items: center;
+        align-content: center;
         width: 90vw;
         max-width: 680px;
-        height: min(20vh, 200px);
     }
 /* } */
 
@@ -79,18 +96,22 @@ h1, h3, h4 {
     align-items: center;
 }
 
-.attack, .health, .jester-message {
-    font-size: calc(var(--gap-height) * 8);
+.jester-message {
+    font-size: 1.2em;
     text-align: center;
 }
 
-.deck, .card, .card-slot:empty {
+.deck, .card-slot {
     aspect-ratio: 9 / 14;
     min-height: 60px;
     max-height: 15vh;
     display: flex;
+    text-align: center;
     justify-content: center;
     align-items: center;
+}
+
+.deck, .card-slot:empty {
     border: 1px solid black;
     border-radius: .5rem;
 }
@@ -100,61 +121,20 @@ h1, h3, h4 {
 }
 
 .deck {
-    font-size: calc(var(--gap-height)*15);
+    font-size: calc(var(--gap-height)*25);
     text-align: center;
     color: white;
-}
-
-.royal-deck {
-    background-color: var(--royal-color);
-    background-image: linear-gradient( rgb(47, 7, 47), rgb(175, 12, 172));
-}
-
-.draw-deck {
-    background-color: var(--draw-color);
-    background-image: linear-gradient(rgb(11, 60, 11), green);
+    background-image: url('imgs/fractal_card_back.jpg');
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .power-text {
     grid-column: span 8;
-    height: var(--gap-height);
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.card {
-    position: relative;
-    border: 1px solid black;
-    border-radius: .5rem;
-    font-size: min(7vw, 70px);
-    background-color: white;
-}
-
-.card.red {
-    color: red;
-}
-
-.card.black {
-    color: black;
-}
-
-.card::before,
-.card::after {
-    position: absolute;
-    content: attr(data-value);
-    font-size: 1rem;
-}
-
-.card::before {
-    top: 0;
-    left: 0;
-}
-
-.card::after {
-    bottom: 0;
-    right: 0;
-    transform: rotate(180deg);
 }
 
 .player-container .card:hover {
@@ -166,24 +146,14 @@ h1, h3, h4 {
 }
 
 button {
-    height: 5vh;
-    width: auto;
+    width: 93%;
     border-radius: 5px;
-    font-size: calc(var(--gap-height) * 7);
+    font-size: 1em;
     cursor: pointer;
+    text-align: center;
 }
-#attack-button, .jester {
+#attack-button, #use-jester, #undo-move {
     grid-column: span 2;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: space-between;
-}
-.jester {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: space-between;
 }
 button:hover {
     opacity: 80%;
@@ -193,7 +163,7 @@ button:disabled {
     cursor: auto;
 }
 .defence-message {
-    display: none;
+    grid-column: span 8;
     border: 2px solid black;
     background-color: green;
     color: white;
@@ -204,6 +174,264 @@ button:disabled {
 }
 
 .message {
-    font-size: var(--gap-width);
+    text-align: center;
+    font-size: 1.5em;
     list-style-type: none; 
+}
+
+.message p {
+    margin: .5em;
+}
+
+/* CARD DESIGN FROM WEBDEVSIMPLIFIED */
+
+.card {
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: .5rem;
+    position: relative;
+    font-size: min(7vw, 70px);
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(3, .5fr);
+    grid-template-rows: repeat(8, .5fr);
+    align-items: center; 
+    padding: .2em;
+}
+
+[data-suit="♥"].card,
+[data-suit="♦"].card {
+  color: red;
+}
+
+[data-suit="♠"].card,
+[data-suit="♣"].card {
+  color: black;
+}
+
+.pip {
+  grid-row-end: span 2;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  pointer-events: none;
+}
+
+[data-suit="♥"] .pip {
+  background-image: url("imgs/heart.svg");
+}
+
+[data-suit="♦"] .pip {
+  background-image: url("imgs/diamond.svg");
+}
+
+[data-suit="♠"] .pip {
+  background-image: url("imgs/spade.svg");
+}
+
+[data-suit="♣"] .pip {
+  background-image: url("imgs/club.svg");
+}
+
+.corner-number {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: -.1em;
+  font-size: .2em;
+}
+
+.corner-number.top {
+  top: var(--corner-position);
+  left: var(--corner-position);
+}
+
+.corner-number.bottom {
+  bottom: var(--corner-position);
+  right: var(--corner-position);
+  transform: rotate(180deg);
+}
+
+.corner-number::after {
+  line-height: 0;
+  display: inline;
+  width: .75em;
+}
+
+[data-suit="♥"] .corner-number::after {
+  content: url("imgs/heart.svg");
+}
+
+[data-suit="♠"] .corner-number::after {
+  content: url("imgs/spade.svg");
+}
+
+[data-suit="♣"] .corner-number::after {
+  content: url("imgs/club.svg");
+}
+
+[data-suit="♦"] .corner-number::after {
+  content: url("imgs/diamond.svg");
+}
+
+[data-value="J"][data-suit="♦"] .pip,
+[data-value="J"][data-suit="♥"] .pip {
+  background-image: url("imgs/jack-red.svg");
+}
+[data-value="J"][data-suit="♠"] .pip,
+[data-value="J"][data-suit="♣"] .pip {
+  background-image: url("imgs/jack-black.svg");
+}
+
+[data-value="Q"][data-suit="♦"] .pip,
+[data-value="Q"][data-suit="♥"] .pip {
+  background-image: url("imgs/queen-red.svg");
+}
+[data-value="Q"][data-suit="♠"] .pip,
+[data-value="Q"][data-suit="♣"] .pip {
+  background-image: url("imgs/queen-black.svg");
+}
+
+[data-value="K"][data-suit="♦"] .pip,
+[data-value="K"][data-suit="♥"] .pip {
+  background-image: url("imgs/king-red.svg");
+}
+[data-value="K"][data-suit="♠"] .pip,
+[data-value="K"][data-suit="♣"] .pip {
+  background-image: url("imgs/king-black.svg");
+}
+
+[data-value="A"] .pip,
+[data-value="J"] .pip,
+[data-value="Q"] .pip,
+[data-value="K"] .pip {
+  grid-row-start: 2;
+  grid-column-start: 1;
+  grid-row-end: span 6;
+  grid-column-end: span 3;
+}
+
+[data-value="4"] .pip:first-child, 
+[data-value="5"] .pip:first-child,
+[data-value="6"] .pip:first-child,
+[data-value="7"] .pip:first-child,
+[data-value="8"] .pip:first-child,
+[data-value="9"] .pip:first-child,
+[data-value="10"] .pip:first-child {
+  grid-row-start: 1;
+  grid-column-start: 1;
+}
+
+[data-value="2"] .pip:first-child, 
+[data-value="3"] .pip:first-child {
+  grid-row-start: 1;
+  grid-column-start: 2;
+}
+
+[data-value="4"] .pip:nth-child(2), 
+[data-value="5"] .pip:nth-child(2),
+[data-value="6"] .pip:nth-child(2),
+[data-value="7"] .pip:nth-child(2),
+[data-value="8"] .pip:nth-child(2),
+[data-value="9"] .pip:nth-child(5),
+[data-value="10"] .pip:nth-child(5) {
+  grid-row-start: 1;
+  grid-column-start: 3;
+}
+
+[data-value="7"] .pip:nth-child(7),
+[data-value="8"] .pip:nth-child(7),
+[data-value="10"] .pip:nth-child(9) {
+  grid-row-start: 2;
+  grid-column-start: 2;
+}
+
+[data-value="9"] .pip:nth-child(2),
+[data-value="10"] .pip:nth-child(2) {
+  grid-row-start: 3;
+  grid-column-start: 1;
+}
+
+[data-value="9"] .pip:nth-child(6),
+[data-value="10"] .pip:nth-child(6) {
+  grid-row-start: 3;
+  grid-column-start: 3;
+}
+
+[data-value="6"] .pip:nth-child(5),
+[data-value="7"] .pip:nth-child(5),
+[data-value="8"] .pip:nth-child(5) {
+  grid-row-start: 4;
+  grid-column-start: 1;
+}
+
+[data-value="3"] .pip:nth-child(2), 
+[data-value="5"] .pip:nth-child(5),
+[data-value="9"] .pip:nth-child(9) {
+  grid-row-start: 4;
+  grid-column-start: 2;
+}
+
+[data-value="6"] .pip:nth-child(6),
+[data-value="7"] .pip:nth-child(6),
+[data-value="8"] .pip:nth-child(6) {
+  grid-row-start: 4;
+  grid-column-start: 3;
+}
+
+[data-value="9"] .pip:nth-child(3),
+[data-value="10"] .pip:nth-child(3) {
+  grid-row-start: 5;
+  grid-column-start: 1;
+  transform: rotate(180deg);
+}
+
+[data-value="9"] .pip:nth-child(7),
+[data-value="10"] .pip:nth-child(7) {
+  grid-row-start: 5;
+  grid-column-start: 3;
+  transform: rotate(180deg);
+}
+
+[data-value="8"] .pip:nth-child(8),
+[data-value="10"] .pip:nth-child(10) {
+  grid-row-start: 6;
+  grid-column-start: 2;
+  transform: rotate(180deg);
+}
+
+[data-value="4"] .pip:nth-child(3), 
+[data-value="5"] .pip:nth-child(3),
+[data-value="6"] .pip:nth-child(3),
+[data-value="7"] .pip:nth-child(3),
+[data-value="8"] .pip:nth-child(3),
+[data-value="9"] .pip:nth-child(4),
+[data-value="10"] .pip:nth-child(4)  {
+  grid-row-start: 7;
+  grid-column-start: 1;
+  transform: rotate(180deg);
+}
+
+[data-value="2"] .pip:nth-child(2), 
+[data-value="3"] .pip:nth-child(3) {
+  grid-row-start: 7;
+  grid-column-start: 2;
+  transform: rotate(180deg);
+}
+
+[data-value="4"] .pip:nth-child(4), 
+[data-value="5"] .pip:nth-child(4),
+[data-value="6"] .pip:nth-child(4),
+[data-value="7"] .pip:nth-child(4),
+[data-value="8"] .pip:nth-child(4),
+[data-value="9"] .pip:nth-child(8),
+[data-value="10"] .pip:nth-child(8) {
+  grid-row-start: 7;
+  grid-column-start: 3;
+  transform: rotate(180deg);
 }
