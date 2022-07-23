@@ -91,11 +91,38 @@ class Card {
     }
 
     getHTML(){
-        const cardDiv = document.createElement('div')
-        cardDiv.innerText = this.suit
-        cardDiv.classList.add("card", this.color)
-        cardDiv.dataset.value = `${this.value}${this.suit}`
-        return cardDiv
+        const cardDiv = document.createElement('div');
+        cardDiv.classList.add('card');
+        const valueAsNumber = parseInt(this.value);
+        if(isNaN(valueAsNumber)){
+            cardDiv.append(this.createPip());
+        } else{
+            for (let i=0; i<valueAsNumber; i++){
+                cardDiv.append(this.createPip());
+            }
+        }
+
+        cardDiv.append(this.createCornerNumber("top", this.value));
+        cardDiv.append(this.createCornerNumber("bottom", this.value));
+
+        cardDiv.dataset.value = `${this.value}`
+        cardDiv.dataset.suit = `${this.suit}`
+
+        return cardDiv;
+    }
+
+    createPip(){
+        const pip = document.createElement("div");
+        pip.classList.add("pip");
+        return pip;
+    }
+
+    createCornerNumber(position, value) {
+        const corner = document.createElement("div")
+        corner.textContent = value
+        corner.classList.add("corner-number")
+        corner.classList.add(position)
+        return corner
     }
 }
 

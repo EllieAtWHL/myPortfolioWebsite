@@ -66,10 +66,11 @@ const activeSlots = [
     document.getElementById('active-card-slot-seventh'),
     document.getElementById('active-card-slot-eigth')
 ]
+const defenceElement = document.getElementById('defence-message')
 
 let royalDeck, drawDeck, royalCard, chosenCards, activeDeck, discardDeck, playerHand
 let currentRoyalAttack, discardedRoyalAttack, currentRoyalHealth, currentShield, onAttack, jestersRemaining
-let toastMessages, moves
+let moves
 
 playButton.addEventListener('click', startGame)
 
@@ -84,16 +85,15 @@ undoButton.addEventListener('click', handleUndoMove)
 function startGame() {
     gameStart.style.display = 'none'
     playArea.style.display = 'grid'
-    attackButton.style.visibility = 'hidden'
-    undoButton.style.visibility = 'hidden'
-    jesterButton.style.visibility = 'visible'
+    hideElement(attackButton)
+    hideElement(undoButton)
+    showElement(jesterButton)
     onAttack = true
     chosenCards = undefined
     activeDeck = undefined
     discardDeck = undefined
     jestersRemaining = TOTAL_JESTERS
     moves = []
-    toastMessages = []
     discardedRoyalAttack = 0
     clearDefenceMessage()
     updateJesterText()
@@ -189,7 +189,6 @@ function setState(){
         currentShield: currentShield,
         jestersRemaining: jestersRemaining,
         discardedRoyalAttack: discardedRoyalAttack,
-        attackButtonVisibilty: attackButton.style.visibility,
         onAttack: onAttack
     }
 }
@@ -209,7 +208,6 @@ function resetState(state){
     currentShield = state.currentShield
     jestersRemaining = state.jestersRemaining
     discardedRoyalAttack = state.discardedRoyalAttack
-    attackButton.style.visibility = state.attackButtonVisibilty
     onAttack = state.onAttack
   
     updateAllItems()
@@ -221,8 +219,8 @@ function cardSelected(){
     moves.unshift({type: type, state: state})
 
     if(!event.target.dataset.value) return
-    let cardValue = event.target.dataset.value
-    let selectedCard = {suit: cardValue.substring(cardValue.length-1), value: cardValue.substring(0,cardValue.length-1)}
+    let cardValue = event.target.dataset
+    let selectedCard = {suit: cardValue.suit, value: cardValue.value}
     if(onAttack){
         if(invalidSelection(selectedCard)){
             let toast = new Toast({
@@ -232,7 +230,7 @@ function cardSelected(){
             moves.shift()
         }
         else {
-            attackButton.style.visibility = 'visible'
+            showElement(attackButton)
             moveSelectedCardToChosenCards(selectedCard)
             let slotToClear = event.path[1]
             renderSelectedCardMovement(slotToClear)
@@ -250,7 +248,7 @@ function cardSelected(){
         }
         if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
     }
-    if(moves.length > 0) setUndoButtonVisibility('visible')
+    if(moves.length > 0) showElement(undoButton)
 }
 
 function invalidSelection(selectedCard){
@@ -352,7 +350,6 @@ function handlePlayerAttack(){
             const toast = new Toast({
                 text: `${card.suit} power is blocked`,
             })
-            toastMessages.push(toast)
         }
     })
     if(suitsActive.includes('♥')){
@@ -362,7 +359,7 @@ function handlePlayerAttack(){
         handleDiamonds()
     }
     playerAttack(suitsActive)
-    if(moves.length > 0) setUndoButtonVisibility('visible')
+    if(moves.length > 0) showElement(undoButton)
 }
 
 function totalPlayerAttack(){
@@ -381,7 +378,6 @@ function handleHearts(){
         let toast =  new Toast({
             text: `Unable to heal from discard`
         })
-        toastMessages.push(toast)
     }
 }
 
@@ -389,7 +385,6 @@ function healFromDiscard(maxHeal){
     let toast = new Toast({
         text: `Healing ${maxHeal} ${maxHeal === 1 ? 'card' : 'cards'} from the discard pile`
     })
-    toastMessages.push(toast)
     discardDeck.shuffle()
     let healedCards = discardDeck.cards.splice(0,maxHeal)
     drawDeck = new Deck(drawDeck.cards.concat(healedCards))
@@ -411,7 +406,6 @@ function drawFromTavern(maxDraw){
     let toast = new Toast({
         text: `Drawing ${maxDraw} ${maxDraw === 1 ? 'card' : 'cards'} from tavern`
     })
-    toastMessages.push(toast)
     let drawnCards = []
     for(let i=0;i<maxDraw;i++){
         drawnCards.push(drawDeck.pop())
@@ -429,12 +423,11 @@ function playerAttack(suits){
     let toast = new Toast({
         text: `Attacking ${royalCard.value}${royalCard.suit} for ${damageDealt} damage`
     })
-    toastMessages.push(toast)
     if(currentRoyalHealth > 0) {
         if (!activeDeck) activeDeck = new Deck(chosenCards.cards)
         else activeDeck = new Deck(activeDeck.cards.concat(chosenCards.cards))
         updateHealthText()
-        attackButton.style.visibility = 'hidden'
+        hideElement(attackButton);
         if(playerHand.numberOfCards === 0 && jestersRemaining === 0) alertBox(['Sorry, you lost'], true)
         else handleRoyalAttack(suits)
     }
@@ -454,7 +447,6 @@ function handleRoyalAttack(suits){
     let toast = new Toast({
         text: `${royalCard.value}${royalCard.suit} is attacking for ${currentRoyalAttack}`
     })
-    toastMessages.push(toast)
     discardedRoyalAttack = currentRoyalAttack
     chosenCards = undefined
     if(currentRoyalAttack <= 0 ) onAttack = true;
@@ -465,20 +457,17 @@ function handleRoyalAttack(suits){
 
 function updateDefenceMessage(){
     if(discardedRoyalAttack > 0){
-        let defenceElement = document.getElementById('defence-message')
-        defenceElement.innerText = `Current defense needed is ${discardedRoyalAttack}`
-        defenceElement.style.display = 'block'
+        defenceElement.innerText = `Current defence needed is ${discardedRoyalAttack}`
+        showElement(defenceElement)
     }
     if(discardedRoyalAttack <= 0){
-        let defenceElement = document.getElementById('defence-message')
-        defenceElement.innerText = ``
-        defenceElement.style.display = 'none'
+        hideElement(defenceElement)
+        defenceElement.innerText = ` Defence Message `
     }
 }
 function clearDefenceMessage(){
-    let defenceElement = document.getElementById('defence-message')
-    defenceElement.innerText = ``
-    defenceElement.style.display = 'none'
+    hideElement(defenceElement)
+    defenceElement.innerText = ` Defence Message `
 }
 
 function getCardShield(cards){
@@ -494,14 +483,12 @@ function handleRoyalDefeated(exactKill){
         let toast = new Toast({
             text: `${royalCard.value}${royalCard.suit} defeated with critical hit`
         })
-        toastMessages.push(toast)
         drawDeck = new Deck([royalCard].concat(drawDeck.cards))
     }
     else {
         let toast = new Toast({
             text: `${royalCard.value}${royalCard.suit} defeated`
         })
-        toastMessages.push(toast)
         if(!discardDeck) discardDeck = new Deck([royalCard])
         else discardDeck = new Deck([royalCard].concat(discardDeck.cards))
     }
@@ -530,7 +517,7 @@ function clearActiveDeck(){
     activeSlots.forEach(slot => {
         slot.innerHTML = ''
     })
-    attackButton.style.visibility = 'hidden'
+    hideElement(attackButton);
 }
 
 function updateDiscardPile(){
@@ -545,10 +532,10 @@ function updateStatsText(){
     updateHealthText()
 }
 function updateAttackText(){
-    attackElement.innerText = `Royal Attack: \n ${currentRoyalAttack}`
+    attackElement.innerText = `${currentRoyalAttack}`
 }
 function updateHealthText(){
-    healthElement.innerText = `Royal Health: \n ${currentRoyalHealth}`
+    healthElement.innerText = `${currentRoyalHealth}`
 }
 
 function updateDeckCount() {
@@ -567,9 +554,9 @@ function handleUseJester(){
     discardPlayerHand()
     updateJesterText()
     if(jestersRemaining === 0){
-        jesterButton.style.visibility = "hidden"
+        hideElement(jesterButton)
     }
-    if(moves.length > 0) setUndoButtonVisibility('visible')
+    if(moves.length > 0) showElement(undoButton)
 }
 
 function discardPlayerHand(){
@@ -597,31 +584,24 @@ function wonGame(){
 }
 
 function alertBox(messages, endGame){
-    toastMessages.forEach( toast => {
-        toast.remove()
-    })
     if(endGame){
         addAlertBoxButton('Restart', endGame)
     } else {
         addAlertBoxButton('Continue')
     }
 
-    let listElement = document.createElement('ul')
+    let listElement = document.createElement('div')
     listElement.classList.add('message')
 
     messageElement.appendChild(listElement)
     messages.forEach((message) => {
-        let listMessage = document.createElement('li')
+        let listMessage = document.createElement('p')
         listMessage.classList.add('list-message')
         listMessage.innerText = message
         listElement.appendChild(listMessage)
     }) 
     gameMessage.style.display = 'block'
     
-}
-
-function setUndoButtonVisibility(value){
-    undoButton.style.visibility = value
 }
 
 function addAlertBoxButton(label, endGame){
@@ -660,8 +640,8 @@ function clearModal(){
 }
 
 function updateAllItems(){
-    if(!chosenCards) attackButton.style.visibility = 'hidden'
-    if(moves.length < 1) setUndoButtonVisibility('hidden')
+    if(!chosenCards) hideElement(attackButton)
+    if(moves.length < 1) hideElement(undoButton)
     renderRoyalCard()
     updateDeckCount()
     updateDefenceMessage()
@@ -669,4 +649,14 @@ function updateAllItems(){
     updateJesterText()
     renderActiveDeck()
     updatePlayerHand()
+}
+
+function hideElement(element){
+    element.classList.add('hide')
+    element.classList.remove('show');
+}
+
+function showElement(element){
+    element.classList.remove('hide')
+    element.classList.add('show');
 }

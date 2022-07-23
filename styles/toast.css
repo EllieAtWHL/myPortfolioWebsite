@@ -10,7 +10,7 @@
     --progress-background: linear-gradient(to right, var(--third-colour), var(--dark-green));
     --default-background: var(--pale-green);
     --success-background: darkgreen;
-    --error-background: darkred;
+    --error-background: rgb(194, 62, 62);
     --light-text: var(--pale-green);
 }
 .toast {
@@ -65,7 +65,7 @@
 .toast-container{
     position: fixed;
     margin: 10px;
-    width: 250px;
+    width: 33vw;
     display: flex;
     flex-direction: column;
     gap: .5rem;
