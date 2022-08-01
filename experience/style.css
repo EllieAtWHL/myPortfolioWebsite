@@ -1,0 +1,118 @@
+@import "../styles/style.css";
+
+:root {
+    --base-green: 113;
+    --high-percent: 90%;
+    --low-percent: 15%;
+
+    --pale-green: hsl(var(--base-green), var(--low-percent), var(--high-percent));
+    --dark-green: hsl(var(--base-green), var(--high-percent), var(--low-percent));
+    --third-colour: hsl(var(--base-green), calc(var(--high-percent) - var(--low-percent)), calc(var(--low-percent) / 2));
+    
+    --chosen-font:'Kanit', Arial, Helvetica, sans-serif;
+    --heading-font-size: 400%;
+    --sub-heading-font-size: 300%;
+    --tertiary-heading-font-size: 200%;
+    --lowest-heading-font-size: 150%;
+    --text-font-size: 14px;
+
+    --logo-width: 50px;
+}
+
+h1 {
+    margin-bottom: .25em;
+}
+
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: var(--dark-green);
+    color: var(--pale-green);
+    float: left;
+    border: none;
+    border-radius: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    padding: 14px;
+    transition: 0.3s;
+    font-size: 18px;
+    opacity: 0.5;
+    width: 7em;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: var(--third-colour);
+}
+
+.dark .tab button:hover {
+    background-color: var(--pale-green);
+    color: var(--third-colour);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    opacity: 1;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px;
+    background-color: var(--dark-green);
+    margin-bottom: .5em;
+    border-radius: 1em;
+    border-top-left-radius: 0;
+}
+
+.active {
+    display: block;
+}
+
+.job {
+    border-radius: 1em;
+    background-color: var(--pale-green);
+    color: var(--third-colour);
+    padding: 1em;
+    margin: .5em;
+}
+
+.dark .job {
+    background-color: var(--third-colour);
+    color: var(--pale-green);
+}
+
+.job li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.job .company {
+    font-size: larger;
+    font-weight: 600;
+}
+.job .date {
+    font-style: italic;
+}
+.job .title {
+    font-weight: bold;
+}
+.job li.description {
+    list-style: circle;
+    margin: initial;
+}
+
+.job img.cert-logo{
+    width: var(--logo-width);
+    height: var(--logo-width);
+    float: right;
+    transform: translateY(-50px);
+}
