@@ -15,38 +15,17 @@
     --tertiary-heading-font-size: 200%;
     --lowest-heading-font-size: 150%;
     --text-font-size: 14px;
+
+    --logo-width: 50px;
 }
 
-.scrollable li {
-    list-style: none;
-    font-weight: bold;
+img.profile {
+    width: 10em;
+    border-radius: 15em;
+    margin: 2em;
 }
 
-.scrollable img, iframe {
-    width: 80vw;
-    aspect-ratio: 16 / 9;
-    margin: 0 8%;
-}
-
-ul img {
-    margin: 0 4%;
-}
-
-.blog {
-    margin: 1.5em;
-}
-
-@media (max-width: 600px) {
-    h1 {
-        font-size: 3vh;
-    }
-    h2 {
-        font-size: 2.66vh;
-    }
-    h3 {
-        font-size: 2.33vh;
-    }
-    h4 {
-        font-size: 2vh;
-    }
+div.intro-text {
+    width: 70vw;
+    transform: translate(15em, -11em);
 }

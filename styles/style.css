@@ -141,6 +141,8 @@ a:hover {
 h1 {
     font-size: var(--heading-font-size);
     text-align: center;
+    margin-top: .25em;
+    margin-bottom: .25em;
 }
 
 h2 {
