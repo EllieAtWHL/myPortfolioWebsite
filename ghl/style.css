@@ -1,0 +1,41 @@
+@import "../styles/style.css";
+
+:root {
+    --base-green: 113;
+    --high-percent: 90%;
+    --low-percent: 15%;
+
+    --pale-green: hsl(var(--base-green), var(--low-percent), var(--high-percent));
+    --dark-green: hsl(var(--base-green), var(--high-percent), var(--low-percent));
+    --third-colour: hsl(var(--base-green), calc(var(--high-percent) - var(--low-percent)), calc(var(--low-percent) / 2));
+    
+    --chosen-font:'Kanit', Arial, Helvetica, sans-serif;
+    --heading-font-size: 400%;
+    --sub-heading-font-size: 300%;
+    --tertiary-heading-font-size: 200%;
+    --lowest-heading-font-size: 150%;
+    --text-font-size: 14px;
+}
+
+.scrollable img{
+    height: 50vh;
+}
+
+.blog {
+    margin: 1.5em;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 3vh;
+    }
+    h2 {
+        font-size: 2.66vh;
+    }
+    h3 {
+        font-size: 2.33vh;
+    }
+    h4 {
+        font-size: 2vh;
+    }
+}
