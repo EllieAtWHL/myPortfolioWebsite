@@ -9,61 +9,118 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="style.css">
         <script src="../scripts/templateScript.js"></script>
+        <script src="script.js" type="module"></script>
+
     </head>
     <body id="body">
         <div class="content" id="content">
-            <div class="scrollable">
+            <div class="scrollable" id="scrollable">
                 <div>
                     <h1>Fantasy Football Draft Application</h1>
                 </div>
                 <div class="blog">
                     <p>
-                        In 2012, my husband started a Fantasy Footbal League - the Golden Helmet League - of which he is commissioner
+                        In 2012, my husband started a Fantasy Football League - <a href="https://www47.myfantasyleague.com/2022/home/24311#0" target="_blank">The Golden Helmet League</a> - of which he is commissioner
                     </p>
                     <p>
-                        As we know needed to draft our teams, we needed a way to capture the draft as it happened. He looked around but didn't find anything that worked the way he wanted it to, and I was fairly technical, he asked if I could build one. At the point, most of the code I wrote was VBA for Excel, so for our first year - and the following 8 years, our draft board was built in Excel. And it was fine - not perfect - but acceptable for a quick win.
+                        As we needed to draft our teams, we needed a way to capture the draft as it happened. He looked around but didn't find anything that worked the way he wanted it to, and I was fairly technical, he asked if I could build one. At the point, most of the code I wrote was VBA for Excel, so for our first year - and the following 8 years, our draft board was built in Excel. And it was fine - not perfect - but acceptable for a quick win.
                     </p>
                     <p>
-                        In 2020, I found myself with time on my hands (because, you know, we weren;t going out so much), and having become an accomplished developer on the Salesforce platform, I decided to try and rebuild the draft application within Salesforce
+                        In 2020, I found myself with time on my hands (because, you know, we weren't going out so much), and having become an accomplished developer on the Salesforce platform, I decided to try and rebuild the draft application within Salesforce. Here is the story of how I went about it.
                     </p>
 
-                    <h4>
-                        Building the data model
-                    </h4>
-                    <img src="./images/dataModel.png">
+                    <section>
+                        <h3>
+                            Building the data model
+                        </h3>
+                        <p>I went through a few iterations of the data model. I could have used Accounts as teams and Contacts as players, which I did in my first iteration, but for my final version I decided to create custom objects for them so that this could easily be imported into any org without conflicting with any existing set up. I also went through diffetenert iterations of how to manage the draft data, but in the backend I decided to just go with a simple, flat structure and let javascript to a lot of the heavy lifting of turning the picks into rounds and who had each pick. This all meant that there were just four custom objects created to store the data</p>
+                        <table>
+                            <tr>
+                                <td class="half-width">
+                                    <h4>NFL Team <code class="code">NFL_Team__c</code></h4>
+                                </td>
+                                <td class="half-width"><h4>Player <code class="code">Player__c</code></h4></td>
+                            </tr>
+                            <tr>
+                                <td class="half-width">
+                                    The main puropose of this object was to store the team and bye week of each player without repeating it for each player, and just looking up to their team. This information can be obtained via the My Fantasy League api.
+                                </td>
+                                <td class="half-width">
+                                    I needed to store a player record for every player listed within the My Fantasy League database in case an owner wanted to pick them during thre draft. If there wasn't a record for them, then they weren't on My Fantasy League and an owner could not draft them. Again, this information could all be obtained via the My Fantasy League api.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="half-width"><h4>Team Owner <code class="code">Team_Owner__c</code></h4></td>
+                                <td class="half-width"><h4>Pick <code class="code">Pick__c</code></h4></td>
+                            </tr>
+                            <tr>
+                                <td class="half-width">
+                                    So that I could send the final draft results back to My Fantasy League, I need to know which players were drafted to which franchise, this also stores their logo url. Again, all this is importable via the My Fanatsy League api.
+                                </td>
+                                <td class="half-width">
+                                    These record would be dynamically created during the draft once each pick was in and would purely look up the player drafted, the player would then look up to the franchise owner to determine who's pick it was and therefore who drafted the player. Below is the final data model I went with.
+                                </td>
+                            </tr>
+                        </table>
 
-                    <h4>
-                        Setting up the APIs
-                    </h4>
-                    <p>
-                        <a href="'https://www03.myfantasyleague.com/2022/api_info?L=" taregt="_blank">My Fantasy League Developer Documentation</a>
-                    </p>
+                        <img id="image" src="./images/dataModel.png">
+                    </section>
 
-                    <h4>
-                        Building the draft board front end
-                    </h4>
-                    <video width="640" height="480" controls>
-                        <source src="videos/GHLDraftBoard.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-
-                    <h4>
-                        Building the commissioner control panel
-                    </h4>                    
-                    <video width="640" height="480" controls>
-                        <source src="videos/GHLCommissioner.webm" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-
-                    <h4>
-                        Setting up the community pages
-                    </h4>
-
-                    <h4>
-                        Final touches
-                    </h4>
+                    <section>
+                        <h3>
+                            Setting up the APIs
+                        </h3>
+                        <p>Now that I had a data model to store the data in, my next job was to set up the api calls to My Fantasy League to retrieve all the data to populate the records. I won't go into detail about each api I used, as you can read the documentation for that, but below are the 5 exports that I used</p>
+                        <ul>
+                            <li>nflByeWeeks</li>
+                            <li>players</li>
+                            <li>adp</li>
+                            <li>playerRanks</li>
+                            <li>league</li>
+                        </ul>
+                        <p>
+                            <a href="https://www03.myfantasyleague.com/2022/api_info?L=" target="_blank">My Fantasy League Developer Documentation</a>
+                        </p>
+                    </section>
                     
-                    <a href="https://github.com/EllieAtWHL/GoldenHelmetLeague">Github</a>
+                    <section>
+                        <h3>
+                            Building the draft board front end
+                        </h3>
+                        <p>Coming soon...</p>
+                        <video controls>
+                            <source src="videos/GHLDraftBoard.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                    </section>
+
+                    <section>
+                        <h3>
+                            Building the commissioner control panel
+                        </h3>
+                        <p>Coming soon...</p>                 
+                        <video controls>
+                            <source src="videos/GHLCommissioner.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                    </section>
+                    
+                    <section>
+                        <h3>
+                            Setting up the community pages
+                            
+                        </h3>
+                        <p>Coming soon...</p>
+                    </section>
+
+                    <section>
+                        <h3>
+                            Final touches
+                        </h3>
+                        <p>Coming soon...</p>
+                    </section>
+                    
+                    Source code can be found in <a href="https://github.com/EllieAtWHL/GoldenHelmetLeague">my Github repository</a>
                 </div>
             </div>
         </div>
