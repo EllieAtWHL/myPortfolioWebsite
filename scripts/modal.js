@@ -36,7 +36,6 @@ export default class Modal {
 
     set width(value){
         this.#modalContent.style.setProperty('width', value)
-        console.log(`Setting width: ${value}`)
     }
 
     get width(){
@@ -45,7 +44,6 @@ export default class Modal {
 
     set height(value){
         this.#modalContent.style.setProperty('height', value)
-        console.log(`Setting height: ${value}`)
     }
 
     get height(){
@@ -53,9 +51,6 @@ export default class Modal {
     }
 
     set content(value){
-        value.style.width = this.width
-        value.style.height = this.height
-        value.style.padding = '12px'
         this.#modalContent.append(value)
     }
     

@@ -28,12 +28,17 @@
                     <p>
                         In 2020, I found myself with time on my hands (because, you know, we weren't going out so much), and having become an accomplished developer on the Salesforce platform, I decided to try and rebuild the draft application within Salesforce. Here is the story of how I went about it.
                     </p>
+                    <p>
+                        <i>Note: This is not Production ready code, this was something I put together quickly and have made some refinements to since. Shortcuts have been taken along the way and best practice may not have always been followed.</i>
+                    </p>
 
                     <section>
                         <h3>
                             Building the data model
                         </h3>
-                        <p>I went through a few iterations of the data model. I could have used Accounts as teams and Contacts as players, which I did in my first iteration, but for my final version I decided to create custom objects for them so that this could easily be imported into any org without conflicting with any existing set up. I also went through diffetenert iterations of how to manage the draft data, but in the backend I decided to just go with a simple, flat structure and let javascript to a lot of the heavy lifting of turning the picks into rounds and who had each pick. This all meant that there were just four custom objects created to store the data</p>
+                        <p>
+                            I went through a few iterations of the data model. I could have used Accounts as teams and Contacts as players, which I did in my first iteration, but for my final version I decided to create custom objects for them so that this could easily be imported into any org without conflicting with any existing set up. I also went through different iterations of how to manage the draft data, but in the backend I decided to just go with a simple, flat structure and let Apex and Javascript do the heavy lifting of turning the picks into rounds and who had each pick. This all meant that there were just four custom objects created to store the data
+                        </p>
                         <table>
                             <tr>
                                 <td class="half-width">
@@ -58,19 +63,31 @@
                                     So that I could send the final draft results back to My Fantasy League, I need to know which players were drafted to which franchise, this also stores their logo url. Again, all this is importable via the My Fanatsy League api.
                                 </td>
                                 <td class="half-width">
-                                    These record would be dynamically created during the draft once each pick was in and would purely look up the player drafted, the player would then look up to the franchise owner to determine who's pick it was and therefore who drafted the player. Below is the final data model I went with.
+                                    These record would be dynamically created during the draft once each pick was in and would purely look up the player drafted, the player would then look up to the franchise owner to determine who's pick it was and therefore who drafted the player.
                                 </td>
                             </tr>
                         </table>
 
-                        <img id="image" src="./images/dataModel.png">
+                        <p>Below is the final data model I went with.</p>
+
+                        <div id="image-container" class="image-container">
+                            <img id="image" src="./images/GHLdataModel.png">
+                            <svg id="icon" class="icon" xmlns="http://www.w3.org/2000/svg" 
+                                height="40" 
+                                width="40">
+                                <path d="M8.333 31.667v-10h2.792v7.208h7.208v2.792Zm20.542-13.334v-7.208h-7.208V8.333h10v10Z"/>
+                            </svg>
+                        </div>
+                            
                     </section>
 
                     <section>
                         <h3>
                             Setting up the APIs
                         </h3>
-                        <p>Now that I had a data model to store the data in, my next job was to set up the api calls to My Fantasy League to retrieve all the data to populate the records. I won't go into detail about each api I used, as you can read the documentation for that, but below are the 5 exports that I used</p>
+                        <p>
+                            Now that I had a data model to store the data in, my next job was to set up the api calls to My Fantasy League to retrieve all the data to populate the records. I won't go into detail about each api I used, as you can read the <a href="https://www03.myfantasyleague.com/2022/api_info?L=" target="_blank">documentation</a> for that, but below are the 5 exports that I used.
+                        </p>
                         <ul>
                             <li>nflByeWeeks</li>
                             <li>players</li>
@@ -79,28 +96,44 @@
                             <li>league</li>
                         </ul>
                         <p>
-                            <a href="https://www03.myfantasyleague.com/2022/api_info?L=" target="_blank">My Fantasy League Developer Documentation</a>
+                            As the callouts were identical apart from the url, I created a single method to actually do the callout that I could pass the url to. I stored the various strings that needed to be stored, such as the base url, in Custom Settings (GHL__c).
                         </p>
+                        <p>
+                            The exports were grouping into three groups and classes created to manage their responses and upsert the relevant records on Salesforce:
+                        </p>
+                        <ul>
+                            <li>Bye Weeks (MFLManageByeWeeks) - which also served to caputure all of the NFL Teams and upsert them in as NFL_Team__c records</li>
+                            <li>Players (MFLManagePlayers) - incorporating the players, adp and playerRanks callouts and upserting the related Player__c records</li>
+                            <li>Owners (MFLManageOwners) - capturing the the franchise information for the owners in the league and upserting the Team_owner__c records</li>
+                        </ul>
                     </section>
                     
                     <section>
                         <h3>
                             Building the draft board front end
                         </h3>
-                        <p>Coming soon...</p>
+                        <p>
+                            This is where the magic really happens. Originally, this was built as a one-stop page, that you had to be logged in to view and control the draft from, and this page would be screen-shared for anyone joining the draft virtually. However on a later iteration, I turned into a read-only view of the draft that was publically available to anyone - meaning anyone in the draft could follow along wherever they are - and being dynamically updated when picks were entered using the new Commissioner page.
+                        </p>
+                        <p>
+                            The first thing needed was to determine how many teams in the draft and how many rounds there were. The umber of teams was a simple query to call and get the sizae of Team_Owner__c records returned. Number of rounds is still hard-coded at this point, but this should ideally be stored in the GHL__c custom settings so it is easy to change. Based on the number of rounds and teams in the draft, we then the structure of the draft board.
+                        </p>
                         <video controls>
-                            <source src="videos/GHLDraftBoard.webm" type="video/webm">
+                            <source src="videos/GHLDraft_watermarked.mkv" type="video/webm">
                             Your browser does not support the video tag.
                         </video>
+                        <a href="https://goldenhelmet2-dev-ed.my.site.com/draft/s/" target="_blank">Final View of Draft</a>
                     </section>
 
                     <section>
                         <h3>
                             Building the commissioner control panel
                         </h3>
-                        <p>Coming soon...</p>                 
+                        <p>
+                            Coming soon...
+                        </p>                 
                         <video controls>
-                            <source src="videos/GHLCommissioner.webm" type="video/webm">
+                            <source src="videos/GHLController_watermarked.mkv" type="video/webm">
                             Your browser does not support the video tag.
                         </video>
                     </section>
@@ -110,14 +143,22 @@
                             Setting up the community pages
                             
                         </h3>
-                        <p>Coming soon...</p>
+                        <p>
+                            Coming soon...
+                        </p>
                     </section>
 
                     <section>
                         <h3>
                             Final touches
                         </h3>
-                        <p>Coming soon...</p>
+                        <p>
+                            <!--
+                                Pushing the draft results back into MFL
+                                Building the control panel to update all info from MFL
+                            -->
+                            Coming soon...
+                        </p>
                     </section>
                     
                     Source code can be found in <a href="https://github.com/EllieAtWHL/GoldenHelmetLeague">my Github repository</a>

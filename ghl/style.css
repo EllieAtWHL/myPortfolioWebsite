@@ -41,8 +41,43 @@ h4 {
     color: var(--pale-green);
 }
 
+.image-container {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.image-container #image {
+    max-width: 80vw;
+    max-height: 40vh;
+}
+
+.image-container:hover #image {
+    opacity: 50%;
+}
+
+.image-container .icon {
+    opacity: 0;
+}
+
+.image-container:hover .icon{
+    opacity: .75;
+    transform: translate(-45px);
+}
+
+#imageCopy {
+    max-width: 80vw;
+    max-height: 80vh;
+    height: auto;
+    width: 100%;
+}
+
 video {
     width: 66vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
 }
 
 @media (max-width: 600px) {
