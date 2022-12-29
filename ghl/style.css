@@ -43,6 +43,7 @@ h4 {
 
 .image-container {
     width: fit-content;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -64,6 +65,11 @@ h4 {
 .image-container:hover .icon{
     opacity: .75;
     transform: translate(-45px);
+}
+
+#image {
+    height: 100%;
+    width: 100%;
 }
 
 #imageCopy {
