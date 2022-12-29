@@ -1,0 +1,102 @@
+@import "../styles/style.css";
+@import "../styles/modal.css";
+
+:root {
+    --base-green: 113;
+    --high-percent: 90%;
+    --low-percent: 15%;
+
+    --pale-green: hsl(var(--base-green), var(--low-percent), var(--high-percent));
+    --dark-green: hsl(var(--base-green), var(--high-percent), var(--low-percent));
+    --third-colour: hsl(var(--base-green), calc(var(--high-percent) - var(--low-percent)), calc(var(--low-percent) / 2));
+    
+    --chosen-font:'Kanit', Arial, Helvetica, sans-serif;
+    --heading-font-size: 400%;
+    --sub-heading-font-size: 300%;
+    --tertiary-heading-font-size: 200%;
+    --lowest-heading-font-size: 150%;
+    --text-font-size: 14px;
+}
+
+h4 {
+    margin: 2px;
+}
+
+.scrollable img {
+    height: 50vh;
+}
+
+.blog {
+    margin: 1.5em;
+}
+
+.half-width {
+    width: 50%;
+    padding: 5px;
+    vertical-align: top;
+}
+
+.code {
+    background-color: #222222;
+    color: var(--pale-green);
+}
+
+.image-container {
+    width: fit-content;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.image-container #image {
+    max-width: 80vw;
+    max-height: 40vh;
+}
+
+.image-container:hover #image {
+    opacity: 50%;
+}
+
+.image-container .icon {
+    opacity: 0;
+}
+
+.image-container:hover .icon{
+    opacity: .75;
+    transform: translate(-45px);
+}
+
+#image {
+    height: 100%;
+    width: 100%;
+}
+
+#imageCopy {
+    max-width: 80vw;
+    max-height: 80vh;
+    height: auto;
+    width: 100%;
+}
+
+video {
+    width: 66vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 3vh;
+    }
+    h2 {
+        font-size: 2.66vh;
+    }
+    h3 {
+        font-size: 2.33vh;
+    }
+    h4 {
+        font-size: 2vh;
+    }
+}

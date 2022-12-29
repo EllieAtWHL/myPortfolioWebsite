@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" type="image/jpg" href="../img/favicon.jpg"/>
+        <title>Fantasy Football Draft</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css">
+        <script src="../scripts/templateScript.js"></script>
+        <script src="script.js" type="module"></script>
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-4MLSWNR391');
+        </script>
+    </head>
+    <body id="body">
+        <div class="content" id="content">
+            <div class="scrollable" id="scrollable">
+                <div>
+                    <h1>Fantasy Football Draft Application</h1>
+                </div>
+                <div class="blog">
+                    <p>
+                        In 2012, my husband started a Fantasy Football League - <a href="https://www47.myfantasyleague.com/2022/home/24311#0" target="_blank">The Golden Helmet League</a> - of which he is the commissioner
+                    </p>
+                    <p>
+                        As we needed to draft our teams, we needed a way to capture the draft as it happened. My husband searched for a suitable solution but was unable to find one that met his needs. Since I had some technical skills and had previously written VBA code for Excel, he asked me to create a draft board for our use. I built the board using Excel and it served us well for the first year and the next eight years, although it had some limitations. Overall, it was an effective solution that allowed us to quickly capture the draft as it happened.
+                    </p>
+                    <p>
+                        With the additional free time I had in 2020 due to the reduced social activities due to the pandemic, I decided to utilise my skills as an experienced Salesforce developer to rebuild the draft application within Salesforce. Here is the story of my journey in doing so.
+                    </p>
+                    <p>
+                        <i>Please note that the following code is not intended for production use. It was developed quickly and has undergone some updates since its initial creation. In the interest of speed, certain shortcuts were taken and best practices may not have always been followed.</i>
+                    </p>
+
+                    <section>
+                        <h3>
+                            Building the data model
+                        </h3>
+                        <p>
+                            During the development process, I experimented with several different data models for the draft application. Initially, I considered using the built-in Account object to represent teams and the Contact object to represent players. However, for the final version, I decided to create custom objects for these entities to ensure that the application could be easily imported into any Salesforce organization without causing conflicts with any existing setup. In terms of managing the draft data, I ultimately chose a simple, flat structure and relied on Apex and JavaScript to handle the complex logic of organizing the picks into rounds and determining which team had each pick. This approach resulted in the creation of four custom objects to store the data.
+                        </p>
+                        <table>
+                            <tr>
+                                <td class="half-width">
+                                    <h4>NFL Team <code class="code">NFL_Team__c</code></h4>
+                                </td>
+                                <td class="half-width"><h4>Player <code class="code">Player__c</code></h4></td>
+                            </tr>
+                            <tr>
+                                <td class="half-width">
+                                    I created this object to efficiently store the team and bye week information for each player without having to repeat it for each player individually. This information can be obtained through the My Fantasy League API.
+                                </td>
+                                <td class="half-width">
+                                    In order to ensure that all players listed in the My Fantasy League database were available for selection during the draft, I needed to create a player record for each of them. If a player did not have a corresponding record, it meant they were not listed in the My Fantasy League database and could not be drafted. As with the team and bye week information, this data was obtained through the My Fantasy League API.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="half-width"><h4>Team Owner <code class="code">Team_Owner__c</code></h4></td>
+                                <td class="half-width"><h4>Pick <code class="code">Pick__c</code></h4></td>
+                            </tr>
+                            <tr>
+                                <td class="half-width">
+                                    In order to transmit the final draft results to My Fantasy League, I needed to store information about which players were drafted by which teams, as well as the team's logo URL. This data was importable through the My Fantasy League API.
+                                </td>
+                                <td class="half-width">
+                                    During the draft, these records were dynamically created when each pick was made. The record would reference the player who was drafted and the player's team, which was determined by looking up the franchise owner associated with the pick. This allowed us to track which players were drafted by which teams.
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p>Below is the final data model I went with.</p>
+
+                        <div id="image-container" class="image-container">
+                            <img id="image" src="./images/GHLdataModel.png">
+                            <svg id="icon" class="icon" xmlns="http://www.w3.org/2000/svg" 
+                                height="40" 
+                                width="40">
+                                <path d="M8.333 31.667v-10h2.792v7.208h7.208v2.792Zm20.542-13.334v-7.208h-7.208V8.333h10v10Z"/>
+                            </svg>
+                        </div>
+                            
+                    </section>
+
+                    <section>
+                        <h3>
+                            Setting up the APIs
+                        </h3>
+                        <p>
+                            With the data model in place, my next task was to set up the API calls to My Fantasy League to retrieve the necessary data and populate the records. While I won't go into detail about each individual API, I will mention that I used the following five exports to gather the data. (You can find more information about these exports in the <a href="https://www03.myfantasyleague.com/2022/api_info?L=" target="_blank">My Fantasy League documentation</a>.)
+                        </p>
+                        <ul>
+                            <li>nflByeWeeks</li>
+                            <li>players</li>
+                            <li>adp</li>
+                            <li>playerRanks</li>
+                            <li>league</li>
+                        </ul>
+                        <p>
+                            Since the API callouts were essentially the same except for the URL, I created a single method to handle the callouts and passed the URL as an argument. To avoid hardcoding values such as the base URL, I stored them in Custom Settings (GHL__c).
+                        </p>
+                        <p>
+                            I divided the exports into three groups and created separate classes to manage the responses and upsert the relevant records in Salesforce:
+                        </p>
+                        <ul>
+                            <li>The Bye Weeks (MFLManageByeWeeks) class served two purposes: it provided information about the bye weeks for each team, and it also allowed me to capture all of the NFL teams and upsert them as NFL_Team__c records in Salesforce.</li>
+                            <li>The Players (MFLManagePlayers) class handled the players, adp, and playerRanks callouts and was responsible for upserting the related Player__c records in Salesforce.</li>
+                            <li>The Owners (MFLManageOwners) class gathered information about the franchises and owners in the league and was responsible for upserting the corresponding Team_Owner__c records in Salesforce.</li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <h3>
+                            Building the draft board front end
+                        </h3>
+                        <p>
+                            This is the central component of the draft application. Initially, the draft was controlled from a single page that required login and was intended to be shared via screen sharing with virtual attendees. However, in a later iteration, I transformed it into a read-only view of the draft that was publicly accessible to anyone in the league, allowing them to follow the draft in real-time from any location. The page was dynamically updated whenever a pick was made using the new Commissioner page.
+                        </p>
+                        <p>
+                            To begin with, I needed to determine the number of teams in the draft and the number of rounds. Obtaining the number of teams was a straightforward query to retrieve the number of Team_Owner__c records. The number of rounds is currently hard-coded, but it would be ideal to store it in the GHL__c custom settings so that it can be easily modified. With the number of teams and rounds, I was able to create the structure of the draft board.
+                        </p>
+                        <p>
+                            Since this is a read-only view of the draft board that does not require user input, we need it to automatically update when the commissioner submits a pick. In a normal scenario, platform events would be the ideal solution and we could use empApi to subscribe to them. However, since we want to make this page publicly available through a community, we cannot use empApi, as it is not compatible with communities. Instead, I used cometD to subscribe to the platform event. This presented a problem because guest users viewing the page do not have a session ID to access Salesforce through the API. To work around this issue, I used a hack to temporarily use my own credentials (stored in Custom Settings) to obtain a session ID. While this is not a secure solution, it was acceptable for my purposes. In a real-life scenario, it would not be recommended.
+                        </p>
+                        <p>
+                            In summary, the draft board component simply listens for an event and refreshes the data when it is received.
+                        </p>
+                        <video controls>
+                            <source src="videos/GHLDraft_watermarked.mkv" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                    </section>
+
+                    <section>
+                        <h3>
+                            Building the commissioner control panel
+                        </h3>
+                        <p>
+                            The commissioner controller panel is the more complex part of the application, as it allows the commissioner to make, delete, and upload picks. This panel is essential for ensuring that the draft process runs smoothly and that the picks are immediately available for viewing by the rest of the league.
+                        </p> 
+                        <p>
+                            The draft template was constructed in a similar manner for the commissioner view, but it was displayed differently on the screen to suit the commissioner's needs. The commissioner needed three input options: make pick, delete pick, and upload to website. 
+                        </p>  
+                        <h4>Pick</h4>
+                        <p>
+                            The Pick button displays a modal that the commissioner can use to search for the player chosen by the current owner. This screen only shows players who are still available to prevent duplicate selections. The list of available players is filtered by including a lookup to the Team Owner for each player when they are picked. The query to return the players to display simply uses a filter to return only players whose Team Owner field is empty.
+                        </p>           
+                        <p>
+                            Once the pick is confirmed, we invoke an Apex class that creates the Pick record and updates the lookup field on the Player record to reference the current Team Owner. The Apex class also publishes a platform event that updates the draft board.
+                        </p>
+                        <h4>Delete</h4>
+                        <p>
+                            The Delete button removes the most recent Pick record (which has a flow triggered on delete that also clears the Team Owner field on the associated Player record, making the player available for selection again). As with the Pick button, a platform event is published to update the draft board with the removal of the pick.
+                        </p>              
+                        <h4>Upload</h4> 
+                        <p>
+                            The Upload button is only enabled once all the picks have been made, at which point it transmits the picks to My Fantasy League through their API.
+                        </p>             
+                        <video controls>
+                            <source src="videos/GHLController_watermarked.mkv" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                    </section>
+                    
+                    <section>
+                        <h3>
+                            Setting up the community pages
+                        </h3>
+                        <p>
+                            With all of the components in place, I created a Digital Experience (formerly known as a Community) and added the read-only view of the board to the Home page, making it publicly accessible. The Commissioner Panel was added to a separate page that required login to access. This completed the development of the draft application.
+                        </p>
+                        <p>
+                            <a href="https://goldenhelmet2-dev-ed.my.site.com/draft/s/" target="_blank">Final View of Draft</a>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3>
+                            Final touches
+                        </h3>
+                        <p>
+                            With the remaining time before the draft, I added a few extra features to the application. One of these was a control panel within Salesforce that could be used to update the team and player listings from My Fantasy League to ensure that we had the most current information. I created buttons that called the existing Apex classes that performed the exports to accomplish this.
+                        </p>
+                        
+
+                        <div id="image-container2" class="image-container">
+                            <img id="image" src="./images/GHLControlPanel.png">
+                            <svg id="icon" class="icon" xmlns="http://www.w3.org/2000/svg" 
+                                height="40" 
+                                width="40">
+                                <path d="M8.333 31.667v-10h2.792v7.208h7.208v2.792Zm20.542-13.334v-7.208h-7.208V8.333h10v10Z"/>
+                            </svg>
+                        </div>
+                    </section>
+
+                    <section>
+                        <p>
+                            Source code can be found in <a href="https://github.com/EllieAtWHL/GoldenHelmetLeague" target="_blank">my Github repository</a>
+                        </p>
+                        <p>
+                            <i>Please keep in mind that this code is not intended for production use, but rather served as an interesting project to practice my architecture skills while also creating a functional tool.</i>
+                        </p>
+
+                    </section>
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

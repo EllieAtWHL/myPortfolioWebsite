@@ -1,0 +1,29 @@
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    --width: 100%;
+    --height: 100%;
+    background-color: var(--pale-green);
+    margin: 1% auto;
+    padding: 5px;
+    border: 1px solid var(--third-colour);
+    border-radius: 10px;
+    width: var(--width);
+    height: var(--height);
+}
+
+.close {
+    color: var(--dark-green);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
