@@ -155,9 +155,9 @@
                         <p>
                             Once the pick is confirmed, we invoke an Apex class that creates the Pick record and updates the lookup field on the Player record to reference the current Team Owner. The Apex class also publishes a platform event that updates the draft board.
                         </p>
-                        <h4>Delete</h4>
+                        <h4>Undo</h4>
                         <p>
-                            The Delete button removes the most recent Pick record (which has a flow triggered on delete that also clears the Team Owner field on the associated Player record, making the player available for selection again). As with the Pick button, a platform event is published to update the draft board with the removal of the pick.
+                            The Undo button removes the most recent Pick record (which has a flow triggered on delete that also clears the Team Owner field on the associated Player record, making the player available for selection again). As with the Pick button, a platform event is published to update the draft board with the removal of the pick.
                         </p>              
                         <h4>Upload</h4> 
                         <p>
