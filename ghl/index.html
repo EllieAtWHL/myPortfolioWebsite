@@ -3,8 +3,27 @@
     <head>
         <meta charset="utf-8">
         <link rel="shortcut icon" type="image/jpg" href="../img/favicon.jpg"/>
-        <title>Fantasy Football Draft</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Primary Meta Tags -->
+        <title>Fantasy Football Draft</title>
+        <meta name="title" content="EllieAtWHL - Fantasy Football Draft Application">
+        <meta name="description" content="How I used Salesforce to create a draft applcation for our Fantasy Football league">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://ellieatwhl.co.uk/ghl">
+        <meta property="og:title" content="EllieAtWHL - Fantasy Football Draft Application">
+        <meta property="og:description" content="How I used Salesforce to create a draft applcation for our Fantasy Football league">
+        <meta property="og:image" content="favicon.ico">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://ellieatwhl.co.uk/ghl">
+        <meta property="twitter:title" content="EllieAtWHL - Fantasy Football Draft Application">
+        <meta property="twitter:description" content="THow I used Salesforce to create a draft applcation for our Fantasy Football league">
+        <meta property="twitter:image" content="favicon.ico">
+
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="style.css">
@@ -155,9 +174,9 @@
                         <p>
                             Once the pick is confirmed, we invoke an Apex class that creates the Pick record and updates the lookup field on the Player record to reference the current Team Owner. The Apex class also publishes a platform event that updates the draft board.
                         </p>
-                        <h4>Delete</h4>
+                        <h4>Undo</h4>
                         <p>
-                            The Delete button removes the most recent Pick record (which has a flow triggered on delete that also clears the Team Owner field on the associated Player record, making the player available for selection again). As with the Pick button, a platform event is published to update the draft board with the removal of the pick.
+                            The Undo button removes the most recent Pick record (which has a flow triggered on delete that also clears the Team Owner field on the associated Player record, making the player available for selection again). As with the Pick button, a platform event is published to update the draft board with the removal of the pick.
                         </p>              
                         <h4>Upload</h4> 
                         <p>
