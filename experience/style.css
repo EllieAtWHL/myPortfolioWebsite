@@ -60,6 +60,14 @@ h1 {
 /* Create an active/current tablink class */
 .tab button.active {
     opacity: 1;
+    background-color: var(--dark-green);
+    color: var(--pale-green);
+}
+
+.dark .tab button.active {
+    opacity: 1;
+    background-color: var(--dark-green);
+    color: var(--pale-green);
 }
 
 /* Style the tab content */
