@@ -151,7 +151,8 @@ function createFooter(){
         }else {
             currentMode = 'light'
         }
-        setColorScheme(currentMode)}
+        setColorScheme(currentMode)
+        updateURLParameter(currentMode)}
     darkModeSpan = document.createElement('span')
     darkModeSpan.className = 'slider round'
     darkModeP = document.createElement('p')
@@ -198,6 +199,14 @@ function setColorScheme(scheme) {
     }
 }
 
+function updateURLParameter(scheme) {
+    let searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("mode", scheme);
+    const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+    history.pushState(null, '', newRelativePathQuery);
+}
+
+
 function getPreferredColorScheme() {
     if(currentMode){
         return currentMode
@@ -219,5 +228,6 @@ function handleDarkMode(){
     }else {
         currentMode = 'light'
     }
-    setColorScheme(currentMode)
+    setColorScheme(currentMode);
+    updateURLParameter(currentMode);
 }
