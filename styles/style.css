@@ -175,17 +175,28 @@ h1.slideDown {
     animation-fill-mode: forwards;
 }
 
+.fadeIn {
+    opacity: 0%;
+    animation: fade-in 2s;
+    animation-delay: 6s;
+    animation-fill-mode: forwards;
+}
+
 @keyframes slide-left {
-    from    { transform: translateX(-100%);}
-    to      { transform: translateX(0);}
+    from    { transform: translateX(-100%); }
+    to      { transform: translateX(0); }
 }
 @keyframes slide-right {
-    from    { opacity: 100%; transform: translateX(100%);}
-    to      { opacity: 100%; transform: translateX(0);}
+    from    { opacity: 100%; transform: translateX(100%);} 
+    to      { opacity: 100%; transform: translateX(0); }
 }
 @keyframes slide-down {
-    from    { opacity: 100%; transform: translateY(150%);}
-    to      { opacity: 100%; transform: translateY(0);}
+    from    { opacity: 100%; transform: translateY(150%); }
+    to      { opacity: 100%; transform: translateY(0); }
+}
+@keyframes fade-in {
+    from    { opacity: 0%; }
+    to      { opacity: 100%; }
 }
 
 .findMe ul {
@@ -316,6 +327,7 @@ button:focus,
 }
 
 .contactMe {
+    padding-top: 70px;
     width: 100%;
 }
 #contactMeButton {
@@ -372,6 +384,10 @@ button:focus,
 }
 
 @media (max-width: 600px) {
+    .wrapper {
+        min-height: 95vh;
+    }
+
     .navbar {
         flex-direction: column;
         align-items: flex-start;
