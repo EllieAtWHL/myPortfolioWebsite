@@ -101,6 +101,12 @@
     transition: 0.8s ease;
 }
 
+.links {
+    min-height: 100%;
+    height: fit-content;
+    z-index: 100;
+}
+
 .links li {
     list-style: none;
 }
@@ -166,17 +172,13 @@ a:hover {
         transition: 0.8s ease;
     }
 
-    /* .links {
-        top: 20%;
-        height: 81%
-    } */
-
     .card:hover .card-desc, .links {
         opacity: 1;
         width: 100%;
     }
 
     .card:hover .card-desc, .links {
-        height: 70%;
+        min-height: 70%;
+        height: fit-content;
     }
 }
