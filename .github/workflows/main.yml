@@ -15,4 +15,3 @@ jobs:
         username: ${{ secrets.username }}
         password: ${{ secrets.password }}
         server-dir:  ${{ secrets.root_folder }}
-        dry-run: true
