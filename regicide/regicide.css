@@ -6,7 +6,7 @@
 }
 
 :root {
-    --gap-width: 0.25vw;
+    --gap-width: 0.25dvw;
     --gap-height: .15em;
     --corner-position: 0.1em;
 
@@ -55,7 +55,7 @@ h1, h3, h4 {
 
 .play-area {
     display: none;
-    width: min(94vw, 700px);
+    width: min(94dvw, 700px);
     grid-template-rows: repeat(4, auto);
     gap: var(--gap-width);
     justify-content: center;
@@ -91,11 +91,11 @@ svg.stats-icon:hover {
 .container {
     padding-top: var(--gap-height);
     display: grid;
-    grid-template-columns: repeat(8, min(11.25vw, 85px));
+    grid-template-columns: repeat(8, min(11.25dvw, 85px));
     gap: calc(var(--gap-width) * 2);
     justify-content: center;
     align-content: center;
-    width: 90vw;
+    width: 90dvw;
     max-width: 680px;
 }
 
@@ -113,7 +113,7 @@ svg.stats-icon:hover {
 .deck, .card-slot {
     aspect-ratio: 9 / 14;
     min-height: 60px;
-    max-height: 15vh;
+    max-height: 15dvh;
     display: flex;
     text-align: center;
     justify-content: center;
@@ -206,7 +206,7 @@ button:disabled {
     border: 1px solid black;
     border-radius: .5rem;
     position: relative;
-    font-size: min(7vw, 70px);
+    font-size: min(7dvw, 70px);
     background-color: white;
     display: grid;
     grid-template-columns: repeat(3, .5fr);
@@ -454,9 +454,9 @@ button:disabled {
 /* TODO: Make more mobile friendly */
 @media (max-width: 600px) {
   .container {
-    grid-template-columns: repeat(8, min(20vw, 40px));
+    grid-template-columns: repeat(8, min(20dvw, 40px));
     gap: calc(var(--gap-width) * 3);
-    height: min(22vh, 200px);
+    height: min(22dvh, 200px);
     max-width: 580px;
   }
 
@@ -481,11 +481,11 @@ button:disabled {
   }
 
   .modal-content {
-    width: 80vw;
+    width: 80dvw;
   }
 
   #modal-button {
-    width: 60vw;
+    width: 60dvw;
   }
 
 }

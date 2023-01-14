@@ -23,7 +23,7 @@ h4 {
 }
 
 .scrollable img {
-    height: 50vh;
+    height: 50dvh;
 }
 
 .blog {
@@ -50,8 +50,8 @@ h4 {
 }
 
 .image-container #image {
-    max-width: 80vw;
-    max-height: 40vh;
+    max-width: 80dvw;
+    max-height: 40dvh;
 }
 
 .image-container:hover #image {
@@ -73,8 +73,8 @@ h4 {
 }
 
 #imageCopy {
-    max-width: 80vw;
-    max-height: 80vh;
+    max-width: 80dvw;
+    max-height: 80dvh;
     height: auto;
     width: 100%;
 }
@@ -88,15 +88,15 @@ video {
 
 @media (max-width: 600px) {
     h1 {
-        font-size: 3vh;
+        font-size: 3dvh;
     }
     h2 {
-        font-size: 2.66vh;
+        font-size: 2.66dvh;
     }
     h3 {
-        font-size: 2.33vh;
+        font-size: 2.33dvh;
     }
     h4 {
-        font-size: 2vh;
+        font-size: 2dvh;
     }
 }

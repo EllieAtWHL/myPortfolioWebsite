@@ -32,7 +32,7 @@ body {
 .wrapper {
     margin: 0;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100dvh;
     display: table;
 }
 
@@ -56,7 +56,7 @@ body {
 }
 
 .brand-title img {
-    width: 10vw;
+    width: 10dvw;
     min-width: 75px;
     padding-top: 10px;
 }
@@ -83,7 +83,7 @@ body {
 .navbar-links li a {
     display: block;
     text-decoration: none;
-    font-size: 3vh;
+    font-size: 3dvh;
     color: var(--pale-green);
     padding: 1rem;
 }
@@ -384,9 +384,6 @@ button:focus,
 }
 
 @media (max-width: 600px) {
-    .wrapper {
-        min-height: 95vh;
-    }
 
     .navbar {
         flex-direction: column;

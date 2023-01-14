@@ -33,10 +33,10 @@
     transform: translateX(-110%);
 }
 .toast-container[data-position="top-centre"] .toast{
-    transform: translateY(-100vh);
+    transform: translateY(-100dvh);
 }
 .toast-container[data-position="bottom-centre"] .toast{
-    transform: translateY(100vh);
+    transform: translateY(100dvh);
 }
 .toast-container .toast.show {
     transform: translateX(0);
@@ -65,7 +65,7 @@
 .toast-container{
     position: fixed;
     margin: 10px;
-    width: 33vw;
+    width: 33dvw;
     display: flex;
     flex-direction: column;
     gap: .5rem;
