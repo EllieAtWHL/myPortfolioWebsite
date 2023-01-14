@@ -385,8 +385,7 @@ button:focus,
 
 @media (max-width: 600px) {
     .wrapper {
-        position: fixed; 
-        top: 0; bottom: 0;
+        min-height: -webkit-fill-available;
     }
 
     .navbar {
