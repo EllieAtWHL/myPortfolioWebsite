@@ -385,9 +385,7 @@ button:focus,
 
 @media (max-width: 600px) {
     .wrapper {
-        min-height: 100vh;
-        margin-top: 0;
-        margin-bottom: 0;
+        min-height: calc(100vh - calc(100vh - 100%))
     }
 
     .navbar {
