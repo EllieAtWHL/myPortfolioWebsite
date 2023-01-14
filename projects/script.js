@@ -1,10 +1,12 @@
 const lightningLink = document.getElementById('lightning');
 const ghlLink = document.getElementById('ghl');
 const regicideLink = document.getElementById('regicide');
+const londonLink = document.getElementById('london-2012');
 
 lightningLink.addEventListener('click', () => {window.location='../lightning-rollout/part-1.html?mode='+currentMode})
 ghlLink.addEventListener('click', () => {window.location='../ghl/index.html?mode='+currentMode})
 regicideLink.addEventListener('click', () => {window.location='../regicide/index.html?mode='+currentMode})
+londonLink.addEventListener('click', () => {window.location='../london-2012/it-begins.html?mode='+currentMode})
 
 function getPreference() {
     const params = new URLSearchParams(window.location.search)

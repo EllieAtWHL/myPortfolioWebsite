@@ -18,8 +18,28 @@
     --text-font-size: 14px;
 }
 
+h2, p {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
 h4 {
-    margin: 2px;
+    margin: 0.125em;
+}
+
+.date, .note {
+    font-style: italic;
+}
+
+.date img {
+    width: 10dvw;
+    height: auto !important;
+    float: right;
+}
+
+.note {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 }
 
 .scrollable img {
@@ -27,14 +47,22 @@ h4 {
 }
 
 .blog {
-    margin: 1.5em;
+    margin: 2.5%;
+    width: 70%;
+    float: left;
 }
 
-.half-width {
-    width: 50%;
-    padding: 5px;
-    vertical-align: top;
+.sidebar {
+    width: 25%;
+    right: 0;
+    float: right;
+    position: fixed;
 }
+
+.sidebar li {
+    list-style: none;
+}
+
 
 @media (max-width: 600px) {
     h1 {
