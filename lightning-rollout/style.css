@@ -23,7 +23,7 @@
 }
 
 .scrollable img, iframe {
-    width: 80vw;
+    width: 80dvw;
     aspect-ratio: 16 / 9;
     margin: 0 8%;
 }
@@ -38,15 +38,15 @@ ul img {
 
 @media (max-width: 600px) {
     h1 {
-        font-size: 3vh;
+        font-size: 3dvh;
     }
     h2 {
-        font-size: 2.66vh;
+        font-size: 2.66dvh;
     }
     h3 {
-        font-size: 2.33vh;
+        font-size: 2.33dvh;
     }
     h4 {
-        font-size: 2vh;
+        font-size: 2dvh;
     }
 }
