@@ -24,7 +24,7 @@
         <meta property="twitter:description" content="Trailblazing Salesforce Developer & Supermum Mentor">
         <meta property="twitter:image" content="favicon.ico">
 
-        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js" defer></script>
         <script>
             function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
         </script>
@@ -34,7 +34,7 @@
         <script src="../scripts/templateScript.js" defer></script>
 
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391" async></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
