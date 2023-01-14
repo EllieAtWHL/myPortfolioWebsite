@@ -32,7 +32,7 @@ body {
 .wrapper {
     margin: 0;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100dvh;
     display: table;
 }
 
@@ -384,9 +384,6 @@ button:focus,
 }
 
 @media (max-width: 600px) {
-    .wrapper {
-        min-height: -webkit-fill-available;
-    }
 
     .navbar {
         flex-direction: column;
