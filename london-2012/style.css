@@ -30,6 +30,13 @@ h4 {
 .date, .note {
     font-style: italic;
 }
+
+.date img {
+    width: 10dvw;
+    height: auto !important;
+    float: right;
+}
+
 .note {
     margin-left: 0.5em;
     margin-right: 0.5em;
