@@ -1,4 +1,4 @@
-import Modal from "../scripts/modal.js"
+import Modal from "./modal.js"
 
 let imageElement = document.getElementById('image-container')
 imageElement.addEventListener('click', expandImage)

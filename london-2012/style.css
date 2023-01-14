@@ -18,30 +18,56 @@
     --text-font-size: 14px;
 }
 
+h2, p {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
 h4 {
-    margin: 2px;
+    margin: 0.125em;
+}
+
+.date, .note {
+    font-style: italic;
+}
+.note {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 }
 
 .scrollable img {
-    height: 50vh;
+    height: 50dvh;
 }
 
 .blog {
-    margin: 1.5em;
+    margin: 2.5%;
+    width: 70%;
+    float: left;
+}
+
+.sidebar {
+    width: 25%;
+    right: 0;
+    float: right;
+    position: fixed;
+}
+
+.sidebar li {
+    list-style: none;
 }
 
 
 @media (max-width: 600px) {
     h1 {
-        font-size: 3vh;
+        font-size: 3dvh;
     }
     h2 {
-        font-size: 2.66vh;
+        font-size: 2.66dvh;
     }
     h3 {
-        font-size: 2.33vh;
+        font-size: 2.33dvh;
     }
     h4 {
-        font-size: 2vh;
+        font-size: 2dvh;
     }
 }
