@@ -46,25 +46,58 @@ h4 {
     height: 50dvh;
 }
 
+.banner {
+    height: auto !important;
+    width: 100%;
+}
+
+.centre {
+    width: 80%;
+    margin: auto;
+}
+
+.centre li {
+    list-style: none;
+}
+
 .blog {
     margin: 2.5%;
     width: 70%;
-    float: left;
+    float: right;
 }
 
 .sidebar {
-    width: 25%;
-    right: 0;
-    float: right;
+    height: 100%;
+    width: 23%;
+    margin: 0 1%;
+    left: 0;
+    float: left;
     position: fixed;
+    border-right: 1px solid var(--pale-green);
+    padding-right: 10px;
+}
+
+.sidebar ul {
+    padding: 0   ;
 }
 
 .sidebar li {
     list-style: none;
 }
 
+.content {
+    background-color: var(--pale-green);
+}
 
-@media (max-width: 600px) {
+.dark .content {
+    background-color: var(--third-colour);
+}
+
+.image-container:has(blockquote){
+    width: 100%;
+}
+
+@media (max-width: 720px) {
     h1 {
         font-size: 3dvh;
     }
@@ -77,4 +110,17 @@ h4 {
     h4 {
         font-size: 2dvh;
     }
+    
+    .blog {
+        width: 95%;
+    }
+    .sidebar {
+        border: none;
+        padding: 5px;
+        width: 90%;
+        height: auto;
+        position: relative;
+        float: none;
+    }
+    
 }

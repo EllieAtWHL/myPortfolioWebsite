@@ -12,14 +12,14 @@
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://ellieatwhl.co.uk/london-2012/">
+        <meta property="og:url" content="https://ellieatwhl.co.uk/london-2012/it-begins.html">
         <meta property="og:title" content="EllieAtWHL - My Olympic Journey">
         <meta property="og:description" content="The journey of a volunteer performer at the Olympic Ceremonies">
         <meta property="og:image" content="https://ellieatwhl.co.uk/london-2012/img/Application.jpg">
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://ellieatwhl.co.uk/london-2012/">
+        <meta property="twitter:url" content="https://ellieatwhl.co.uk/london-2012/it-begins.html">
         <meta property="twitter:title" content="EllieAtWHL  - My Olympic Journey">
         <meta property="twitter:description" content="The journey of a volunteer performer at the Olympic Ceremonies">
         <meta property="twitter:image" content="https://ellieatwhl.co.uk/london-2012/img/Application.jpg">
@@ -28,8 +28,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="style.css">
-        <script src="../scripts/CustomElements.js" dfer></script>
+        <script src="../scripts/CustomElements.js" type="module"></script>
         <script src="../scripts/images.js" type="module"></script>
+        <script src="./scripts/Posts.js" type="module"></script>
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391"></script>
@@ -41,23 +42,43 @@
         </script>
     </head>
     <body id="body">
+
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v15.0" nonce="r5Qvjzl2"></script>
+
         <div class="wrapper" id="wrapper">
             <ellieatwhl-header></ellieatwhl-header>
             <div class="content" id="content">
                 <div class="scrollable" id="scrollable">
-                    <header>
-                        <h1>My Olympic Journey</h1>
-                        <p>The journey of a volunteer performer at the Olympic Ceremonies</p>
-                        <p class="note">Originally posted on <a href="https://ellieatwhl.wordpress.com/" target="_blank">my Wordpress</a></p>
-                    </header>
+                    <section class="sidebar">
+                        <ellieatwhl-blogsidebar></ellieatwhl-blogsidebar>
+                    </section>
                     <section class="blog">
                         <p class="date">
-                            15th August 2011
-                            <img src="./img/2011-08-15.png"></p>
+                            16th August 2011
+                            <img src="./img/2011-08-16.png"></p>
                         </p>
                         <h2>It Begins...</h2>
-                        <p>LOCOG (the London Organizing Committee of the Olympic and Paralympic Games) released a press release announcing that they were seeking volunteer performers for the London 2012 Olympic Ceremonies. Initially, I was hesitant to apply, despite posting on Facebook how I was tempted to, but after some contemplation, I decided that it couldn't hurt to try. I completed the application, but to be honest, I didn't believe that I had much of a chance of being selected. However, I knew that the Olympics would be a significant part of my life regardless of where I was in the summer of 2012, so I figured it was worth a shot.</p>
-                        <div id="image-container" class="image-container">
+                        <p>
+                            People often ask me how I got involved in the Olympic Ceremonies. In all honesty, I don't remember the exact moment, but this is what I do know...
+                        </p>
+                        <br>
+                        <p>
+                            Even before applying, I was obsessed with the Olympics. I spent way too much time during maternity leave taking to the internet for any leads I could on how to get my hands on some tickets. I had already been in communication with a group of Twitter users, that I soon become part of, now known as "the 2012 Tweeps". A year before the ceremony, and before I even applied, I posted how excited I was - a whole year out!
+                        </p>
+                        <div class="fb-post image-container" data-href="https://www.facebook.com/EllieAtWHL/posts/pfbid0eB7WmmCmUTNzWV52M3T261fQv7z6XYhEEsJo5QQKVmqPqoCEvHVg6mJTXVbsGbKal" data-width="" data-show-text="true">
+                            <blockquote cite="https://www.facebook.com/EllieAtWHL/posts/10150248785302898" class="fb-xfbml-parse-ignore"><p>One year to go until the opening ceremony, I know some people are already bored of all the hype, but I don&#039;t think I ever will.</p>Posted by <a href="#" role="button">Eleanor Matthewman</a> on&nbsp;<a href="https://www.facebook.com/EllieAtWHL/posts/10150248785302898">Wednesday, 27 July 2011</a></blockquote>
+                        </div>
+                        <p>
+                            As I said, I don't remember exactly how I came acroos it, but I suspect there was a link on one of the many email newsletters that I'd signed up to, looking for volunteers for the ceremonies, and on seeing the advert, I posted on Facebook how I was "tempted to apply".
+                        </p>
+                        <div class="fb-post image-container" data-href="https://www.facebook.com/EllieAtWHL/posts/143085205779616" data-width="" data-show-text="true">
+                            <blockquote cite="https://www.facebook.com/EllieAtWHL/posts/143085205779616" class="fb-xfbml-parse-ignore"><p>So tempted to apply!</p>Posted by <a href="#" role="button">Eleanor Matthewman</a> on&nbsp;<a href="https://www.facebook.com/EllieAtWHL/posts/143085205779616">Tuesday, 16 August 2011</a></blockquote>
+                        </div>
+                        <p>
+                            Apply I did, and from what I remember, I didn't really think much of it, but that is where my official journey to become "part of the cultural record of London" began...
+                        </p>
+                        <div class="image-container">
                             <img id="image" src="img/Application.jpg">
                             <svg id="icon" class="icon" xmlns="http://www.w3.org/2000/svg" 
                                 height="40" 
@@ -66,20 +87,9 @@
                             </svg>
                         </div>
                     </section>
-                    <section class="sidebar">
-                        <li>It Begins...</li>
-                        <!-- <li><a href="./an-invitation-to-audition.html">An Invitation to Audition</a></li>
-                        <li><a>My First Audition</a></li>
-                        <li><a>Drumming Audition?!?</a></li>
-                        <li><a>The Decision Arrives</a></li>
-                        <li><a>My First Rehearsal</a></li>
-                        <li><a>1000 Drummers</a></li>
-                        <li><a>Costume Fitting</a></li> -->
-                    </section>
                 </div>
             </div>
             <ellieatwhl-footer></ellieatwhl-footer>
         </div>
-        
     </body>
 </html>
