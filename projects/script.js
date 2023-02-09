@@ -1,22 +1,3 @@
-const lightningLink = document.getElementById('lightning');
-const ghlLink = document.getElementById('ghl');
-const regicideLink = document.getElementById('regicide');
-
-lightningLink.addEventListener('click', () => {window.location='../lightning-rollout/part-1.html?mode='+currentMode})
-ghlLink.addEventListener('click', () => {window.location='../ghl/index.html?mode='+currentMode})
-regicideLink.addEventListener('click', () => {window.location='../regicide/index.html?mode='+currentMode})
-
-function getPreference() {
-    const params = new URLSearchParams(window.location.search)
-    if(params.has('mode')){
-        currentMode = params.get('mode')
-    }
-    if(window.matchMedia){
-        var colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)')
-        colorSchemeQuery.addEventListener('change', setColorScheme(getPreferredColorScheme()))
-    }
-}
-
 const buttonElements = document.querySelectorAll('.card')
 
 buttonElements.forEach(buttonElement => {
@@ -58,33 +39,4 @@ function handleClick(event){
 
         prevSibling = prevSibling.previousElementSibling;
     }
-}
-
-function setColorScheme(scheme) {  
-    const element = document.getElementById('body')  
-    switch(scheme){
-        case 'dark':  
-            element.classList.add("dark")
-        break
-        case 'light':           
-            element.className = ""
-        break
-        default:          
-            element.className = ""
-        break
-    }
-}
-
-function getPreferredColorScheme() {
-    if(currentMode){
-        return currentMode
-    }
-    if (window.matchMedia) {
-        if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-            currentMode = 'dark'
-        } else {
-            currentMode = 'light'
-        }
-    }
-    return currentMode
 }
