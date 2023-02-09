@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="style.css">
-        <script src="../scripts/templateScript.js"></script>
+        <script src="../scripts/CustomElements.js" defer></script>
         <script src="script.js" defer></script>
 
         <!-- Google tag (gtag.js) -->
@@ -39,7 +39,9 @@
         </script>
     </head>
     <body id="body">
-        <div class="content" id="content">
+        <div class="wrapper" id="wrapper">
+            <ellieatwhl-header></ellieatwhl-header>
+            <div class="content" id="content">
             <div class="scrollable">
                 <h1 class="title">Projects</h1>
 
@@ -49,8 +51,8 @@
                         <img src="salesforce.png" alt="Salesforce">
                         <p class="card-desc">Click to see a view a list of Salesforce projects.</p>
                         <ul class="links closed">
-                            <a href="#" id="lightning"><li>Lightning Rollout</li></a>
-                            <a href="#" id="ghl"><li>Fantasy Football Draft Application</li></a>
+                            <a href="../lightning-rollout/part-1.html" id="lightning"><li>Lightning Rollout</li></a>
+                            <a href="../ghl" id="ghl"><li>Fantasy Football Draft Application</li></a>
                             <a href="https://www.youtube.com/watch?v=CfDqOJrnVmc" target="_blank"><li>Quick Tips: Access Popular Items in a Single Click</li></a>
                             <a href="https://www.youtube.com/watch?v=GWoZodkICew" target="_blank"><li>Quick Tips: Make Key Information Easier to Find</li></a>
                         </ul>
@@ -61,7 +63,7 @@
                         <img src="games.png" alt="Games" >
                         <p class="card-desc">Click to see a view a list of games.</p> 
                         <ul class="links closed">
-                            <a href="#" id="regicide"><li>Regicide</li></a>
+                            <a href="../regicide" id="regicide"><li>Regicide</li></a>
                         </ul>                   
                     </div>
 
@@ -78,5 +80,8 @@
                 </div>
             </div>
         </div>
+            <ellieatwhl-footer></ellieatwhl-footer>
+        </div>
+        
     </body>
 </html>
