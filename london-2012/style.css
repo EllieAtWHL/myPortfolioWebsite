@@ -62,11 +62,18 @@ h4 {
 
 .blog {
     margin: 2.5%;
+    height: 100%;
     width: 70%;
+    float: right;
     float: right;
 }
 
 .sidebar {
+    height: 100%;
+    width: 23%;
+    margin: 0 1%;
+    left: 0;
+    float: left;
     height: 100%;
     width: 23%;
     margin: 0 1%;
@@ -96,7 +103,19 @@ h4 {
 .image-container:has(blockquote){
     width: 100%;
 }
+.content {
+    background-color: var(--pale-green);
+}
 
+.dark .content {
+    background-color: var(--third-colour);
+}
+
+.image-container:has(blockquote){
+    width: 100%;
+}
+
+@media (max-width: 720px) {
 @media (max-width: 720px) {
     h1 {
         font-size: 3dvh;
@@ -110,6 +129,19 @@ h4 {
     h4 {
         font-size: 2dvh;
     }
+    
+    .blog {
+        width: 95%;
+    }
+    .sidebar {
+        border: none;
+        padding: 5px;
+        width: 90%;
+        height: auto;
+        position: relative;
+        float: none;
+    }
+    
     
     .blog {
         width: 95%;
