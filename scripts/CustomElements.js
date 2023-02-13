@@ -217,3 +217,5 @@ function createLink(linkDetails) {
 
 customElements.define("ellieatwhl-header", Header);
 customElements.define("ellieatwhl-footer", Footer);
+
+export {createLink};

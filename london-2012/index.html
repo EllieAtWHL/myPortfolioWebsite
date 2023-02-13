@@ -28,7 +28,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="style.css">
-        <script src="../scripts/CustomElements.js" defer></script>
+        <link rel="stylesheet" href="../styles/carousel.css">
+        <script src="../scripts/CustomElements.js" type="module"></script>
+        <script src="./scripts/Posts.js" type="module"></script>
+        <script src="../scripts/carousel.js" defer></script>
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391"></script>
@@ -45,42 +48,97 @@
             <ellieatwhl-header></ellieatwhl-header>
             <div class="content" id="content">
                 <div class="scrollable">
-                    <div>
-                        <h1>Volunteering at the London 2012 Olympics: My Personal Experience</h1>
-                    </div>
-                    <div class="blog">
-                        <section>
-                            <p>
-                                As a lifelong fan of sports and performance, the opportunity to volunteer as a performer at the London 2012 Olympics was a dream come true. As part of the team of volunteer performers, I had the chance to be a part of one of the biggest and most exciting events in the world.
-                            </p>
-                            <p>
-                                My role as a volunteer performer at the London 2012 Olympics involved rehearsing and performing in both the opening and closing ceremonies.
-                            </p>
-                            <p>
-                                One of the most memorable moments of my experience as a volunteer performer at the London 2012 Olympics was the opportunity to perform in front of a global audience during the opening ceremony. It was an incredible feeling to be a part of such a historic and memorable event, and I will always treasure the memories of that night.
-                            </p>
-                            <p>
-                                Looking back on my experience as a volunteer performer at the London 2012 Olympics, I am grateful for the opportunity to be a part of something so special. Not only did I get to perform in front of a global audience, but I also had the chance to meet and work with a diverse group of talented and passionate people.
-                            </p>
-                            <p>
-                                One of the biggest lessons I learned from my experience as a volunteer performer at the London 2012 Olympics is the importance of teamwork and collaboration. Working with such a large and diverse team required strong communication and cooperation skills, and I am grateful for the opportunity to develop these skills in such a high-pressure environment.
-                            </p>
-                            <p>
-                                Overall, my experience as a volunteer performer at the London 2012 Olympics was an incredible and unforgettable opportunity. If you have the chance to volunteer at a major event like this, I highly recommend it. Not only will you have the chance to be a part of something special, but you will also gain valuable skills and experience that will serve you well in your personal and professional life.
-                            </p>
-                        </section>
-    
-                        <section>
-                            It Begins...
-                            An Invitation to Audition
-                            My First Audition
-                            Role-specific (Drumming!?!) Audition
-                            The Decision Arrives
-                            The First Rehearsal!
-                            1,000 Drummers
-                            A Costume Fitting
-                        </section>
-                    </div>
+                    <section class="sidebar">
+                        <ellieatwhl-blogsidebar></ellieatwhl-blogsidebar>
+                    </section>
+                    <section class="blog">
+                        <h2>Image Gallery</h2>
+                        <div class="slideshow-container fade">
+                            <div class="Containers">
+                                <div class="MessageInfo">1 / 13</div>
+                                <img src="img/ocDressingRoom.jpg">
+                                <div class="Info">In the dressing room for the Opening Ceremony</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">2 / 13</div>
+                                <img src="img/ocPreShow.jpg">
+                                <div class="Info">Outside the stadium prior to the Opening Ceremony</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">3 / 13</div>
+                                <img src="img/torDrummer.jpg">
+                                <div class="Info">Drumming on the Tor during the 2nd Technical Rehearsal</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">4 / 13</div>
+                                <img src="img/underRings.jpg">
+                                <div class="Info">We "made" the Olympic Rings!</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">5 / 13</div>
+                                <img src="img/torDrummers.jpg">
+                                <div class="Info">The Tor Drummers</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">6 / 13</div>
+                                <img src="img/sideRings.jpg">
+                                <div class="Info">The rings forming during the 2nd Technical Rehearsal</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">7 / 13</div>
+                                <img src="img/parade1.jpg">
+                                <div class="Info">The "sheepdog" drummers in their pen</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">8 / 13</div>
+                                <img src="img/parade2.jpg">
+                                <div class="Info">Following Team GB</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">9 / 13</div>
+                                <img src="img/ccDressingRoom.jpg">
+                                <div class="Info">In the dressing room for the Closing Ceremony</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">10 / 13</div>
+                                <img src="img/ccDressSign.jpg">
+                                <div class="Info">Waiting backstage at the rehearsal the morning of the Closing Ceremony</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">11 / 13</div>
+                                <img src="img/DannyKristian.jpg">
+                                <div class="Info">With Olympic bronze medalists Danny Purvis and Kristian Thomas</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">12 / 13</div>
+                                <img src="img/Louis.jpg">
+                                <div class="Info">With Olympic bronze medalist Louis Smith</div>
+                            </div>
+                            <div class="Containers">
+                                <div class="MessageInfo">13 / 13</div>
+                                <img src="img/ccShowOver.jpg">
+                                <div class="Info">The End of the Closing Ceremony</div>
+                            </div>
+                            <a class="Back" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="Forward" onclick="plusSlides(1)">&#10095;</a>
+                        </div>
+                        <div class="navigation">
+                            <span class="dots" onclick="currentSlide(1)"></span>
+                            <span class="dots" onclick="currentSlide(2)"></span>
+                            <span class="dots" onclick="currentSlide(3)"></span>
+                            <span class="dots" onclick="currentSlide(4)"></span>
+                            <span class="dots" onclick="currentSlide(5)"></span>
+                            <span class="dots" onclick="currentSlide(6)"></span>
+                            <span class="dots" onclick="currentSlide(7)"></span>
+                            <span class="dots" onclick="currentSlide(8)"></span>
+                            <span class="dots" onclick="currentSlide(9)"></span>
+                            <span class="dots" onclick="currentSlide(10)"></span>
+                            <span class="dots" onclick="currentSlide(11)"></span>
+                            <span class="dots" onclick="currentSlide(12)"></span>
+                            <span class="dots" onclick="currentSlide(13)"></span>
+                        </div> 
+
+                    </section>
                 </div>
             </div>
             <ellieatwhl-footer></ellieatwhl-footer>

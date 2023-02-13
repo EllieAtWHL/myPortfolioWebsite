@@ -1,0 +1,129 @@
+:root {
+    --base-green: 113;
+    --high-percent: 90%;
+    --low-percent: 15%;
+
+    --pale-green: hsl(var(--base-green), var(--low-percent), var(--high-percent));
+    --dark-green: hsl(var(--base-green), var(--high-percent), var(--low-percent));
+    --dark-green-transparency: hsl(var(--base-green), var(--high-percent), var(--low-percent), 0.9);
+    --third-colour: hsl(var(--base-green), calc(var(--high-percent) - var(--low-percent)), calc(var(--low-percent) / 2));
+    
+    --chosen-font:'Kanit', Arial, Helvetica, sans-serif;
+    --heading-font-size: 400%;
+    --sub-heading-font-size: 300%;
+    --tertiary-heading-font-size: 200%;
+    --lowest-heading-font-size: 150%;
+    --text-font-size: 14px;
+}
+
+* {box-sizing:border-box}
+
+.slideshow-container {
+    position: relative;
+    margin: auto;
+}
+
+.Containers {
+    display: none;
+    justify-content: center;
+}  
+
+.Containers img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.Back, .Forward {
+    cursor: pointer;
+    position: absolute;
+    top: 48%;
+    width: auto;
+    margin-top: -23px;
+    padding: 17px;
+    color: grey;
+    font-weight: bold;
+    font-size: 19px;
+    transition: 0.4s ease;
+    border-radius: 0 5px 5px 0;
+    user-select: none;
+}
+
+.Forward {
+    right: 0;
+    border-radius: 4px 0 0 4px;
+}
+
+.Back:hover, .Forward:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.Info {
+    background-color: var(--dark-green-transparency);
+    color: var(--pale-green);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 16px;
+    padding: 10px 14px;
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.MessageInfo {
+    display: none;
+    color: #f2f2f3;
+    font-size: 14px;
+    padding: 10px 14px;
+    position: absolute;
+    top: 0;
+}
+
+.navigation {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dots {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 3px;
+    background-color: var(--third-colour);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.5s ease;
+}
+
+.dark .dots {
+    background-color: var(--pale-green);
+}
+
+.enable {
+    height: 16px;
+    width: 16px;
+}
+
+.enable, .dots:hover {
+    background-color: var(--dark-green) !important;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.4s;
+    animation-name: fade;
+    animation-duration: 1.4s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .5}
+    to {opacity: 2}
+}
+
+@keyframes fade {
+    from {opacity: .5}
+    to {opacity: 2}
+}

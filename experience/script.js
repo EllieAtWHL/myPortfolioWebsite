@@ -1,6 +1,5 @@
 function openTab(event, tabName) {
-  
-  console.log(event)
+
   var i, tabcontent, tablinks
   tabcontent = document.getElementsByClassName('tabcontent')
   for (i = 0; i < tabcontent.length; i++) {
@@ -13,5 +12,3 @@ function openTab(event, tabName) {
   document.getElementById(tabName).classList.add('active')
   event.currentTarget.classList.add('active')
 }
-
-  // https://www.w3schools.com/howto/howto_js_tabs.asp
