@@ -65,7 +65,6 @@ h4 {
     height: 100%;
     width: 70%;
     float: right;
-    float: right;
 }
 
 .sidebar {
@@ -115,7 +114,6 @@ h4 {
     width: 100%;
 }
 
-@media (max-width: 720px) {
 @media (max-width: 720px) {
     h1 {
         font-size: 3dvh;
