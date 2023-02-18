@@ -7,9 +7,16 @@ const RECIPE_LIST =
         'rough': 3,
         'muddled': 3,
         'special': ['sweet', 'spicy'],
-        'color': 'light'
-    },
-    {
+        'color': 'medium'
+    },{
+        'recipe': ['yellow', 'orange', 'orange', 'orange'],
+        'perfect': 3,
+        'smooth': 3,
+        'rough': 2,
+        'muddled': 1,
+        'special': ['hops', 'spicy'],
+        'color': 'medium'
+    },{
         'recipe': ['yellow', 'brown', 'brown', 'brown'],
         'perfect': 4,
         'smooth': 4,
@@ -17,6 +24,110 @@ const RECIPE_LIST =
         'muddled': 1,
         'special': ['sweet', 'hops'],
         'color': 'dark'
+    },{
+        'recipe': ['yellow', 'yellow', 'brown', 'brown'],
+        'perfect': 4,
+        'smooth': 4,
+        'rough': 3,
+        'muddled': 1,
+        'special': ['spicy'],
+        'color': 'medium'
+    },{
+        'recipe': ['yellow', 'yellow', 'yellow', 'orange'],
+        'perfect': 3,
+        'smooth': 3,
+        'rough': 2,
+        'muddled': 1,
+        'special': ['sweet', 'hops'],
+        'color': 'light'
+    },{
+        'recipe': ['yellow', 'yellow', 'yellow', 'brown'],
+        'perfect': 4,
+        'smooth': 4,
+        'rough': 3,
+        'muddled': 1,
+        'special': ['sweet', 'hops'],
+        'color': 'light'
+    },{
+        'recipe': ['yellow', 'yellow', 'orange', 'orange'],
+        'perfect': 4,
+        'smooth': 3,
+        'rough': 2,
+        'muddled': 2,
+        'special': [],
+        'color': 'light'
+    },{
+        'recipe': ['orange', 'orange', 'brown', 'brown'],
+        'perfect': 4,
+        'smooth': 3,
+        'rough': 2,
+        'muddled': 2,
+        'special': [],
+        'color': 'dark'
+    },{
+        'recipe': ['orange', 'orange', 'orange', 'brown'],
+        'perfect': 3,
+        'smooth': 3,
+        'rough': 2,
+        'muddled': 1,
+        'special': ['hops', 'spicy'],
+        'color': 'medium'
+    },{
+        'recipe': ['orange', 'orange', 'orange', 'orange'],
+        'perfect': 5,
+        'smooth': 5,
+        'rough': 4,
+        'muddled': 2,
+        'special': [],
+        'color': 'medium'
+    },{
+        'recipe': ['orange', 'orange', 'orange', 'orange'],
+        'perfect': 5,
+        'smooth': 5,
+        'rough': 4,
+        'muddled': 2,
+        'special': [],
+        'color': 'medium'
+    },{
+        'recipe': ['orange', 'brown', 'brown', 'brown'],
+        'perfect': 4,
+        'smooth': 3,
+        'rough': 2,
+        'muddled': 2,
+        'special': [],
+        'color': 'dark'
+    },{
+        'recipe': ['brown', 'brown', 'brown', 'brown'],
+        'perfect': 6,
+        'smooth': 5,
+        'rough': 4,
+        'muddled': 2,
+        'special': ['hops'],
+        'color': 'dark'
+    },{
+        'recipe': ['brown', 'brown', 'brown', 'brown'],
+        'perfect': 6,
+        'smooth': 5,
+        'rough': 4,
+        'muddled': 2,
+        'special': ['hops'],
+        'color': 'dark'
+    },{
+        'recipe': ['yellow', 'yellow', 'yellow', 'yellow'],
+        'perfect': 6,
+        'smooth': 5,
+        'rough': 4,
+        'muddled': 2,
+        'special': ['spicy'],
+        'color': 'light'
+    },{
+        'recipe': ['yellow', 'yellow', 'yellow', 'yellow'],
+        'perfect': 6,
+        'smooth': 5,
+        'rough': 4,
+        'muddled': 2,
+        'special': ['spicy'],
+        'color': 'light'
     }
 ]
 

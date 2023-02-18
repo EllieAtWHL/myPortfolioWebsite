@@ -30,6 +30,11 @@ h1, h3, h4 {
     text-align: left;
 }
 
+.playerInput {
+    min-width: 50px;
+    width: 45%;
+}
+
 .play-area {
     display: none;
     width: min(95dvw, 900px);
@@ -52,13 +57,14 @@ button {
 }
 
 .copper-grid {
-    padding: 19px 12px 0 7px;
+    padding: 17px 12px 0 7px;
     width: 300px;
-    height: 360px;
+    height: 290px;
+    border-radius: 10px;
     background-image: url(img/copper.png);
     background-size: cover;
     display: grid;
-    grid-template-rows: repeat(8, 9.4%);
+    grid-template-rows: repeat(8, 11.8%);
     grid-template-columns: repeat(5, 20%);
     gap: 1px;
     justify-content: center;

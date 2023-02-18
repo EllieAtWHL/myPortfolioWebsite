@@ -7,21 +7,82 @@ const CUSTOMER_LIST =
             'drink': ['yellow', 'brown', 'brown', 'brown'],
             'special': 'sweet',
             'bonus': 3
-        },
-        {
+        },{
             'name': 'India Pale Ale',
             'country': 'India',
             'color': 'light',
             'drink': ['yellow', 'yellow', 'yellow', 'orange'],
             'special': 'hops',
             'bonus': 2
-        },
-        {
+        },{
             'name': 'Munich Dark Lager',
             'country': 'Germany',
-            'color': 'neutral',
-            'drink': ['orange', 'orange', 'orange', 'orange'],
+            'color': 'medium',
+            'drink': ['yellow', 'orange', 'orange', 'orange'],
             'special': 'spicy',
+            'bonus': 2
+        },{
+            'name': 'Tokyo Extra Dry Lager',
+            'country': 'Japan',
+            'color': 'medium',
+            'drink': ['orange', 'orange', 'orange', 'orange'],
+            'special': null,
+            'bonus': null
+        },{
+            'name': 'Czech Pilsner',
+            'country': 'Czechia',
+            'color': 'medium',
+            'drink': ['yellow', 'yellow', 'brown', 'brown'],
+            'special': null,
+            'bonus': null
+        },{
+            'name': 'English Milk Stout',
+            'country': 'England',
+            'color': 'dark',
+            'drink': ['brown', 'brown', 'brown', 'brown'],
+            'special': null,
+            'bonus': null
+        },{
+            'name': 'Russian Imperial Stout',
+            'country': 'Russia',
+            'color': 'dark',
+            'drink': ['orange', 'orange', 'brown', 'brown'],
+            'special': null,
+            'bonus': null
+        },{
+            'name': 'Belgian Blonda Ale',
+            'country': 'Belgium',
+            'color': 'light',
+            'drink': ['yellow', 'yellow', 'yellow', 'yellow'],
+            'special': null,
+            'bonus': null
+        },{
+            'name': 'American Wheat Ale',
+            'country': 'USA',
+            'color': 'light',
+            'drink': ['yellow', 'yellow', 'orange', 'orange'],
+            'special': null,
+            'bonus': null
+        },{
+            'name': 'Scottish Wee Heavy',
+            'country': 'Scotland',
+            'color': 'light',
+            'drink': ['yellow', 'yellow', 'yellow', 'brown'],
+            'special': 'sweet',
+            'bonus': 3
+        },{
+            'name': 'Oktoberfest Lager',
+            'country': 'Germany',
+            'color': 'medium',
+            'drink': ['orange', 'orange', 'orange', 'brown'],
+            'special': 'spicy',
+            'bonus': 2
+        },{
+            'name': 'Irish Dry Stout',
+            'country': 'Ireland',
+            'color': 'dark',
+            'drink': ['orange', 'brown', 'brown', 'brown'],
+            'special': 'hops',
             'bonus': 2
         }
     ]
