@@ -20,7 +20,7 @@ export default class Modal {
         this.#modalElement.append(this.#modalContent)
         
         
-        this.#removeBinded = this.removeModal.bind(this)
+        this.#removeBinded = this.remove.bind(this)
 
         this.#closeElement = document.createElement('span')
         this.#closeElement.classList.add('close')
@@ -53,20 +53,6 @@ export default class Modal {
     set content(value){
         this.#modalContent.append(value)
     }
-
-    set buttons(value){
-        value.forEach(button => {
-            let buttonElement = document.createElement('button');
-            buttonElement.innerText = button;
-            buttonElement.id = button;
-            buttonElement.addEventListener('click', this.#removeBinded);
-            this.#modalContent.append(buttonElement);
-        })
-    }
-
-    get okResponse(){
-        return true;
-    }
     
     updateModal(options){
         Object.entries(options).forEach(([key, value]) => {
@@ -74,11 +60,8 @@ export default class Modal {
         })
     }
 
-    removeModal(){
-        let response = event.target.id;
+    remove(){
         this.#modalElement.remove()
-        if (response != 'OK') return;
-        return this.okResponse;
     }
 
 }

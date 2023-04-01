@@ -1,6 +1,10 @@
 @import "../styles/style.css";
 @import "../styles/toast.css";
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 :root {
     --gap-width: 0.25dvw;
     --gap-height: .15em;
