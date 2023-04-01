@@ -27,26 +27,21 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="style.css">
-        <script src="../scripts/CustomElements.js" type="module"></script>
 
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-4MLSWNR391');
-        </script>
+        <script src="../scripts/CustomElements.js" type="module"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391" async></script>
+        <script src="/scripts/monitoring.js" async></script>
     </head>
+    
     <body id="body">
-        <div class="wrapper" id="wrapper">
+        <div class="wrapper">
             <ellieatwhl-header></ellieatwhl-header>
-            <div class="content" id="content">
+            <div class="content">
                 <div class="scrollable">
                     <h1>About Me</h1>
-                    <div class="intro">
+                    <section class="intro">
                         <img class="profile" src="img/EllieMatthewman(Square).jpg">
-                        <div class="intro-text">
+                        <article class="intro-text">
                             <p>
                                 Hi there! I'm Ellie, a highly skilled and experienced Salesforce professional with a passion for technology and helping businesses succeed. With over 11 years of experience in the Salesforce ecosystem, I have a proven track record of leading development teams and staying up to date with the latest industry developments. I am 5 times Salesforce certified and an All-Star Trailhead ranger.
                             </p>
@@ -59,8 +54,8 @@
                             <p>
                                 I am always looking for new challenges and opportunities to grow both personally and professionally. Thank you for stopping by my "About Me" page!
                             </p>
-                        </div>
-                    </div>
+                        </article>
+                    </section>
                 </div>
             </div>
             <ellieatwhl-footer></ellieatwhl-footer>

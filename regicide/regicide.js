@@ -303,13 +303,13 @@ function cardSelected(){
         else {
             showElement(attackButton)
             moveSelectedCardToChosenCards(selectedCard)
-            let slotToClear = event.path[1]
+            let slotToClear = event.target.parentElement
             renderSelectedCardMovement(slotToClear)
         }
     } else {        
         discardedRoyalAttack -= CARD_VALUE_MAP[selectedCard.value]
         moveSelectedCardToDiscard(selectedCard)
-        let slotToClear = event.path[1]
+        let slotToClear = event.target.parentElement
         renderDiscardedCardMovement(slotToClear)
         if(discardedRoyalAttack <= 0) {
             clearDefenceMessage()

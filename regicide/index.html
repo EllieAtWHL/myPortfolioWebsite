@@ -6,70 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
         
-                <!-- Primary Meta Tags -->
-                <title>Regicide</title>
-                <meta name="title" content="EllieAtWHL - Regicide">
-                <meta name="description" content="Regicide is a challenging, card game based on a standard 52 card deck.">
+        <!-- Primary Meta Tags -->
+        <title>Regicide</title>
+        <meta name="title" content="EllieAtWHL - Regicide">
+        <meta name="description" content="Regicide is a challenging, card game based on a standard 52 card deck.">
         
-                <!-- Open Graph / Facebook -->
-                <meta property="og:type" content="website">
-                <meta property="og:url" content="https://ellieatwhl.co.uk/regicide">
-                <meta property="og:title" content="EllieAtWHL - Regicide">
-                <meta property="og:description" content="Regicide is a challenging, card game based on a standard 52 card deck.">
-                <meta property="og:image" content="https://ellieatwhl.co.uk/regicide/imgs/regicide.png">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://ellieatwhl.co.uk/regicide">
+        <meta property="og:title" content="EllieAtWHL - Regicide">
+        <meta property="og:description" content="Regicide is a challenging, card game based on a standard 52 card deck.">
+        <meta property="og:image" content="https://ellieatwhl.co.uk/regicide/imgs/regicide.png">
         
-                <!-- Twitter -->
-                <meta property="twitter:card" content="summary_large_image">
-                <meta property="twitter:url" content="https://ellieatwhl.co.uk/regicide">
-                <meta property="twitter:title" content="EllieAtWHL - Regicide">
-                <meta property="twitter:description" content="Regicide is a challenging, card game based on a standard 52 card deck.">
-                <meta property="twitter:image" content="https://ellieatwhl.co.uk/regicide/imgs/regicide.png">
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://ellieatwhl.co.uk/regicide">
+        <meta property="twitter:title" content="EllieAtWHL - Regicide">
+        <meta property="twitter:description" content="Regicide is a challenging, card game based on a standard 52 card deck.">
+        <meta property="twitter:image" content="https://ellieatwhl.co.uk/regicide/imgs/regicide.png">
         
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="regicide.css">
+
         <script src="../scripts/CustomElements.js" type="module"></script>
         <script src="../scripts/modalScript.js" defer></script>
         <script src="regicide.js" type="module"></script>
-
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-4MLSWNR391');
-        </script>
-        <script>
-            window['_fs_host'] = 'fullstory.com';
-            window['_fs_script'] = 'edge.fullstory.com/s/fs.js';
-            window['_fs_org'] = 'o-1J8NQN-na1';
-            window['_fs_namespace'] = 'FS';
-            (function(m,n,e,t,l,o,g,y){
-                if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;}
-                g=m[e]=function(a,b,s){g.q?g.q.push([a,b,s]):g._api(a,b,s);};g.q=[];
-                o=n.createElement(t);o.async=1;o.crossOrigin='anonymous';o.src='https://'+_fs_script;
-                y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
-                g.identify=function(i,v,s){g(l,{uid:i},s);if(v)g(l,v,s)};g.setUserVars=function(v,s){g(l,v,s)};g.event=function(i,v,s){g('event',{n:i,p:v},s)};
-                g.anonymize=function(){g.identify(!!0)};
-                g.shutdown=function(){g("rec",!1)};g.restart=function(){g("rec",!0)};
-                g.log = function(a,b){g("log",[a,b])};
-                g.consent=function(a){g("consent",!arguments.length||a)};
-                g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
-                g.clearUserCookie=function(){};
-                g.setVars=function(n, p){g('setVars',[n,p]);};
-                g._w={};y='XMLHttpRequest';g._w[y]=m[y];y='fetch';g._w[y]=m[y];
-                if(m[y])m[y]=function(){return g._w[y].apply(this,arguments)};
-                g._v="1.3.0";
-            })(window,document,window['_fs_namespace'],'script','user');
-        </script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391" async></script>
+        <script src="/scripts/monitoring.js" async></script>
     </head>
+
     <body id="body">
         <div class="wrapper">
             <ellieatwhl-header></ellieatwhl-header>
-            <div class="content" id="content">
+            <div class="content">
                 <div class="scrollable">
-                    <div class="game-start" id="game-start">
+                    <article class="game-start" id="game-start">
                         <h1>Regicide</h1>
                         <button id="play-game">Play Game</button>
                         <p>Regicide is a challenging, card game based on a standard 52 card deck.</p>
@@ -109,7 +81,7 @@
                                 <li>Initial build of game</li>
                             </ul>
                         </div>
-                    </div>
+                    </article>
                     
                     <div class="play-area" id="play-area">
                         <div class="links">
