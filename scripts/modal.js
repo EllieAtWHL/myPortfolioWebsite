@@ -30,7 +30,7 @@ export default class Modal {
         
         this.updateModal({...DEFAULT_OPTIONS, ...options})
         
-        let contentElement = document.getElementById('scrollable');
+        let contentElement = document.getElementsByClassName('scrollable')[0];
         contentElement.append(this.#modalElement)
     }
 

@@ -25,7 +25,7 @@ img.profile {
     margin: 2em;
 }
 
-div.intro-text {
+.intro-text {
     width: 70dvw;
     transform: translate(15em, -11em);
 }

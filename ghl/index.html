@@ -27,27 +27,20 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="style.css">
+
         <script src="../scripts/CustomElements.js" type="module"></script>
         <script src="../scripts/images.js" type="module"></script>
-
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-4MLSWNR391');
-        </script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391" async></script>
+        <script src="/scripts/monitoring.js" async></script>
     </head>
+
     <body id="body">
-        <div class="wrapper" id="wrapper">
+        <div class="wrapper">
             <ellieatwhl-header></ellieatwhl-header>
-            <div class="content" id="content">
-                <div class="scrollable" id="scrollable">
-                    <div>
-                        <h1>Fantasy Football Draft Application</h1>
-                    </div>
-                    <div class="blog">
+            <div class="content">
+                <div class="scrollable">
+                    <h1>Fantasy Football Draft Application</h1>
+                    <article class="blog">
                         <p>
                             In 2012, my husband started a Fantasy Football League - <a href="https://www47.myfantasyleague.com/2022/home/24311#0" target="_blank">The Golden Helmet League</a> - of which he is the commissioner
                         </p>
@@ -231,7 +224,7 @@
 
                         </section>
                         
-                    </div>
+                    </article>
                 </div>
             </div>
             <ellieatwhl-footer></ellieatwhl-footer>

@@ -1,18 +1,15 @@
 var slidePosition = 1;
 SlideShow(slidePosition);
 
-// forward/Back controls
 function plusSlides(n) {
   SlideShow(slidePosition += n);
 }
 
-//  images controls
 function currentSlide(n) {
   SlideShow(slidePosition = n);
 }
 
 function SlideShow(n) {
-    console.log(n);
     var i;
     var slides = document.getElementsByClassName("Containers");
     var circles = document.getElementsByClassName("dots");
