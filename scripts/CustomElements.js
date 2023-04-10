@@ -49,7 +49,7 @@ class Header extends HTMLElement {
   constructor() {
     super();
 
-    const header = document.createElement("nav");
+    const header = document.createElement("header");
     header.className = "navbar";
 
     const brandTitle = document.createElement("div");
@@ -65,7 +65,7 @@ class Header extends HTMLElement {
       toggleButton.appendChild(bar);
     }
 
-    const topnav = document.createElement("div");
+    const topnav = document.createElement("nav");
     topnav.className = "navbar-links";
     let linksElement = document.createElement("ul");
 
@@ -111,7 +111,7 @@ class Footer extends HTMLElement {
   constructor() {
     super();
 
-    const footer = document.createElement("div");
+    const footer = document.createElement("footer");
     footer.className = "footer";
 
     const findMe = document.createElement("div");
@@ -168,6 +168,8 @@ class Footer extends HTMLElement {
 
     const darkModeLabel = document.createElement("label");
     darkModeLabel.className = "switch";
+    darkModeLabel.for = "darkMode";
+    darkModeLabel.innerText = ".... Mode";
 
     const darkModeInput = document.createElement("input");
     darkModeInput.type = "checkbox";
@@ -177,6 +179,7 @@ class Footer extends HTMLElement {
     }
     darkModeInput.onclick = function () {
       var checkbox = document.getElementById("darkMode");
+      console.log(checkbox)
       if (checkbox.checked === true) {
         currentMode = "dark";
       } else {
@@ -186,14 +189,10 @@ class Footer extends HTMLElement {
     };
     const darkModeSpan = document.createElement("span");
     darkModeSpan.className = "slider round";
-    const darkModeP = document.createElement("p");
-    const darkModeText = document.createTextNode("Dark Mode");
 
-    darkModeP.appendChild(darkModeText);
     darkModeLabel.appendChild(darkModeInput);
     darkModeLabel.appendChild(darkModeSpan);
     darkMode.appendChild(darkModeLabel);
-    darkMode.appendChild(darkModeP);
 
     footer.appendChild(findMe);
     footer.appendChild(darkMode);
