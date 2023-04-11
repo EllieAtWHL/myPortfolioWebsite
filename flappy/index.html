@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<htmll lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" type="image/jpg" href="../img/favicon.jpg"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Primary Meta Tags -->
+        <title>Flappy McFlapface</title>
+        <meta name="title" content="EllieAtWHL - Flappy McFlapface">
+        <meta name="description" content="My first game built on Unity.">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://ellieatwhl.co.uk/flappy">
+        <meta property="og:title" content="EllieAtWHL - Flappy McFlapface">
+        <meta property="og:description" content="My first game built on Unity.">
+        <meta property="og:image" content="bird.gif">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://ellieatwhl.co.uk/flappy">
+        <meta property="twitter:title" content="EllieAtWHL - Flappy McFlapface">
+        <meta property="twitter:description" content="My first game built on Unity.">
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/flappy/flappy.css">
+
+        <script src="../scripts/CustomElements.js" type="module"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391" async></script>
+        <script src="../scripts/monitoring.js" async></script>
+    </head>
+
+    <body id="body">
+        <div class="wrapper">
+            <ellieatwhl-header></ellieatwhl-header>
+            <div class="content">
+                <div class="scrollable">
+                    <article>
+                        <h1>
+                            Flappy McFlapface
+                        </h1>
+                        <section class="blog left">
+                            <p>
+                                As I explore game design more, I decided to use a tutorial to build a clone for Flappy Bird on Unity. You can follow the same tutorial <a href="https://www.youtube.com/watch?v=XtQMytORBmM" target="_blank">here</a>.
+                            </p>
+                            <p>
+                                Once I'd followed the tutorial, I extended it further with the following enhancements:
+                                <ul>
+                                    <li>Added clouds in the background, that do not collide and spawn at random sizes and speeds to create an illusion of depth to the graphics</li>
+                                    <li>
+                                        Increased the spawn rate of the pipes for every multiple of 5 the score reaches, to ramp up the difficult the further you go
+                                    </li>
+                                    <li>
+                                        Keep track of the highest score achieved to give you a target to beat
+                                    </li>
+                                    <li>
+                                        Added sounds effects for passing a pipe, the increase after every 5 score and game over
+                                    </li>
+                                    <li>
+                                        Added a start screen so you can start when you are ready rather than going straight into it
+                                    </li>
+                                    <li>
+                                        Added a settings page that allows you to turn off the sound effects
+                                    </li>
+                                </ul>
+                            </p>
+                            <p>
+                                <object type="image/svg+xml" data="https://gh-card.dev/repos/EllieAtWHL/Flappy-McFlapFace.svg?fullname=&link_target=_blank"></object>
+                            </p>
+                        </section>
+                        <section class="blog right">
+                            <iframe id='webgl_iframe' frameborder="0" allow="autoplay; fullscreen; vr" allowfullscreen="" allowvr=""
+    mozallowfullscreen="true" src="https://play.unity.com/webgl/acf23484-2e70-445b-aa1a-98f18d8fa661?screenshot=false&embedType=embed"  width="100%" height="100%"
+    onmousewheel="" webkitallowfullscreen="true"></iframe>
+                        </section>
+                    </article>
+                </div>
+            </div>
+            <ellieatwhl-footer></ellieatwhl-footer>
+        </div>
+    </body>
+</html>
+
+
+
+
+
+

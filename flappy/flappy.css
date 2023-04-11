@@ -1,0 +1,30 @@
+@import "../styles/style.css";
+
+.blog {
+    margin: 2.5%;
+    width: 80%;
+}
+
+.centre {
+    width: 80%;
+    margin: auto;
+}
+
+.left {
+    width: 45%;
+    height: 65dvh;
+    float: left;
+}
+
+.right {
+    width: 45%;
+    height: 65dvh;
+    float: right;
+}
+
+@media (max-width: 600px)  {
+    .left, .right {
+        width: 95%;
+        float: none;
+    }
+}
