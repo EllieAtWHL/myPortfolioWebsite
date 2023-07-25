@@ -81,7 +81,8 @@ h1 {
 }
 
 .active {
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 
 .job {
@@ -90,6 +91,8 @@ h1 {
     color: var(--third-colour);
     padding: 1em;
     margin: .5em;
+    width: 80dvw;
+    align-self: center;
 }
 
 .dark .job {
