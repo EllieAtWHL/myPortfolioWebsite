@@ -139,17 +139,4 @@ h4 {
         float: none;
     }
     
-    
-    .blog {
-        width: 95%;
-    }
-    .sidebar {
-        border: none;
-        padding: 5px;
-        width: 90%;
-        height: auto;
-        position: relative;
-        float: none;
-    }
-    
 }
