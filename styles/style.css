@@ -13,6 +13,7 @@
     --tertiary-heading-font-size: 200%;
     --lowest-heading-font-size: 150%;
     --text-font-size: 14px;
+    --logo-width: 50px;
 }
 
 *, *::before, *::after {
