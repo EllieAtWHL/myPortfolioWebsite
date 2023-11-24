@@ -1,0 +1,9 @@
+@import "../styles/style.css";
+
+th {
+    background-color: var(--dark-green);
+}
+
+th, td {
+    padding: 5px;
+}
