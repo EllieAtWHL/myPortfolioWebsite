@@ -2,6 +2,7 @@
 
 th {
     background-color: var(--dark-green);
+    color: var(--pale-green);
 }
 
 th, td {
