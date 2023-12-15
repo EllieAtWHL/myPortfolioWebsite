@@ -92,6 +92,11 @@ class Header extends HTMLElement {
     projectsLinkLI.appendChild(projectsLink);
     linksElement.appendChild(projectsLinkLI);
 
+    const contactMeLinkLI = document.createElement("li");
+    const contactMeLink = createLink({ href: "../contact-me", text: "Contact Me" });
+    contactMeLinkLI.appendChild(contactMeLink);
+    linksElement.appendChild(contactMeLinkLI);
+
     topnav.appendChild(linksElement);
 
     logoLink.appendChild(logo);
