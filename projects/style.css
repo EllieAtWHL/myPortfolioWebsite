@@ -34,7 +34,7 @@
 
 .cards {
     width: 100%;
-    height: 50dvh;
+    height: 80dvh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
