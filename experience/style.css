@@ -102,3 +102,10 @@ h1 {
     width: var(--logo-width);
     height: var(--logo-width);
 }
+
+.job img.job-logo{
+    float: right;
+    transform: translateY(-30px);
+    width: auto;
+    height: var(--logo-width);
+}
