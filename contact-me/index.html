@@ -31,6 +31,7 @@
         <script src="../scripts/CustomElements.js" type="module"></script>
         <script src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391" async></script>
         <script src="/scripts/monitoring.js" async></script>
+        <link rel="stylesheet" href="/contact-me/style.css">
         <script src="https://www.google.com/recaptcha/api.js" defer></script>
         <script>
             function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
@@ -42,13 +43,13 @@
             <ellieatwhl-header></ellieatwhl-header>
             <div class="content">
                 <div class="scrollable">
-                    <h1>Contact Me</h3>
+                    <h1>Contact Me</h1>
 
-                    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+                    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form">
                     
                         <input type=hidden name='captcha_settings' value='{"keyname":"EllieAtWHL","fallback":"true","orgId":"00D58000000YxlM","ts":""}'>
                         <input type=hidden name="oid" value="00D58000000YxlM">
-                        <input type=hidden name="retURL" value="https://www.ellieatwhl.co.uk/"> <!-- TODO: fix return url to be a thank you for contact me page or change to current page-->
+                        <input type=hidden name="retURL" value="https://www.ellieatwhl.co.uk/contact-me/thank-you.html">
                         
                         <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
                         <!--  these lines if you wish to test in debug mode.                          -->
@@ -56,37 +57,20 @@
                         <!--  <input type="hidden" name="debugEmail"                                  -->
                         <!--  value="eleanormatthewman+salesforce@gmail.com">                         -->
                         
-                        <table> <!-- TODO: change to something like grid-->
-                            <tbody>
-                                <tr>
-                                    <td><label for="first_name">First Name</label></td>
-                                    <td><input  id="first_name" maxlength="40" name="first_name" size="20" type="text"/></td>
-                                </tr>
-                                
-                                <tr>
-                                    <td><label for="last_name">Last Name</label></td>
-                                    <td><input  id="last_name" maxlength="80" name="last_name" size="20" type="text"/></td>
-                                </tr>
-                                
-                                <tr>
-                                    <td><label for="email">Email</label></td>
-                                    <td><input  id="email" maxlength="80" name="email" size="20" type="text"/></td>
-                                </tr>
+                        <label for="first_name">First Name</label>
+                        <input  id="first_name" maxlength="40" name="first_name" size="20" type="text"/>
+                        
+                        <label for="last_name">Last Name</label>
+                        <input  id="last_name" maxlength="80" name="last_name" size="20" type="text"/>
+                        
+                        <label for="email">Email</label>
+                        <input  id="email" maxlength="80" name="email" size="20" type="text"/>
+                        
+                        <label for="description">Comments</label>
+                        <textarea id="description" rows="6" name="description"></textarea>
 
-                                <tr>
-                                    <td><label for="description">Comments</label></td>
-                                    <td><textarea id="description" rows="6" name="description"></textarea></td>
-                                </tr> 
-                                
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="g-recaptcha" data-sitekey="6LfUBQEfAAAAAOwXkILtp2Amwf_U6Ouoza-xsGZT"></div>
-                                    </td>
-                                </tr>
-                                
-                                
-                            </tbody>
-                        </table>
+
+                        <div class="g-recaptcha" data-sitekey="6LfUBQEfAAAAAOwXkILtp2Amwf_U6Ouoza-xsGZT"></div>
 
                         <input class="button" type="submit" name="submit">
                     
