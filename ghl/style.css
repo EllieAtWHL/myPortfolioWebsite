@@ -22,6 +22,17 @@ h4 {
     margin: 2px;
 }
 
+.scrollable {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+article {
+    max-width: 800px;
+}
+
 .scrollable img {
     height: 50dvh;
 }
