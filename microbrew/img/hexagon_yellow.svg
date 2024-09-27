@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+    <path d="M13.6 42 3.2 24 13.6 6h20.8l10.4 18-10.4 18Z" fill="yellow"/>
+    <g font-size="30" font-family="sans-serif" font-weight="bold"  fill="black" stroke="none" text-anchor="middle">
+        <text x="23" y="34">Y</text>
+    </g>
+</svg>
