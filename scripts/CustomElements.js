@@ -129,8 +129,8 @@ class Footer extends HTMLElement {
       target: "_blank",
       text: "Linktree",
     });
-    headingText.appendChild(linktreeLink);
     heading.appendChild(headingText);
+    heading.appendChild(linktreeLink);
 
     findMe.appendChild(heading);
 
