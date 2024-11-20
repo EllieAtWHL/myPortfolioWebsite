@@ -132,20 +132,7 @@ class Footer extends HTMLElement {
     headingText.append(linktreeLink);
     heading.appendChild(headingText);
 
-    const linkList = document.createElement("ul");
-
-    const linktreeLinkItem = document.createElement("li");
-    const linktreeLink = createLink({
-      href: "https://linktr.ee/EllieAtWHL",
-      target: "_blank",
-      text: "Linktree",
-    });
-    linktreeLinkItem.appendChild(linktreeLink);
-
-    linkList.appendChild(linktreeLinkItem);
-
     findMe.appendChild(heading);
-    findMe.appendChild(linkList);
 
     const darkMode = document.createElement("div");
     darkMode.className = "darkMode floatRight";
