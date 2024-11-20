@@ -1,24 +1,5 @@
 @import "../styles/style.css";
 
-:root {
-    --base-green: 113;
-    --high-percent: 90%;
-    --low-percent: 15%;
-
-    --pale-green: hsl(var(--base-green), var(--low-percent), var(--high-percent));
-    --dark-green: hsl(var(--base-green), var(--high-percent), var(--low-percent));
-    --third-colour: hsl(var(--base-green), calc(var(--high-percent) - var(--low-percent)), calc(var(--low-percent) / 2));
-    
-    --chosen-font:'Kanit', Arial, Helvetica, sans-serif;
-    --heading-font-size: 400%;
-    --sub-heading-font-size: 300%;
-    --tertiary-heading-font-size: 200%;
-    --lowest-heading-font-size: 150%;
-    --text-font-size: 14px;
-
-    --logo-width: 50px;
-}
-
 img.profile {
     width: 10em;
     border-radius: 15em;
