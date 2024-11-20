@@ -15,7 +15,7 @@
     --sub-heading-font-size: 300%;
     --tertiary-heading-font-size: 200%;
     --lowest-heading-font-size: 150%;
-    --text-font-size: 18px;
+    --text-font-size: 110%;
     --logo-width: 50px;
 
     --progress-background: linear-gradient(to right, var(--third-colour), var(--dark-green));
