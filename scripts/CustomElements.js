@@ -128,7 +128,7 @@ class Footer extends HTMLElement {
 
     const linkList = document.createElement("ul");
 
-    const linktreeLinkItem = document.createElement("li";
+    const linktreeLinkItem = document.createElement("li");
     const linktreeLink = createLink({
       href: "https://linktr.ee/EllieAtWHL",
       target: "_blank",
