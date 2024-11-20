@@ -123,47 +123,20 @@ class Footer extends HTMLElement {
     findMe.className = "findMe floatLeft";
 
     const heading = document.createElement("p");
-    const headingText = document.createTextNode("You can also find me at...");
+    const headingText = document.createTextNode("Find all my socials on: ");
     heading.appendChild(headingText);
 
     const linkList = document.createElement("ul");
 
-    const twitterLinkItem = document.createElement("li");
-    const twitterLink = createLink({
-      href: "https://twitter.com/EllieAtWHL",
+    const linktreeLinkItem = document.createElement("li";
+    const linktreeLink = createLink({
+      href: "https://linktr.ee/EllieAtWHL",
       target: "_blank",
-      text: "Twitter",
+      text: "Linktree",
     });
-    twitterLinkItem.appendChild(twitterLink);
+    linktreeLinkItem.appendChild(linktreeLink);
 
-    const linkedInLinkItem = document.createElement("li");
-    const linkedInLink = createLink({
-      href: "https://www.linkedin.com/in/elliematthewman/",
-      target: "_blank",
-      text: "LinkedIn",
-    });
-    linkedInLinkItem.appendChild(linkedInLink);
-
-    const githubLinkItem = document.createElement("li");
-    const githubLink = createLink({
-      href: "https://github.com/EllieAtWHL",
-      target: "_blank",
-      text: "Github",
-    });
-    githubLinkItem.appendChild(githubLink);
-
-    const salesforceLinkItem = document.createElement("li");
-    const salesforceLink = createLink({
-      href: "https://trailblazer.me/id/elliematthewman",
-      target: "_blank",
-      text: "Salesforce",
-    });
-    salesforceLinkItem.appendChild(salesforceLink);
-
-    linkList.appendChild(twitterLinkItem);
-    linkList.appendChild(linkedInLinkItem);
-    linkList.appendChild(githubLinkItem);
-    linkList.appendChild(salesforceLinkItem);
+    linkList.appendChild(linktreeLinkItem);
 
     findMe.appendChild(heading);
     findMe.appendChild(linkList);
