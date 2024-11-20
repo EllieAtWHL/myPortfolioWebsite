@@ -123,7 +123,13 @@ class Footer extends HTMLElement {
     findMe.className = "findMe floatLeft";
 
     const heading = document.createElement("p");
-    const headingText = document.createTextNode("Find all my socials on: ");
+    const headingText = document.createTextNode("Find all my socials on ");
+    const linktreeLink = createLink({
+      href: "https://linktr.ee/EllieAtWHL",
+      target: "_blank",
+      text: "Linktree",
+    });
+    headingText.append(linktreeLink);
     heading.appendChild(headingText);
 
     const linkList = document.createElement("ul");
