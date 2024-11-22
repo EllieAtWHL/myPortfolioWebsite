@@ -4,6 +4,9 @@ h1 {
     margin-bottom: .25em;
 }
 
+img {
+    max-width: 70dvw;
+}
 
 /* Style the tab */
 .tab {

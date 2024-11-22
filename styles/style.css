@@ -5,15 +5,20 @@
 
     --pale-green: hsl(var(--base-green), var(--low-percent), var(--high-percent));
     --dark-green: hsl(var(--base-green), var(--high-percent), var(--low-percent));
+    --dark-green-transparency: hsl(var(--base-green), var(--high-percent), var(--low-percent), 0.9);
     --third-colour: hsl(var(--base-green), calc(var(--high-percent) - var(--low-percent)), calc(var(--low-percent) / 2));
+    --success-color: var(--dark-green);
+    --error-color: rgb(194, 62, 62);
     
     --chosen-font:'Kanit', Arial, Helvetica, sans-serif;
     --heading-font-size: 400%;
     --sub-heading-font-size: 300%;
     --tertiary-heading-font-size: 200%;
     --lowest-heading-font-size: 150%;
-    --text-font-size: 14px;
+    --text-font-size: 110%;
     --logo-width: 50px;
+
+    --progress-background: linear-gradient(to right, var(--third-colour), var(--dark-green));
 }
 
 *, *::before, *::after {

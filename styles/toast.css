@@ -1,22 +1,9 @@
-:root{
-    --base-green: 113;
-    --high-percent: 90%;
-    --low-percent: 15%;
+@import "../styles/style.css";
 
-    --pale-green: hsl(var(--base-green), var(--low-percent), var(--high-percent));
-    --dark-green: hsl(var(--base-green), var(--high-percent), var(--low-percent));
-    --third-colour: hsl(var(--base-green), calc(var(--high-percent) - var(--low-percent)), calc(var(--low-percent) / 2));
-
-    --progress-background: linear-gradient(to right, var(--third-colour), var(--dark-green));
-    --default-background: var(--pale-green);
-    --success-background: darkgreen;
-    --error-background: rgb(194, 62, 62);
-    --light-text: var(--pale-green);
-}
 .toast {
     box-sizing: border-box;
     padding: .75rem;
-    background-color: var(--default-background);
+    background-color: var(--pale-green);
     color: var(--third-colour);
     border: 1px solid var(--third-colour);
     border-radius: .25rem;
@@ -101,11 +88,11 @@
 }
 
 .success {
-    background-color: var(--success-background);
-    color: var(--light-text);
+    background-color: var(--success-color);
+    color: var(--pale-green);
 }
 
 .error {
-    background-color: var(--error-background);
-    color: var(--light-text);
+    background-color: var(--error-color);
+    color: var(--pale-green);
 }
