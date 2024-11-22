@@ -9,18 +9,17 @@ img.profile {
 .intro-text {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    transform: translate(15em, -11em);
+    width: 60%;
+    max-width: 70dvw;
+    transform: translate(30dvw, -30dvh);
 }
 
-@media (max-width: 800px) and (min-width: 550px){
+@media (max-width: 800px){
     .intro-text {
-        width: 55dvw;
+        transform: translate(20dvw, 0%);
     }
-}
 
-@media (min-width: 800px){
-    .intro-text {
-        width: 70dvw;
+    img.profile {
+        transform: translate(20dvw, 0%);
     }
 }
