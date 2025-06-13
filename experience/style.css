@@ -95,7 +95,7 @@ img {
     font-weight: bold;
 }
 .job li.description {
-    list-style: circle;
+    list-style: disc;
     margin: initial;
 }
 
@@ -111,4 +111,8 @@ img {
     transform: translateY(-30px);
     width: auto;
     height: var(--logo-width);
+}
+
+#certs .job {
+    height: 100px;
 }
