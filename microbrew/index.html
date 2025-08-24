@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" type="image/jpg" href="../img/favicon.jpg"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+        
+        <!-- Primary Meta Tags -->
+        <title>Microbrew</title>
+        <meta name="title" content="EllieAtWHL - Microbrew">
+        <meta name="description" content="Microbrew is a medium-weight worker placement / puzzle game hybrid for two players.">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://ellieatwhl.co.uk/microbrew">
+        <meta property="og:title" content="EllieAtWHL - Microbrew">
+        <meta property="og:description" content="Microbrew is a medium-weight worker placement / puzzle game hybrid for two players.">
+        <meta property="og:image" content="https://ellieatwhl.co.uk/microbrew/imgs/logo.png">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://ellieatwhl.co.uk/microbrew">
+        <meta property="twitter:title" content="EllieAtWHL - Microbew">
+        <meta property="twitter:description" content="Microbrew is a medium-weight worker placement / puzzle game hybrid for two players.">
+        <meta property="twitter:image" content="https://ellieatwhl.co.uk/microbrew/imgs/logo.png">
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="microbrew.css">
+        <script src="../scripts/CustomElements.js" type="module"></script>
+        <script src="../scripts/modalScript.js" defer></script>
+        <script src="microbrew.js" type="module"></script>
+        
+        <!-- Google tag (gtag.js) -->
+        <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MLSWNR391"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-4MLSWNR391');
+        </script> -->  <!-- TODO: Uncomment this before deploying -->
+    </head>
+    <body id="body">
+        <div class="wrapper">
+            <ellieatwhl-header></ellieatwhl-header>
+            <div class="content" id="content">
+                <div class="scrollable" id="scrollable">
+                    <div class="game-start" id="game-start">
+                        <h1>Microbrew</h1>
+                        <div>
+                            <label for="playerOne">Enter player one's name</label>
+                        <input id="playerOne" class="playerInput" required>
+                        </div>
+                        <div>
+                            <label for="playerTwo">Enter player two's name</label>
+                        <input id="playerTwo" class="playerInput" required>
+                        </div>
+                        <button id="play-game">Play Game</button>
+                        <p>Microbrew is a medium-weight worker placement / puzzle game hybrid for two players.</p>
+                        <p>Kickstarted by <a href="https://www.onefreeelephant.co.uk/" target="_blank">One Free Elephant</a> in May 2019.</p>
+                        <p>You can <a href="https://www.onefreeelephant.co.uk/Microbrew/" target="_blank">print and play your own copy or buy from any of the retailers</a>. I started working on this digital version as I enjoyed the game but found it fiddly, so wondered how a digital version might work.</p>
+                    </div>
+                    
+                    <div class="play-area" id="play-area">
+                        <h3 id="player-name">Player 1</h3>
+                        <!-- <img class="board" src="img/board.png"> -->
+                        <div class="copper-grid">
+                            <div class="copper-spot" data-row="1" data-col="1">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="1" data-col="3">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="1" data-col="5">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="1" data-col="2">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="1" data-col="4">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="2" data-col="1">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="2" data-col="3">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="2" data-col="5">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="2" data-col="2">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="2" data-col="4">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="3" data-col="1">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="3" data-col="3">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="3" data-col="5">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="3" data-col="2">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="3" data-col="4">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="4" data-col="1">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="4" data-col="3">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="4" data-col="5">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="4" data-col="2">
+                            </div>
+                            <div></div>
+                            <div class="copper-spot" data-row="4" data-col="4">
+                            </div>
+                            <div></div>
+                        </div>
+    
+                        <div id="customers">
+                            <h3>Loyal Customers</h3>
+                            <h3>Thirsty Customers</h3>
+                        </div>
+                        
+                        <div id="recipes">
+                            <h3>Your Recipes</h3>
+                            <h3 id="recipes">Available Recipes</h3>
+                        </div>
+                        
+    
+                    </div>
+                    
+                </div>
+            </div>
+            <ellieatwhl-footer></ellieatwhl-footer>
+        </div>
+    </body>
+</html>
